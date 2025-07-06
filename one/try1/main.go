@@ -25,7 +25,7 @@ func main() {
 	go asynk(2)
 	go asynk(3) // but if want to see output we can make some delay after asynk function call
 
-	time.Sleep(time.Second)
+	time.Sleep(time.Second) // 1 sec delay deko
 	fmt.Println("After asynk function")
 }
 func function() {
