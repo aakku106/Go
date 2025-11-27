@@ -90,6 +90,40 @@ func main() {
 	*/
 	// I think the above comment clearly explain behavior of slice, we will be talking on why slice behaves like this latter on
 	// also i will make a seperate file for all example and explains of slice seperatly.
+	// Now lest go to next step we will make slice of slice
+	newSlice = newSlice[1:]
+	// If you think its output will be same as before, than you are wrong.
+	stringPrint(newSlice)
+	// the output is [is ccn okii], which is slice of a slice, which means,
+	// initially newSlice sayed my 0th index will be 1st index of string ie. ["<this is 0th index of new slice>Name","is","ccn","okki"] ["<0th index of string>My", "<0th index of new slice>Name", "is", "ccn", "okii"]
+
+	/*
+				and now ["My", "Name", "<0th index of new Newstring>is", "ccn", "okii"], which is  strings[2:] or [1:] of newString
+		["name","is","ccn","okii"] i.e. new newString is ["is","ccn","okii"]
+	*/
+	// Do you wonder why i sayed new newString is [2:] of string, does that makes you confuse, good you ar learnign than.
+	// One more critial never name your variable string.
+	/*
+												# lest try to solve new newSlice is [2:] of original string slice, we can say so because
+
+												A slice is stored like,
+												- pointer → original array (at some offset)
+										- length
+										- capacity
+
+								Every time you slice:
+									•	you MOVE the pointer forward
+									•	you REDUCE capacity
+									•	you CHANGE length
+
+
+
+					a:= [x:]
+					b:=a[y:], then
+					b == arr[x+y:]
+
+		hope this dosent make you more confused, read this 2 to 3 times, take time, look at code, look output and read comments again , try doing aaa:=string[2:] you shough be gettign concept now
+	*/
 
 }
 
