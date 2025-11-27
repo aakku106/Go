@@ -63,7 +63,7 @@ func main() {
 									- Now after that we just re-used same slice/array(pointed in memory) sss after that we did sss= sss[2:], ie copy sss in sss, from index 2(0,1,2...not 1,2...ie. index 2 = 3rd element of array )
 						 so the capacity of sss now changes from 9 to 9-2= 7;
 					- now did you got confused here, in slice [2:] ie 3rd element, but 9-2, shouldn't it be 9-3 ?
-					- Confused if yes rest review our concepts again,
+					- Confused if yes lest review our concepts again,
 					1. Slice do not own array, it is just pointer to underlying array in memmory.
 			2. New capacity = old capacity - startingIndex
 
