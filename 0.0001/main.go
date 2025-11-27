@@ -58,7 +58,7 @@ func main() {
 
 								- in ss, we copited s,but [:0] means copy item/element less than 0, so its length became 0, but since ss is pointing to s in memory somewhere, its capacity is still 10 (re-view code aand watch results to graps whats i am saying)
 
-								- now here in sss, we pointed to s, but copied elements after oth element, so length becomes 9 and since we copied from 1st element capacity also becomes 9
+								- now here in sss, we pointed to s, but copied elements after 0th element, so length becomes 9 and since we copied from 1st element capacity also becomes 9
 
 									- Now after that we just re-used same slice/array(pointed in memory) sss after that we did sss= sss[2:], ie copy sss in sss, from index 2(0,1,2...not 1,2...ie. index 2 = 3rd element of array )
 						 so the capacity of sss now changes from 9 to 9-2= 7;
