@@ -37,6 +37,16 @@ func main() {
 	printSlice(s)
 	ss := s[:0]
 	printSlice(ss)
+	sss := s[1:]
+	printSlice(sss)
+	// of curse we can reuse a variable
+	sss = sss[2:]
+	printSlice(sss)
+	sss = sss[:2]
+	printSlice(sss)
+	sss = sss[1:2]
+	printSlice(sss)
+	// notice the capacity
 
 }
 
