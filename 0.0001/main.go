@@ -136,4 +136,4 @@ func stringPrint(s []string) {
 
 // everything written in this file (time: 2025,nov 27, 10:46 PM) are not offically conformed, this is just byproduct of my brainstroming of Go's slice based on its behavior, its my 1st say of learning GO,
 // toold used: alacrity(terminal emulator), Nvim (code editor),offical go doc (may be that was official i just rad data dype in go and started exploring my self) and used chatGPT 5 to verify this file (It told everything in correct in this file except grammer, but i still dotn belife that stupid bot, how could even this all be correct in 1st try of go)
-// you still intrested, i tryed to prove this in proveSlice.go file and all slice content of this file in in seperate go file named slice.go (may be in same dir as this file<main.go>)
+// you still intrested, i tryed to prove this in proveSlice.go file and all slice content of this file in in seperate go file named slice.go (may be in different dir as this file<main.go>)
