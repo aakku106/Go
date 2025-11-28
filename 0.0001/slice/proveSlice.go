@@ -24,8 +24,8 @@ func proveSlice() {
 	arr = append(arr, "Fat") // Capacity is still 8 and length gets 6
 	printSlic(arr)
 	// so, Go simplly doubles the size of array or slice when its capacity gets filled,
-	// Again slice is a array with fixed capacity, go just doubles the size of array when capacity is full
-	// When capicity id slice fills up and we append more elements, Go does: old capacity x 2 (oldCapacity*2)
+	// Again slice points array with fixed capacity, go just doubles the size of pointed array when capacity is full
+	// When capicity ie slice fills up and we append more elements, Go does: old capacity x 2 (oldCapacity*2)
 	newArr := arr[:]
 	printSlic(newArr)
 	newArr[5] = "Super Fat"
@@ -63,6 +63,8 @@ func proveSlice() {
 	// You CAN append up to capacity before Go reallocates.
 
 	// This much of depth is oki for our biginner level.
+
+	// Everything i explained in this folder is only applicable with slice in go, if you use same logic for array (what i explained about length and capacity) will be wrong, array are simple just like in C(at this lvl you dont need to knwo more,you will learn with time.).
 
 }
 func printSlic(s []string) {
