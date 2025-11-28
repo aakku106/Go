@@ -54,7 +54,7 @@ func proveSlice() {
 				those extra slots are not part of the slice’s length.
 				They exist in memory, but the slice doesn’t “own” them in its metadata.
 	*/
-	// simplly this means we cannot access elements out of length, so we can say our length is the size of array,
+	// simplly this means we cannot access elements out of length, so we can say our length is the size of slice,
 	// and capacity indicates max length of that array(array not slice because slice simplly points to array in memory adn arrays has fix size, capacity denotes the size of that array, and length denotes size of slice you using. So you can't change the value of underlying array until length of slice reach to that index).
 
 	// Capacity shows potential.
