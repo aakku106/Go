@@ -111,7 +111,7 @@ func main() {
 	*/
 
 	// uncommentBelow to run proveSlice()
-	proveSlice() // Un-commenting this will run our prove code, go to proveSlice.go file and do "go run main.go proveSlice.go". See code and read comments and look at outputs to understand things properly
+	//	proveSlice() // Un-commenting this will run our prove code, go to proveSlice.go file and do "go run main.go proveSlice.go". See code and read comments and look at outputs to understand things properly
 }
 
 func printSlice(s []int) {
