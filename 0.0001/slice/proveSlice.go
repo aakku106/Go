@@ -24,7 +24,7 @@ func proveSlice() {
 	arr = append(arr, "Fat") // Capacity is still 8 and length gets 6
 	printSlic(arr)
 	// so, Go simplly doubles the size of array(not actually, go creates a new array with more size and copy original array in that new array) or slice when its capacity gets filled,
-	// Again slice points array with fixed capacity, go just doubles the size of pointed array when capacity is full
+	// Again slice points array with fixed length/slice, go just doubles the size of pointed array when capacity is full
 	// When capicity ie slice fills up and we append more elements, Go does: old capacity x 2 (oldCapacity*2)
 	// Creates new array of (oldCapacity*2) and copies original array to tht new array, when i say go increases size of array pointed by slice, i always mean go creates a new bigger capacity array and copies original array pointed by slice, and pasted that array in new bigger array and the slice which was pointing to old small array will simplly point to new bigger array[so whenever i say go increas size of array remember that]
 	newArr := arr[:]
@@ -67,12 +67,12 @@ func proveSlice() {
 	// I have used as simple words as possible(Cause i dont knwo complex works xd)
 	// You will figure out your self what was slightly wrong in this comments when you start doing go seriously(spically how capacity grow for larger array size)
 
-	// Everything i explained in this folder is only applicable with slice in go, if you use same logic for array (what i explained about length and capacity) will be wrong, array are simple just like in C(at this lvl you dont need to knwo more,you will learn with time.).
+	// Everything i explained in this folder is only applicable with slice in go, if you use same logic for array (what i explained about length and capacity) will be wrong, for now assume array are simple just like in C(at this lvl you dont need to knwo more,you will learn with time<things like <value semantics,passing in function,not pointer by defult like C,assigning array, etc>.).
 
 }
 func printSlic(s []string) {
 	fmt.Printf("\ngiven Array:\t%v\tLength:\t%d\tCapacity\t%d\n", s, len(s), cap(s))
 }
 
-// This program ends with an runtime error,Try solving this error.
+// This program ends with an runtime error,Try solving this error yourself.
 // Next go to error/main.go file, we will learn error handeling in Go in this same code base
