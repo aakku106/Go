@@ -1,6 +1,7 @@
-package slice
+package main
 
-import "fmt"
+import ("fmt"
+)
 
 func main() {
 	// Slice
@@ -108,6 +109,8 @@ func main() {
 		hope this dosent make you more confused, read this 2 to 3 times, take time, look at code, look output and read comments again , try doing aaa:=string[2:] you shough be gettign concept now
 	*/
 
+	// uncommentBelow to run proveSlice()
+	proveSlice()
 }
 
 func printSlice(s []int) {
@@ -119,4 +122,3 @@ func stringPrint(s []string) {
 
 // everything written in this file (time: 2025,nov 27, 10:46 PM) are not offically conformed, this is just byproduct of my brainstroming of Go's slice based on its behavior, its my 1st say of learning GO,
 // toold used: alacrity(terminal emulator), Nvim (code editor),offical go doc (may be that was official i just rad data dype in go and started exploring my self) and used chatGPT 5 to verify this file (It told everything in correct in this file except grammer, but i still dotn belife that stupid bot, how could even this all be correct in 1st try of go)
-// you still intrested, i tryed to prove this in proveSlice.go file and all slice content of this file in in seperate go file named slice.go (may be in different dir than <main.go>)
