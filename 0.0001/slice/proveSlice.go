@@ -16,6 +16,15 @@ func proveSlice() {
 	printSlic(arr)
 	arr = append(arr, "Rats") //Capacity 4 wtf
 	printSlic(arr)
+	// lest do one more time than you will understand the pattern
+	arr = append(arr, "and") // see, now capacity is still 4 and length is also 4.
+	printSlic(arr)
+	arr = append(arr, "Becomes") // Here capacity becomes 8 and lenght is 5
+	printSlic(arr)
+	arr = append(arr, "Fat") // Capacity is still 8 and length gets 6
+	printSlic(arr)
+	// so, Go simplly doubles the size of array or slice when its capacity gets filled,
+	// Again slice is a array with fixed capacity, go just doubles the size of array
 }
 
 func printSlic(s []string) {
