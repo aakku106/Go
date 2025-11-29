@@ -25,13 +25,14 @@ func main() {
 	newArr[5] = "Super Fat"
 	printSlic(newArr)
 	printSlic(arr)
-	newArr[7] = "last index" // we will get runtime error here
-	if newArr[7] == nil {
-		println("cant access 7 space its out of length of slice ")
-	}
+	if 7 >= len(newArr) {
+		fmt.Println("slice newArrar only has length of", len(newArr), "So you can't access out of ", len(newArr)-1)
+	} else {
+		newArr[7] = "last Index"
+	} // wait were you aspectign == nil thing just now lol xd
+	// Next go to pacakages/main.go, there is more intresting stuff
 }
 
 func printSlic(s []string) {
 	fmt.Printf("\ngiven Array:\t%v\tLength:\t%d\tCapacity\t%d\n", s, len(s), cap(s))
 }
-
