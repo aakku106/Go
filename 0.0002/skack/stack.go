@@ -64,5 +64,8 @@ func Peek() {
 	}
 }
 func isStackEmpty() bool {
+	if pointer != -1 {
+		return true
+	}
 	return false
 }
