@@ -58,6 +58,8 @@ func RemoveFromStack() int {
 		return lastIndexValue
 	}
 	return -106
+	// This program fails when user gice input -106, we can still peek -106 but can tremove it
+	// Try making function solvin this ; hint: do not return anything just use normal function without return and prnt inside function
 }
 
 func Peek() {
