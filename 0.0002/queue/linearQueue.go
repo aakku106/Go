@@ -23,6 +23,17 @@ func linearQueue() {
 			os.Exit(0)
 		case enque:
 			fmt.Printf("--->\t%d\tInserted in Linear Queue", EnqueIntoLinerQueue())
+		case deque:
+			dequedValueFromLinearQueue, wasLinearQueueEmpty := DequFromLinerQueue()
+			if wasLinearQueueEmpty {
+				fmt.Println("Linear Queue was empty...")
+			} else {
+				fmt.Printf("---->\t%d\t<---- Dequed", dequedValueFromLinearQueue)
+			}
+		case peek:
+			PeekIntoLinearQueue()
+		default:
+			fmt.Println("Choose betn 1,2,3 or choose 0 to exit program")
 		}
 	}
 }
