@@ -45,7 +45,6 @@ func InsertInStack() int {
 	fmt.Println("Enter the number ot put on stack")
 	fmt.Scan(&value)
 	arr = append(arr, value)
-	pointer++
 	// notice you cant do ++ pointer in go
 	// Go people say it's to remove ambiguity,but i say i am more confused now xd
 	return value
