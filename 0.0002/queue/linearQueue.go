@@ -47,7 +47,7 @@ func EnqueIntoLinerQueue() int {
 }
 func DequFromLinerQueue() (int, bool) {
 	if isLinearQueueEmpty() {
-		return 0, false
+		return 0, true
 	}
 	dequedValue := linearQueueStoragePlace[0]
 	linearQueueStoragePlace = linearQueueStoragePlace[1:]
