@@ -1,7 +1,7 @@
 package main
 
 var arr []int
-var pointer int = 0
+var pointer int = -1
 
 func main() {
 

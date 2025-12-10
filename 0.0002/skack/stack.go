@@ -22,9 +22,17 @@ func stack() int {
 	case exit:
 		return 0
 	case insert:
-		fmt.Printf("%d Inserted in stack", InsertInStack())
+		fmt.Printf("--->\t%d\tInserted in stack", InsertInStack())
 	case remove:
-		RemoveFromStack()
+		temp := RemoveFromStack()
+		if temp != -106 {
+			fmt.Printf("\t%d\tpoped from stack", temp)
+		} else {
+			fmt.Println("Stack is empty")
+		}
+
+	case peek:
+		Peek()
 	default:
 		fmt.Println("---Choose between 0,1,2,3")
 	}
@@ -38,13 +46,23 @@ func InsertInStack() int {
 	arr = append(arr, value)
 	pointer++
 	// notice you cant do ++ pointer in go
+	// Go people say it's to remove ambiguity,but i say i am more confused now xd
 	return value
 }
 func RemoveFromStack() int {
-	val := 2
-	return val
+	if isStackEmpty() {
+		return arr[pointer]
+	}
+	return -106
 }
 
 func Peek() {
-	fmt.Printf("arr: %v\n", arr[pointer])
+	if isStackEmpty() {
+		fmt.Printf("arr: %d\n", arr[pointer])
+	} else {
+		println("Stack is Empty")
+	}
+}
+func isStackEmpty() bool {
+	return false
 }
