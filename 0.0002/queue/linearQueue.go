@@ -15,7 +15,7 @@ func linearQueue() {
 	fmt.Println("Accessing Linear queue....")
 	fmt.Println("Linear queue accesed")
 	for {
-		fmt.Printf("choose between:\n1.\tEnque\n2.\tDeque\n3.\tPeek")
+		fmt.Printf("choose between:\n1.\tEnque\n2.\tDeque\n3.\tPeek\n")
 		var choose int8
 		fmt.Scan(&choose)
 		switch choose {
