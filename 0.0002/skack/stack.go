@@ -51,20 +51,23 @@ func InsertInStack() int {
 }
 func RemoveFromStack() int {
 	if isStackEmpty() {
-		return arr[pointer]
+		fmt.Printf("\t%d\t", len(arr))
+		tempReducedArray := arr[:len(arr)-1]
+		fmt.Printf("\t%d\t", len(tempReducedArray))
+		return tempReducedArray[len(tempReducedArray)]
 	}
 	return -106
 }
 
 func Peek() {
 	if isStackEmpty() {
-		fmt.Printf("arr: %d\n", arr[pointer])
+		fmt.Printf("arr: %d\n", arr[len(arr)-1])
 	} else {
 		println("Stack is Empty")
 	}
 }
 func isStackEmpty() bool {
-	if pointer != -1 {
+	if len(arr) > 0 {
 		return true
 	}
 	return false
