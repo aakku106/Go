@@ -12,10 +12,18 @@ func linearQueue() {
 	fmt.Println("Accessing Linear queue....")
 	fmt.Println("Linear queue accesed")
 	fmt.Printf("choose between:\n1.\tEnque\n2.\tDeque\n3.\tPeek")
+	var choose int8
+	fmt.Scan(&choose)
+	switch choose {
+
+	}
 }
 
 func EnqueIntoLinerQueue() int {
-	return 1
+	fmt.Println("Enter value to enqueue")
+	var valueToEnqueueInLinearQueuesTop int
+	fmt.Scan(&valueToEnqueueInLinearQueuesTop)
+	return valueToEnqueueInLinearQueuesTop
 }
 func DequFromLinerQueue() (int, bool) {
 	if isLinearQueueEmpty() {
