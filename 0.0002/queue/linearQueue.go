@@ -14,14 +14,16 @@ const (
 func linearQueue() {
 	fmt.Println("Accessing Linear queue....")
 	fmt.Println("Linear queue accesed")
-	fmt.Printf("choose between:\n1.\tEnque\n2.\tDeque\n3.\tPeek")
-	var choose int8
-	fmt.Scan(&choose)
-	switch choose {
-	case quit:
-		os.Exit(0)
-	case enque:
-		fmt.Printf("--->\t%d\tInserted in Linear Queue", EnqueIntoLinerQueue())
+	for {
+		fmt.Printf("choose between:\n1.\tEnque\n2.\tDeque\n3.\tPeek")
+		var choose int8
+		fmt.Scan(&choose)
+		switch choose {
+		case quit:
+			os.Exit(0)
+		case enque:
+			fmt.Printf("--->\t%d\tInserted in Linear Queue", EnqueIntoLinerQueue())
+		}
 	}
 }
 
