@@ -26,8 +26,8 @@ func stack() int {
 		case insert:
 			fmt.Printf("--->\t%d\tInserted in stack", InsertInStack())
 		case remove:
-			tempPopedValue, isNotEmpty := RemoveFromStack()
-			if isNotEmpty {
+			tempPopedValue, isStackNotEmpty := RemoveFromStack()
+			if isStackNotEmpty {
 				fmt.Printf("\t%d\tpoped from stack", tempPopedValue)
 			} else {
 				fmt.Println("Stack is empty")
@@ -62,7 +62,7 @@ func RemoveFromStack() (int, bool) {
 
 func PeekInStack() {
 	if !isStackEmpty() {
-		fmt.Printf("arr: %d\n", arr[len(arr)-1])
+		fmt.Printf("Top of Stack: %d\n", arr[len(arr)-1])
 	} else {
 		println("Stack is Empty")
 	}
