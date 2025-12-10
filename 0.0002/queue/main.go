@@ -26,7 +26,7 @@ func main() {
 		case quit:
 			return
 		case linear:
-			go linearQueue()
+			linearQueue()
 		case circular:
 		//	circularQueue()
 		default:
