@@ -22,7 +22,7 @@ func linearQueue() {
 		case quit:
 			os.Exit(0)
 		case enque:
-			fmt.Printf("--->\t%d\tInserted in Linear Queue", EnqueIntoLinerQueue())
+			fmt.Printf("--->\t%d\tInserted in Linear Queue\n", EnqueIntoLinerQueue())
 		case deque:
 			dequedValueFromLinearQueue, wasLinearQueueEmpty := DequFromLinerQueue()
 			if wasLinearQueueEmpty {
