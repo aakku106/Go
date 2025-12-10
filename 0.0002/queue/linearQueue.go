@@ -63,6 +63,6 @@ func PeekIntoLinearQueue() {
 	if isLinearQueueEmpty() {
 		fmt.Println("The Linear Queue is Empty !!!")
 	} else {
-		fmt.Printf("----->\t%d\t<---- is next to come out", linearQueueStoragePlace[0])
+		fmt.Printf("----->\t%d\t<---- is next to come out\n", linearQueueStoragePlace[0])
 	}
 }
