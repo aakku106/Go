@@ -24,15 +24,15 @@ func stack() int {
 	case insert:
 		fmt.Printf("--->\t%d\tInserted in stack", InsertInStack())
 	case remove:
-		temp := RemoveFromStack()
-		if temp != -106 {
-			fmt.Printf("\t%d\tpoped from stack", temp)
+		tempPopedValue, isNotEmpty := RemoveFromStack()
+		if isNotEmpty {
+			fmt.Printf("\t%d\tpoped from stack", tempPopedValue)
 		} else {
 			fmt.Println("Stack is empty")
 		}
 
 	case peek:
-		Peek()
+		PeekInStack()
 	default:
 		fmt.Println("---Choose between 0,1,2,3")
 	}
@@ -49,20 +49,18 @@ func InsertInStack() int {
 	// Go people say it's to remove ambiguity,but i say i am more confused now xd
 	return value
 }
-func RemoveFromStack() int {
+func RemoveFromStack() (int, bool) {
 	if !isStackEmpty() {
 		// fmt.Printf("\t%d\t%v\t", len(arr), arr)
 		lastIndexValue := arr[len(arr)-1]
 		arr = arr[:len(arr)-1]
 		//	fmt.Printf("\t%d\t%v\t", len(arr), arr)
-		return lastIndexValue
+		return lastIndexValue, true
 	}
-	return -106
-	// This program fails when user gice input -106, we can still peek -106 but can tremove it
-	// Try making function solvin this ; hint: do not return anything just use normal function without return and prnt inside function
+	return 0, false
 }
 
-func Peek() {
+func PeekInStack() {
 	if !isStackEmpty() {
 		fmt.Printf("arr: %d\n", arr[len(arr)-1])
 	} else {
