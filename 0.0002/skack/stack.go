@@ -68,8 +68,9 @@ func Peek() {
 	}
 }
 func isStackEmpty() bool {
-	if len(arr) >= 0 {
-		return true
+	// fmt.Printf("--------\t%d\t-------------", len(arr))
+	if len(arr) <= 0 {
+		return false
 	}
-	return false
+	return true
 }
