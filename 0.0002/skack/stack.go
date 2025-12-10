@@ -12,32 +12,33 @@ const (
 )
 
 func stack() int {
-	fmt.Println("Accessing stack")
-	fmt.Println("Stack accessed, choose between")
-	fmt.Printf("\n1. Insert\n2. Remove\n3. Peek\n")
-	choose := -1
-	fmt.Scan(&choose)
+	for {
 
-	switch choose {
-	case exit:
-		return 0
-	case insert:
-		fmt.Printf("--->\t%d\tInserted in stack", InsertInStack())
-	case remove:
-		tempPopedValue, isNotEmpty := RemoveFromStack()
-		if isNotEmpty {
-			fmt.Printf("\t%d\tpoped from stack", tempPopedValue)
-		} else {
-			fmt.Println("Stack is empty")
+		fmt.Println("Accessing stack")
+		fmt.Println("Stack accessed, choose between")
+		fmt.Printf("\n1. Insert\n2. Remove\n3. Peek\n")
+		choose := -1
+		fmt.Scan(&choose)
+
+		switch choose {
+		case exit:
+			return 0
+		case insert:
+			fmt.Printf("--->\t%d\tInserted in stack", InsertInStack())
+		case remove:
+			tempPopedValue, isNotEmpty := RemoveFromStack()
+			if isNotEmpty {
+				fmt.Printf("\t%d\tpoped from stack", tempPopedValue)
+			} else {
+				fmt.Println("Stack is empty")
+			}
+
+		case peek:
+			PeekInStack()
+		default:
+			fmt.Println("---Choose between 0,1,2,3")
 		}
-
-	case peek:
-		PeekInStack()
-	default:
-		fmt.Println("---Choose between 0,1,2,3")
 	}
-	stack()
-	return 0
 }
 func InsertInStack() int {
 	var value int
