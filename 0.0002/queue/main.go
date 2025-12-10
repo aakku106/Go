@@ -5,6 +5,7 @@ import (
 )
 
 var linearQueueStoragePlace []int
+var circularQueueStoragePlace [5]int
 
 const (
 	quit = iota
@@ -28,7 +29,7 @@ func main() {
 		case linear:
 			linearQueue()
 		case circular:
-		//	circularQueue()
+			circularQueue()
 		default:
 			fmt.Println("Choose Between 1,2,3 or choose 0 to exit")
 		}
