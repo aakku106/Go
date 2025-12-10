@@ -51,10 +51,11 @@ func InsertInStack() int {
 }
 func RemoveFromStack() int {
 	if isStackEmpty() {
-		fmt.Printf("\t%d\t", len(arr))
-		tempReducedArray := arr[:len(arr)-1]
-		fmt.Printf("\t%d\t", len(tempReducedArray))
-		return tempReducedArray[len(tempReducedArray)]
+		// fmt.Printf("\t%d\t%v\t", len(arr), arr)
+		lastIndexValue := arr[len(arr)-1]
+		arr = arr[:len(arr)-1]
+		//	fmt.Printf("\t%d\t%v\t", len(arr), arr)
+		return lastIndexValue
 	}
 	return -106
 }
@@ -67,7 +68,7 @@ func Peek() {
 	}
 }
 func isStackEmpty() bool {
-	if len(arr) > 0 {
+	if len(arr) >= 0 {
 		return true
 	}
 	return false
