@@ -47,6 +47,7 @@ func EnqueueInCircularQueue() (int, bool) {
 	rearOfCircularQueue++
 	return value, true
 }
+func DequeFromCircularQueue() (int, bool)
 
 func PeekIntoCircularQueue() {
 	if isCircularQueueEmpty() {
