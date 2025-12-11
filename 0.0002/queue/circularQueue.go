@@ -62,3 +62,7 @@ func isCircularQueueEmpty() bool {
 	}
 	return false
 }
+func isCircularQueueFull() bool {
+
+	return true
+}
