@@ -47,6 +47,9 @@ func EnqueueInCircularQueue() (int, bool) {
 		// rearOfCircularQueue++
 		rearOfCircularQueue = (rearOfCircularQueue + 1) % len(circularQueueStoragePlace)
 		circularQueueStoragePlace[rearOfCircularQueue] = value
+		if frontOFcirularQueue < 0 {
+			frontOFcirularQueue, rearOfCircularQueue = 0, 0
+		}
 		return value, false
 	}
 	fmt.Println("The Circular Queue is Full")
