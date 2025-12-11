@@ -44,7 +44,8 @@ func EnqueueInCircularQueue() (int, bool) {
 		var value int
 		fmt.Println("Give data to enqueue in circular Queue")
 		fmt.Scan(&value)
-		rearOfCircularQueue++
+		// rearOfCircularQueue++
+		rearOfCircularQueue = (rearOfCircularQueue + 1) % len(circularQueueStoragePlace)
 		circularQueueStoragePlace[rearOfCircularQueue] = value
 		return value, false
 	}
