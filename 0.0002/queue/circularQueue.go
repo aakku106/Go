@@ -39,13 +39,15 @@ func circularQueue() {
 }
 
 func EnqueueInCircularQueue() (int, bool) {
-	fmt.Printf("\t%d\t%d\n", len(circularQueueStoragePlace), cap(circularQueueStoragePlace))
-	var value int
-	fmt.Println("Give data to enqueue in circular Queue")
-	fmt.Scan(&value)
-	circularQueueStoragePlace[rearOfCircularQueue] = value
-	rearOfCircularQueue++
-	return value, true
+	if !isCircularQueueFull() {
+		var value int
+		fmt.Println("Give data to enqueue in circular Queue")
+		fmt.Scan(&value)
+		circularQueueStoragePlace[rearOfCircularQueue] = value
+		rearOfCircularQueue++
+		return value, false
+	}
+	return 0, true
 }
 func DequeFromCircularQueue() (int, bool)
 
@@ -57,12 +59,14 @@ func PeekIntoCircularQueue() {
 	}
 }
 func isCircularQueueEmpty() bool {
-	if len(circularQueueStoragePlace) <= 0 {
+	if frontOFcirularQueue == rearOfCircularQueue {
 		return true
 	}
 	return false
 }
 func isCircularQueueFull() bool {
-
-	return true
+	if (rearOfCircularQueue+1)%len(circularQueueStoragePlace) == frontOFcirularQueue {
+		return true
+	}
+	return false
 }
