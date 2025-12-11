@@ -78,8 +78,7 @@ func PeekIntoCircularQueue() {
 	}
 }
 func isCircularQueueEmpty() bool {
-	if frontOFcirularQueue == rearOfCircularQueue {
-		frontOFcirularQueue, rearOfCircularQueue = -1, -1
+	if frontOFcirularQueue < 0 {
 		return true
 	}
 	return false
