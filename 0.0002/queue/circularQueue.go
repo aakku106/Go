@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-var frontOFcirularQueue, rearOfCircularQueue int = -1, -1
+var frontOFcirularQueue, rearOfCircularQueue int = 0, -1
 
 func circularQueue() {
 	fmt.Println("Accessing Circular queue....")
