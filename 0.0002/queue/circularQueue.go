@@ -59,7 +59,12 @@ func EnqueueInCircularQueue() (int, bool) {
 func DequeFromCircularQueue() (int, bool) {
 	if !isCircularQueueEmpty() {
 		dequeuedValue := circularQueueStoragePlace[frontOFcirularQueue]
-		frontOFcirularQueue++
+		// frontOFcirularQueue++
+		if frontOFcirularQueue == rearOfCircularQueue {
+			frontOFcirularQueue, rearOfCircularQueue = -1, -1
+		} else {
+			frontOFcirularQueue = (frontOFcirularQueue + 1) % len(circularQueueStoragePlace)
+		}
 		return dequeuedValue, false
 	}
 	return 0, true
