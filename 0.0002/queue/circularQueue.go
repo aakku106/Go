@@ -20,8 +20,8 @@ func circularQueue() {
 			os.Exit(0)
 		case enque:
 			enqueuedValueInCircularQueue, wasCircularQueueFull := EnqueueInCircularQueue()
-			if wasCircularQueueFull {
-				fmt.Println("The Circular Queue is Full")
+			if !wasCircularQueueFull {
+				fmt.Printf("--->\t%d\tInserted in Circular Queue\n", enqueuedValueInCircularQueue)
 			}
 			fmt.Printf("--->\t%d\tInserted in Circular Queue\n", enqueuedValueInCircularQueue)
 		case deque:
