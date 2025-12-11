@@ -76,7 +76,7 @@ func isCircularQueueEmpty() bool {
 	return false
 }
 func isCircularQueueFull() bool {
-	if (rearOfCircularQueue+1)%(len(circularQueueStoragePlace)-1) == frontOFcirularQueue {
+	if (rearOfCircularQueue+1)%(len(circularQueueStoragePlace)) == frontOFcirularQueue {
 		return true
 	}
 	return false
