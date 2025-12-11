@@ -24,7 +24,7 @@ func circularQueue() {
 			}
 			fmt.Printf("--->\t%d\tInserted in Circular Queue\n", enqueuedValueInCircularQueue)
 		case deque:
-			dequedValueFromCircularQueue, wasCircularQueueEmpty := DequFromLinerQueue()
+			dequedValueFromCircularQueue, wasCircularQueueEmpty := DequeFromCircularQueue()
 			if wasCircularQueueEmpty {
 				fmt.Println("Linear Queue was empty...")
 			} else {
