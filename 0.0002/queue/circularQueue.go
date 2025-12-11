@@ -38,8 +38,14 @@ func circularQueue() {
 	}
 }
 
-func EnqueueInCircularQueue() int {
-	return 1
+func EnqueueInCircularQueue() (int, bool) {
+	fmt.Printf("\t%d\t%d\n", len(circularQueueStoragePlace), cap(circularQueueStoragePlace))
+	var value int
+	fmt.Println("Give data to enqueue in circular Queue")
+	fmt.Scan(&value)
+	circularQueueStoragePlace[rearOfCircularQueue] = value
+	rearOfCircularQueue++
+	return value, true
 }
 
 func PeekIntoCircularQueue() {
