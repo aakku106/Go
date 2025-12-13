@@ -91,7 +91,11 @@ func peekIntoProrityQueue() {
 		fmt.Println("The Prority Queue is Empty")
 		return
 	}
-	fmt.Printf("---->\t%d\t<---- Will come out next", prorityQueueStoragePlace[frontOfProrityQueue])
+	for i := range 5 {
+		if len(prorityQueueStoragePlace[i]) != 0 {
+			fmt.Printf("---->\t%d\t<---- cumming out next\n", prorityQueueStoragePlace[i][0])
+		}
+	}
 }
 func isProrityQueueEmpty() bool {
 	if (len(prorityQueueStoragePlace[0]) + len(prorityQueueStoragePlace[1]) + len(prorityQueueStoragePlace[2]) + len(prorityQueueStoragePlace[3]) + len(prorityQueueStoragePlace[4])) <= 0 {
