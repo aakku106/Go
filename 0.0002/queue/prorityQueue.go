@@ -17,16 +17,21 @@ func prorityQueue() {
 	var choose int8
 	fmt.Scan(&choose)
 	switch choose {
+	case enque:
+	case deque:
+	case peek:
+		peekIntoProrityQueue()
 	default:
 		fmt.Println("Choose between 1,2,3 or 0 to exit program")
 	}
 
 }
 func peekIntoProrityQueue() {
-	if isCircularQueueEmpty() {
+	if isProrityQueueEmpty() {
 		fmt.Println("The Prority Queue is Empty")
 		return
 	}
+	fmt.Printf("---->\t%d\t<---- Will come out next", prorityQueueStoragePlace[frontOfProrityQueue])
 }
 func isProrityQueueEmpty() bool {
 	if frontOFcirularQueue == -1 {
