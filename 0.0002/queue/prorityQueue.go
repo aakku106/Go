@@ -50,7 +50,7 @@ a:
 		prority int8
 	)
 	fmt.Scanf("%d,%d", &value, &prority)
-	if prority > 5 && prority < 0 {
+	if prority >= 5 || prority < 0 {
 		fmt.Println("choose Between 0,1,2,3,4")
 		goto a
 	}
