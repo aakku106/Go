@@ -82,4 +82,37 @@ func isProrityQueueEmpty() bool {
 Lest see how we make  prority queue:
 1. 1st it shall follow fifo rele: first in 1st out,which means i have to 1st make a normal linear queue(not circular queue cause i have a idea to use slice like a ummm some shord of garbage collector thing like, when lest say slice is larger than 50, ie. the front is larger than 50 than only do [front:], and front=0; i think it should be ~ O(1)may be lest cee)
 2. i need a prority, so lest decleare a var called prority, where we can give values from 0 to 4, lower the value higher the prority, I think this is good idea for now
+
+
+
+the main problem here is how do i manage the prority,
+i have to store value & prority in same index of array, which isen't possible(without usign may be like struct), we have ot use linkedlist, which i dont want now,
+so i have 2 ideas to implement this prorityQueue
+1. make 2 array, one to store value and another to store prority.
+2. make 5 array, 0,1,2,3,4 and store value in respective prority arrays accorting to their prority value
+
+i kind of like option no 2, cause th elogic will be cleaner and easier
+cause in option no 1, i guss we have to short array in basis of prority each time, & aslso we have to read values from 2 arry, make the logic to shor the array with values and short prority array accordingly will that be O(n) or n^2 i wonder,
+
+But i am still unsure about my 2 iseas and i think 2nd idea will take more space, but i belive we can do operation on O(1) in that queue
+
+my idea of ques in2 in option
+
+var(
+ zero []int
+one []int
+.
+.
+four []int
+)
+
+but thers a another way in Go to do same thing but in more cleanear and scalable way
+prorityQueue[i][] int
+ this way we can change the value i as our linkin gin our case it will be 5.
+
+and another benifit will be fast memory access, cause way 1 all array or rather say slice are store in random place in memory, and in way 2 they are stored continously
+when we have 5 array it dosent really matter, but if we have 5millon array than it will matter, it will be chasing friendly , cpu have to do less work less seeking time in memory
+and if we are making games, high frequency trading or kernal sheduler than it really massters
+it dosent matter in our case, but will i will use way 2
+
 */
