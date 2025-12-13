@@ -37,6 +37,7 @@ func prorityQueue() {
 	}
 }
 func EnqueueInProrityQueue() (int, int8) {
+a:
 	fmt.Println("Enter the value to Enqueue in Prority Queue")
 	fmt.Println("In format: value,prority")
 	fmt.Println("Note: Prority shall be from 0 to 4, lower the value, higher the prority")
