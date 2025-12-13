@@ -16,6 +16,11 @@ const (
 	circular
 	prority
 )
+const (
+	enque = iota + 1
+	deque
+	peek
+)
 
 func main() {
 	for {

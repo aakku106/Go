@@ -5,12 +5,6 @@ import (
 	"os"
 )
 
-const (
-	enque = iota + 1
-	deque
-	peek
-)
-
 func linearQueue() {
 	fmt.Println("Accessing Linear queue....")
 	fmt.Println("Linear queue accesed")
