@@ -44,12 +44,15 @@ a:
 
 	fmt.Printf("\tlen:\t%d\tcap:\t%d\n", len(prorityQueueStoragePlace), cap(prorityQueueStoragePlace))
 	fmt.Printf("\t%d\n", (len(prorityQueueStoragePlace[0]) + len(prorityQueueStoragePlace[1]) + len(prorityQueueStoragePlace[2]) + len(prorityQueueStoragePlace[3]) + len(prorityQueueStoragePlace[4])))
-
 	var (
 		value   int
 		prority int8
 	)
 	fmt.Scanf("%d,%d", &value, &prority)
+	if prority > 5 && prority < 0 {
+		fmt.Println("choose Between 0,1,2,3,4")
+		goto a
+	}
 	switch prority {
 	case 0:
 		prorityQueueStoragePlace[0] = append(prorityQueueStoragePlace[0], value)
