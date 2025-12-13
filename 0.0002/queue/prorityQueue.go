@@ -72,10 +72,10 @@ func peekIntoProrityQueue() {
 	fmt.Printf("---->\t%d\t<---- Will come out next", prorityQueueStoragePlace[frontOfProrityQueue])
 }
 func isProrityQueueEmpty() bool {
-	if frontOfProrityQueue == -1 {
-		return true
+	if (len(prorityQueueStoragePlace[0]) + len(prorityQueueStoragePlace[1]) + len(prorityQueueStoragePlace[2]) + len(prorityQueueStoragePlace[3]) + len(prorityQueueStoragePlace[4])) <= 0 {
+		return false
 	}
-	return false
+	return true
 }
 
 /*
