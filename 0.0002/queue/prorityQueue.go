@@ -13,9 +13,12 @@ func prorityQueue() {
 		fmt.Println("1.To Enqueue")
 		fmt.Println("2. To Deque")
 		fmt.Println("3. Peek")
+		fmt.Println("-1 To back to Queue")
 		var choose int8
 		fmt.Scan(&choose)
 		switch choose {
+		case back:
+			return
 		case quit:
 			os.Exit(0)
 		case enque:
@@ -146,4 +149,5 @@ when we have 5 array it dosent really matter, but if we have 5millon array than 
 and if we are making games, high frequency trading or kernal sheduler than it really massters
 it dosent matter in our case, but will i will use way 2
 
+### now you might think one thing,i told i will make it like garbacecollection and clear dequeuede eleent menually, but i used inbuild go slices insted of front, because in go slice dont oun array its pointer to array with length and capacity, so its basically same as i told earlier, but still i will emplement that gc like behavior in prorityQueue.go in 0.0003 folder
 */
