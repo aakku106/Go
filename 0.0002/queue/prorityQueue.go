@@ -23,7 +23,8 @@ func prorityQueue() {
 		case quit:
 			os.Exit(0)
 		case enque:
-			EnqueueInProrityQueue()
+			enquedValue, prorityOfEnqueuedValue := EnqueueInProrityQueue()
+			fmt.Printf("-->\t%d\tEnqueued with prority:\t%d\n", enquedValue, prorityOfEnqueuedValue)
 		case deque:
 		case peek:
 			peekIntoProrityQueue()
