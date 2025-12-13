@@ -98,6 +98,7 @@ func peekIntoProrityQueue() {
 	for i := range 5 {
 		if len(prorityQueueStoragePlace[i]) != 0 {
 			fmt.Printf("---->\t%d\t<---- cumming out next\n", prorityQueueStoragePlace[i][0])
+			return
 		}
 	}
 }
