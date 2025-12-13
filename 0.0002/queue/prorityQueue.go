@@ -74,7 +74,7 @@ a:
 
 	//	fmt.Printf("\n%v\n", prorityQueueStoragePlace)
 
-	return value, prority
+	return value, prority, true
 }
 func DequeueFromProrityQueue() (int, int8, bool) {
 	if isProrityQueueEmpty() {
