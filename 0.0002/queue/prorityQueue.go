@@ -17,6 +17,8 @@ func prorityQueue() {
 	fmt.Scan(&choose)
 	switch choose {
 	case enque:
+		enqueuedValueInProrityQueue, prorityOfEnqueuedValueInProrityQueue := EnqueueInProrityQueue()
+		fmt.Printf("---->\t%d\t<----Enqueued Into Prority Queue with Prority of:\t%d", enqueuedValueInProrityQueue, prorityOfEnqueuedValueInProrityQueue)
 	case deque:
 	case peek:
 		peekIntoProrityQueue()
@@ -24,6 +26,9 @@ func prorityQueue() {
 		fmt.Println("Choose between 1,2,3 or 0 to exit program")
 	}
 
+}
+func EnqueueInProrityQueue() (int, int) {
+	return 1, 1
 }
 func peekIntoProrityQueue() {
 	if isProrityQueueEmpty() {
