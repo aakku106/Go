@@ -19,8 +19,10 @@ func prorityQueue() {
 		case quit:
 			os.Exit(0)
 		case enque:
-			enquedValue, prorityOfEnqueuedValue := EnqueueInProrityQueue()
-			fmt.Printf("-->\t%d\tEnqueued with prority:\t%d\n", enquedValue, prorityOfEnqueuedValue)
+			enquedValue, prorityOfEnqueuedValue, wasEnqueueSuccess := EnqueueInProrityQueue()
+			if wasEnqueueSuccess {
+				fmt.Printf("-->\t%d\tEnqueued with prority:\t%d\n", enquedValue, prorityOfEnqueuedValue)
+			}
 		case deque:
 			dequeuedValue, prorityOfDequeuedValue, wasProrityQueueEmpty := DequeueFromProrityQueue()
 			if wasProrityQueueEmpty {
