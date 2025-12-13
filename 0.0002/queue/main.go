@@ -7,7 +7,7 @@ import (
 var (
 	linearQueueStoragePlace   []int
 	circularQueueStoragePlace [5]int
-	prorityQueueStoragePlace  []int
+	prorityQueueStoragePlace  [5][]int
 )
 
 const (
