@@ -10,6 +10,16 @@ var (
 func prorityQueue() {
 	fmt.Println("Accessing Protity Queue.....")
 	fmt.Println("Protuty Queue Accesed")
+	fmt.Println("Choose Between")
+	fmt.Println("1.To Enqueue")
+	fmt.Println("2. To Deque")
+	fmt.Println("3. Peek")
+	var choose int8
+	fmt.Scan(&choose)
+	switch choose {
+	default:
+		fmt.Println("Choose between 1,2,3 or 0 to exit program")
+	}
 
 }
 
