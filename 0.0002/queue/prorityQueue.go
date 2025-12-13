@@ -38,8 +38,7 @@ func EnqueueInProrityQueue() (int, int) {
 	fmt.Println("Note: Prority shall be from 0 to 4, lower the value, higher the prority")
 
 	fmt.Printf("\tlen:\t%d\tcap:\t%d\n", len(prorityQueueStoragePlace), cap(prorityQueueStoragePlace))
-	// fmt.Printf("\tlen of %d:\t%d\tcap of %d:\t%d\n",
-	//	len(prorityQueueStoragePlace[0][0]), cap(prorityQueueStoragePlace[0][0]))
+	fmt.Printf("\t%d\n", (len(prorityQueueStoragePlace[0]) + len(prorityQueueStoragePlace[1]) + len(prorityQueueStoragePlace[2]) + len(prorityQueueStoragePlace[3]) + len(prorityQueueStoragePlace[4])))
 
 	var (
 		value   int
