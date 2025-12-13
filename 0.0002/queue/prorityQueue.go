@@ -22,6 +22,18 @@ func prorityQueue() {
 	}
 
 }
+func peekIntoProrityQueue() {
+	if isCircularQueueEmpty() {
+		fmt.Println("The Prority Queue is Empty")
+		return
+	}
+}
+func isProrityQueueEmpty() bool {
+	if frontOFcirularQueue == -1 {
+		return true
+	}
+	return false
+}
 
 /*
 Lest see how we make  prority queue:
