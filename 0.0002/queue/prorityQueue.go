@@ -76,7 +76,15 @@ func DequeueFromProrityQueue() (int, int8, bool) {
 		fmt.Println("The Prority Queue is Empty !!!")
 		return 0, 0, true
 	}
-	return 1, 1, false
+	for i := range 5 {
+		if len(prorityQueueStoragePlace[i]) != 0 {
+			value := prorityQueueStoragePlace[i][0]
+			prorityQueueStoragePlace[i] =
+				prorityQueueStoragePlace[i][1:]
+			return value, int8(i), false
+		}
+	}
+	return 0, 0, true
 }
 func peekIntoProrityQueue() {
 	if isProrityQueueEmpty() {
