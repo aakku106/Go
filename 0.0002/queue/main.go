@@ -19,7 +19,6 @@ const (
 
 func main() {
 	for {
-
 		fmt.Println("Welci to queue, choose between")
 		fmt.Println("1. Linear Queue")
 		fmt.Println("2. Circular queue")
