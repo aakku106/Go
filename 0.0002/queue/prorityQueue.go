@@ -98,9 +98,9 @@ func peekIntoProrityQueue() {
 }
 func isProrityQueueEmpty() bool {
 	if (len(prorityQueueStoragePlace[0]) + len(prorityQueueStoragePlace[1]) + len(prorityQueueStoragePlace[2]) + len(prorityQueueStoragePlace[3]) + len(prorityQueueStoragePlace[4])) <= 0 {
-		return false
+		return true
 	}
-	return true
+	return false
 }
 
 /*
