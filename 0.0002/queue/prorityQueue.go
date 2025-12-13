@@ -3,7 +3,8 @@ package main
 import "fmt"
 
 var (
-	prorityValue int
+	prorityValue        int
+	frontOfProrityQueue int = -1
 )
 
 func prorityQueue() {
