@@ -3,7 +3,6 @@ package main
 import "fmt"
 
 var (
-	prorityValue        int
 	frontOfProrityQueue int = -1
 )
 
