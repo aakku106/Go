@@ -62,7 +62,7 @@ func EnqueueInProrityQueue() (int, int8) {
 	}
 	fmt.Printf("\n%v\n", prorityQueueStoragePlace)
 
-	return 1, 1
+	return value, prority
 }
 func peekIntoProrityQueue() {
 	if isProrityQueueEmpty() {
