@@ -23,6 +23,12 @@ func prorityQueue() {
 			enquedValue, prorityOfEnqueuedValue := EnqueueInProrityQueue()
 			fmt.Printf("-->\t%d\tEnqueued with prority:\t%d\n", enquedValue, prorityOfEnqueuedValue)
 		case deque:
+			dequeuedValue, prorityOfDequeuedValue, wasProrityQueueEmpty := DequeueFromProrityQueue()
+			if wasProrityQueueEmpty {
+				fmt.Println("The Prority Queue was Empty!!!")
+			} else {
+				fmt.Printf("-->\t%d\tEnqueued with prority:\t%d\n", dequeuedValue, prorityOfDequeuedValue)
+			}
 		case peek:
 			peekIntoProrityQueue()
 		default:
