@@ -4,9 +4,11 @@ import (
 	"fmt"
 )
 
-var linearQueueStoragePlace []int
-var circularQueueStoragePlace [5]int
-var prorityQueueStoragePlace []int
+var (
+	linearQueueStoragePlace   []int
+	circularQueueStoragePlace [5]int
+	prorityQueueStoragePlace  []int
+)
 
 const (
 	quit = iota
