@@ -12,11 +12,11 @@ func circularQueue() {
 	fmt.Println("Circular queue accesed")
 	for {
 		//	fmt.Printf("\n\n\tqueue:\t%v\tfront:\t%d\trear\t%d\tlen:%d\tcap:%d\n", circularQueueStoragePlace, frontOFcirularQueue, rearOfCircularQueue, len(circularQueueStoragePlace), cap(circularQueueStoragePlace))
-		fmt.Printf("choose between:\n1.\tEnque\n2.\tDeque\n3.\tPeek\n-1. Back\n")
+		fmt.Printf("choose between:\n1.\tEnque\n2.\tDeque\n3.\tPeek\n-1. Back\n\n")
 		var choose int8
 		fmt.Scan(&choose)
 		switch choose {
-		case back:
+		case -1:
 			return
 		case quit:
 			os.Exit(0)

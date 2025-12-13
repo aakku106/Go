@@ -17,7 +17,7 @@ func prorityQueue() {
 		var choose int8
 		fmt.Scan(&choose)
 		switch choose {
-		case back:
+		case -1:
 			return
 		case quit:
 			os.Exit(0)

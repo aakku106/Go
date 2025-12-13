@@ -17,7 +17,6 @@ const (
 	prority
 )
 const (
-	back  = -1
 	enque = iota + 1
 	deque
 	peek
