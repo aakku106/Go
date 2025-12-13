@@ -12,23 +12,25 @@ var (
 func prorityQueue() {
 	fmt.Println("Accessing Protity Queue.....")
 	fmt.Println("Protuty Queue Accesed")
-	fmt.Println("Choose Between")
-	fmt.Println("1.To Enqueue")
-	fmt.Println("2. To Deque")
-	fmt.Println("3. Peek")
-	var choose int8
-	fmt.Scan(&choose)
-	switch choose {
-	case enque:
-		enqueuedValueInProrityQueue, prorityOfEnqueuedValueInProrityQueue := EnqueueInProrityQueue()
-		fmt.Printf("---->\t%d\t<----Enqueued Into Prority Queue with Prority of:\t%d", enqueuedValueInProrityQueue, prorityOfEnqueuedValueInProrityQueue)
-	case deque:
-	case peek:
-		peekIntoProrityQueue()
-	default:
-		fmt.Println("Choose between 1,2,3 or 0 to exit program")
+	for {
+		fmt.Println("Choose Between")
+		fmt.Println("1.To Enqueue")
+		fmt.Println("2. To Deque")
+		fmt.Println("3. Peek")
+		var choose int8
+		fmt.Scan(&choose)
+		switch choose {
+		case quit:
+			os.Exit(0)
+		case enque:
+			EnqueueInProrityQueue()
+		case deque:
+		case peek:
+			peekIntoProrityQueue()
+		default:
+			fmt.Println("Choose between 1,2,3 or 0 to exit program")
+		}
 	}
-
 }
 func EnqueueInProrityQueue() (int, int) {
 	return 1, 1
