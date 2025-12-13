@@ -64,6 +64,11 @@ func EnqueueInProrityQueue() (int, int8) {
 
 	return value, prority
 }
+func DequeueFromProrityQueue() (int, int8, bool) {
+	if isProrityQueueEmpty() {
+		fmt.Println("The Prority Queue is Empty !!!")
+		return 0, 0, true
+	}
 func peekIntoProrityQueue() {
 	if isProrityQueueEmpty() {
 		fmt.Println("The Prority Queue is Empty")
