@@ -6,10 +6,6 @@ import (
 	"os"
 )
 
-var (
-	frontOfProrityQueue int = -1
-)
-
 func prorityQueue() {
 	fmt.Println("Accessing Protity Queue.....")
 	fmt.Println("Protuty Queue Accesed")
