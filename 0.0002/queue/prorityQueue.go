@@ -37,7 +37,7 @@ func prorityQueue() {
 		}
 	}
 }
-func EnqueueInProrityQueue() (int, int8) {
+func EnqueueInProrityQueue() (int, int8, bool) {
 a:
 	fmt.Println("Enter the value to Enqueue in Prority Queue")
 	fmt.Println("In format: value,prority")
