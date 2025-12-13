@@ -54,21 +54,25 @@ a:
 		fmt.Println("choose Between 0,1,2,3,4")
 		goto a
 	}
-	switch prority {
-	case 0:
-		prorityQueueStoragePlace[0] = append(prorityQueueStoragePlace[0], value)
-	case 1:
-		prorityQueueStoragePlace[1] = append(prorityQueueStoragePlace[1], value)
-	case 2:
-		prorityQueueStoragePlace[2] = append(prorityQueueStoragePlace[2], value)
-	case 3:
-		prorityQueueStoragePlace[3] = append(prorityQueueStoragePlace[3], value)
-	case 4:
-		prorityQueueStoragePlace[4] = append(prorityQueueStoragePlace[4], value)
-	default:
-		fmt.Println("Cloose between: 0,1,2,3,4")
-	}
-	fmt.Printf("\n%v\n", prorityQueueStoragePlace)
+	prorityQueueStoragePlace[prority] = append(prorityQueueStoragePlace[prority], value)
+
+	//	switch prority {
+	//	case 0:
+	//		prorityQueueStoragePlace[0] = append(prorityQueueStoragePlace[0], value)
+	//	case 1:
+	//		prorityQueueStoragePlace[1] = append(prorityQueueStoragePlace[1], value)
+	//	case 2:
+	//		prorityQueueStoragePlace[2] = append(prorityQueueStoragePlace[2], value)
+	//	case 3:
+	//		prorityQueueStoragePlace[3] = append(prorityQueueStoragePlace[3], value)
+	//	case 4:
+	//		prorityQueueStoragePlace[4] = append(prorityQueueStoragePlace[4], value)
+	//	default:
+	//		fmt.Println("Cloose between: 0,1,2,3,4")
+	//		return 0, 0, false
+	//	}
+
+	//	fmt.Printf("\n%v\n", prorityQueueStoragePlace)
 
 	return value, prority
 }
