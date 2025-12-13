@@ -32,6 +32,8 @@ func main() {
 			linearQueue()
 		case circular:
 			circularQueue()
+		case prority:
+			prorityQueue()
 		default:
 			fmt.Println("Choose Between 1,2,3 or choose 0 to exit")
 		}
