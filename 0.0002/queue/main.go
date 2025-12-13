@@ -6,6 +6,7 @@ import (
 
 var linearQueueStoragePlace []int
 var circularQueueStoragePlace [5]int
+var prorityQueueStoragePlace []int
 
 const (
 	quit = iota
