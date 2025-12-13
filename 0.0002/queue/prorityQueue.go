@@ -43,8 +43,8 @@ a:
 	fmt.Println("In format: value,prority")
 	fmt.Println("Note: Prority shall be from 0 to 4, lower the value, higher the prority")
 
-	fmt.Printf("\tlen:\t%d\tcap:\t%d\n", len(prorityQueueStoragePlace), cap(prorityQueueStoragePlace))
-	fmt.Printf("\t%d\n", (len(prorityQueueStoragePlace[0]) + len(prorityQueueStoragePlace[1]) + len(prorityQueueStoragePlace[2]) + len(prorityQueueStoragePlace[3]) + len(prorityQueueStoragePlace[4])))
+	// fmt.Printf("\tlen:\t%d\tcap:\t%d\n", len(prorityQueueStoragePlace), cap(prorityQueueStoragePlace))
+	// fmt.Printf("\t%d\n", (len(prorityQueueStoragePlace[0]) + len(prorityQueueStoragePlace[1]) + len(prorityQueueStoragePlace[2]) + len(prorityQueueStoragePlace[3]) + len(prorityQueueStoragePlace[4])))
 	var (
 		value   int
 		prority int8
