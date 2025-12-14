@@ -93,7 +93,7 @@ func Dequeue() (int, bool) {
 		}
 	}
 
-	return 1, false
+	return 1, true
 }
 
 func peekQueue() {
