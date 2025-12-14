@@ -91,12 +91,10 @@ func peekQueue() {
 		return
 	}
 }
-func isEmpty() bool {
-	for i := range queue {
 
-		if len(queue[i])-front[i] > 0 {
-			return false
-		}
+func isEmpty() bool {
+	if len(front) == 0 {
+		return false
 	}
 	return true
 }
