@@ -99,8 +99,12 @@ func peekQueue() {
 }
 
 func isEmpty() bool {
-	if len(front) == 0 {
-		return false
+	check := 0
+	for i := range queue {
+		check = front[i] + check
 	}
-	return true
+	if check < 0 {
+		return true
+	}
+	return false
 }
