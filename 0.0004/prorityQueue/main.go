@@ -7,7 +7,7 @@ import (
 
 var (
 	queue [5][]int
-	front [5]int
+	front [5]int = [5]int{-1, -1, -1, -1, -1}
 )
 
 const (
