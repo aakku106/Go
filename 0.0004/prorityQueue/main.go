@@ -68,7 +68,10 @@ a:
 
 	queue[prority] = append(queue[prority], value)
 
-	front[prority] = front[prority] + 1
+	if front[prority] == -1 {
+		front[prority] = 0
+	}
+	// front[prority] = front[prority] + 1
 	return value, prority, false
 }
 
