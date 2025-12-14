@@ -47,8 +47,31 @@ func main() {
 	}
 }
 
-func Enqueue() (int, int8, bool)
-func Dequeue() (int, bool)
+func Enqueue() (int, int8, bool) {
+a:
+
+	fmt.Println("Enter the value to Enqueue in Prority Queue")
+	fmt.Println("In format: value,prority")
+	fmt.Println("Note: Prority shall be from 0 to 4, lower the value, higher the prority")
+
+	var (
+		value   int
+		prority int8
+	)
+
+	fmt.Scanf("%d,%d", &value, &prority)
+
+	if prority >= 5 || prority < 0 {
+		fmt.Println("Prority Must be from 0 to 4")
+		goto a
+	}
+
+	queue[prority] = append(queue[prority], value)
+
+	front[prority] = front[prority] + 1
+	return value, prority, false
+}
+
 func peekQueue() {
 	if isEmpty() {
 		fmt.Println("Queue is Empty")
