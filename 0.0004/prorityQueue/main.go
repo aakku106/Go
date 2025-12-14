@@ -1,0 +1,60 @@
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+var (
+	queue [5][]int
+	front [5]int
+)
+
+const (
+	quit = iota
+	enqueue
+	dequeue
+	peek
+)
+
+func main() {
+	fmt.Println("Trying to access prority queue.....")
+	fmt.Println("Prority queue accesed")
+
+	fmt.Println("Choose Between")
+	fmt.Println("1.To Enqueue")
+	fmt.Println("2. To Deque")
+	fmt.Println("3. Peek")
+	fmt.Println("-1 To back to Queue")
+	var choose int8
+	fmt.Scan(&choose)
+	switch choose {
+	case -1:
+		return
+	case quit:
+		os.Exit(0)
+	case enqueue:
+	case dequeue:
+	case peek:
+	default:
+		fmt.Println("Chooe betn 1,2,3 or 0 to exit")
+	}
+}
+
+func Enqueue() (int, int8, bool)
+func Dequeue() (int, bool)
+func peekQueue() {
+	if isEmpty() {
+		fmt.Println("Queue is Empty")
+		return
+	}
+}
+func isEmpty() bool {
+	for i := range queue {
+
+		if len(queue[i])-front[i] > 0 {
+			return false
+		}
+	}
+	return true
+}
