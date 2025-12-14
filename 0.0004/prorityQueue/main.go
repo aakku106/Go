@@ -36,7 +36,9 @@ func main() {
 		case quit:
 			os.Exit(0)
 		case enqueue:
+			Enqueue()
 		case dequeue:
+			Dequeue()
 		case peek:
 			peekQueue()
 		default:
