@@ -72,6 +72,19 @@ a:
 	return value, prority, false
 }
 
+func Dequeue() (int, bool) {
+	if isEmpty() {
+		fmt.Println("Queue is Empty !!!")
+		return 0, true
+	}
+
+	for i := range 5 {
+		i++
+	}
+
+	return 1, false
+}
+
 func peekQueue() {
 	if isEmpty() {
 		fmt.Println("Queue is Empty")
