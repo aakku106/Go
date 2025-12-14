@@ -79,7 +79,13 @@ func Dequeue() (int, bool) {
 	}
 
 	for i := range 5 {
-		i++
+		if front[i] != -1 {
+			if front[i] == 0 {
+				front[i] = -1
+			} else {
+				front[i] = front[i] + 1
+			}
+		}
 	}
 
 	return 1, false
