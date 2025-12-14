@@ -101,6 +101,19 @@ func peekQueue() {
 		fmt.Println("Queue is Empty")
 		return
 	}
+	for i := range 5 {
+		if front[i] > -1 {
+			//			if front[i] == 0 {
+			//				front[i] = -1
+			//				return queue[i][0], false
+			//			} else {
+			//				front[i] = front[i] + 1
+			//				return queue[i][front[i-1]], false
+			fmt.Printf("---->\t%d\t<--- will be cumming next with prority:\t%d", queue[i][front[i]], front[i])
+			return
+		}
+	}
+
 }
 
 func isEmpty() bool {
