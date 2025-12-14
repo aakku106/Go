@@ -36,7 +36,9 @@ func main() {
 		case quit:
 			os.Exit(0)
 		case enqueue:
-			Enqueue()
+
+			value, prority := Enqueue()
+			fmt.Printf("---->\t%d\t<----enqueued with prority:\t%d", value, prority)
 		case dequeue:
 			Dequeue()
 		case peek:
@@ -47,7 +49,7 @@ func main() {
 	}
 }
 
-func Enqueue() (int, int8, bool) {
+func Enqueue() (int, int8) {
 a:
 
 	fmt.Println("Enter the value to Enqueue in Prority Queue")
@@ -72,7 +74,7 @@ a:
 		front[prority] = 0
 	}
 	// front[prority] = front[prority] + 1
-	return value, prority, false
+	return value, prority
 }
 
 func Dequeue() (int, bool) {
@@ -119,10 +121,11 @@ func peekQueue() {
 func isEmpty() bool {
 	check := 0
 	for i := range queue {
-		check = front[i] + check
+		check += len(queue[i])
 	}
 	if check < 0 {
 		return true
 	}
+
 	return false
 }
