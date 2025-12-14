@@ -21,6 +21,8 @@ func main() {
 	fmt.Println("Trying to access prority queue.....")
 	fmt.Println("Prority queue accesed")
 	for {
+		fmt.Println(queue)
+		fmt.Println(front)
 		fmt.Println("Choose Between")
 		fmt.Println("1.To Enqueue")
 		fmt.Println("2. To Deque")
