@@ -38,9 +38,14 @@ func main() {
 		case enqueue:
 
 			value, prority := Enqueue()
-			fmt.Printf("---->\t%d\t<----enqueued with prority:\t%d", value, prority)
+			fmt.Printf("---->\t%d\t<----enqueued with prority:\t%d\n", value, prority)
 		case dequeue:
-			Dequeue()
+			value, wasEmpty := Dequeue()
+			if !wasEmpty {
+				fmt.Printf("---->\t%d\t----dequeued", value)
+			} else {
+				fmt.Println("Empty queue")
+			}
 		case peek:
 			peekQueue()
 		default:
@@ -82,14 +87,18 @@ func Dequeue() (int, bool) {
 		fmt.Println("Queue is Empty !!!")
 		return 0, true
 	}
-
+	fmt.Println("root")
 	for i := range 5 {
 		if front[i] > -1 {
+			//	fmt.Println("i>-1")
 			if front[i] == 0 {
+				//	fmt.Println("f==0")
+				//	fmt.Printf("index \t%d\n", i)
 				front[i] = -1
 				return queue[i][0], false
 			} else {
 				front[i] = front[i] + 1
+				//	fmt.Println("f!=0")
 				return queue[i][front[i-1]], false
 			}
 		}
@@ -105,17 +114,10 @@ func peekQueue() {
 	}
 	for i := range 5 {
 		if front[i] > -1 {
-			//			if front[i] == 0 {
-			//				front[i] = -1
-			//				return queue[i][0], false
-			//			} else {
-			//				front[i] = front[i] + 1
-			//				return queue[i][front[i-1]], false
 			fmt.Printf("---->\t%d\t<--- will be cumming next with prority:\t%d", queue[i][front[i]], front[i])
 			return
 		}
 	}
-
 }
 
 func isEmpty() bool {
