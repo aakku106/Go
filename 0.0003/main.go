@@ -36,6 +36,9 @@ func main() {
 		Hour                 = 60 * Minute
 	*/
 	fmt.Println(int(time.Hour))
+	// Basically
+	// Time represents an instant in time with nanosecond precision.
+
 }
 
 // Function that parse tiem in given function
