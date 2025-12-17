@@ -107,3 +107,5 @@ func NewDomesticAnimal(name string, height uint16) DomesticAnimal {
 	}
 
 }
+
+// Now go to struct/method/metho.go package main
