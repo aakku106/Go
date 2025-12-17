@@ -29,6 +29,7 @@ func main() {
 	fmt.Println("Area of Square: ", square.area())
 	fmt.Println("Area of Circle: ", newCircle.area())
 	fmt.Println("Area of Traingle: ", rtTraingl.area())
+	// Look how we achived polymerphism
 
 }
 
@@ -41,3 +42,6 @@ func (c *circle) area() float64 {
 func (t *traingle) area() float32 {
 	return (t.height * t.base * 1 / 2)
 }
+
+// Now next step will be interface in 0.0008
+// noticed i used float32 and float64 here, you will find out about that in interface too
