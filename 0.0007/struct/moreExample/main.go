@@ -32,3 +32,12 @@ func main() {
 
 }
 
+func (r *rectangle) area() float32 {
+	return r.length * r.breadth
+}
+func (c *circle) area() float64 {
+	return math.Pi * math.Pow(c.radious, 2)
+}
+func (t *traingle) area() float32 {
+	return (t.height * t.base * 1 / 2)
+}
