@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"structtest/animal" // Import the animal package!
+)
 
 type DomesticAnimal struct {
 	Name   string
