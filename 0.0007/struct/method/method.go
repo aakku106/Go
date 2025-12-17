@@ -93,3 +93,16 @@ So Go said:
 		 No virtual methods
 		 No constructors
 */
+
+/*
+Methods are not for functionality
+	Methods are for meaning
+	Interfaces only work because of methods
+	Go killed classes to avoid inheritance pain
+	Go kept methods to model behavior
+	Go uses composition + interfaces instead of class hierarchies
+
+If C is mechanical power
+and Java/C# is structured OOP
+Go is behavioral minimalism
+*/
