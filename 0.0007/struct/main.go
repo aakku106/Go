@@ -58,6 +58,19 @@ func main() {
 	}
 	fmt.Println(bufflow)
 	// See int type returns 0 and string type returns whitespace
+
+	// And we can also define a struct like
+	cow := DomesticAnimal{
+		"Cow", 12,
+	}
+	fmt.Println(cow)
+	// but you better dont use this, cause what if anyone added a species type before height, now your code is broken
+
+	// Are you missing constructor, use new Functions
+	fmt.Println(NewDomesticAnimal("GinnyPig", 3))
+	// Now this NewDome... function act as a constructor in other OOPS language, but we nac name it anything cause its normal function
+	// we can also handle defult value, insted of height:height we can do height:100, defult
+	// we can use new function insted of get/set function in certsin cases
 }
 
 /*
@@ -86,4 +99,11 @@ func (d *DomesticAnimal) GetHeight() uint16 {
 
 func (d *DomesticAnimal) SetHeight(h uint16) {
 	d.height = h
+}
+func NewDomesticAnimal(name string, height uint16) DomesticAnimal {
+	return DomesticAnimal{
+		Name:   name,
+		height: height,
+	}
+
 }
