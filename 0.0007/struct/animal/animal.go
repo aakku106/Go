@@ -38,4 +38,5 @@ eg: we have package animal and another package build in build/build here
 - can import built in animal
 - but cannot import built in animal and animal in built at one time
 ie. Either import built in animal oe import animal in built but not each other at same time
+- And program alwaysstarts from package main
 */
