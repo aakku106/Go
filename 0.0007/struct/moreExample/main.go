@@ -15,3 +15,20 @@ type traingle struct {
 	base, height float32
 }
 
+func main() {
+
+	square := rectangle{
+		length: 21.63, breadth: 21.63,
+	}
+	newCircle := circle{
+		radious: 21.23,
+	}
+	rtTraingl := traingle{
+		base: 15.2, height: 19.8,
+	}
+	fmt.Println("Area of Square: ", square.area())
+	fmt.Println("Area of Circle: ", newCircle.area())
+	fmt.Println("Area of Traingle: ", rtTraingl.area())
+
+}
+
