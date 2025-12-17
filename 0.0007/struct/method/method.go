@@ -37,3 +37,59 @@ but if we pass the refrence instead the real value of newRect will change
 
 Simple like in function, but we dont have to pass &newRect this time
 */
+
+/*
+NOTE: method don’t let you do something you can’t do with functions.
+They let you do things cleaner, safer, and more scalable.
+
+than you might why bother to use it ?
+it will make all scence while using interfaces
+
+also looking at
+newRect.area(12, 30)
+&
+area(newRect, 12, 30)
+the upper one is more cleaner and explicetly saying what we are doing lest look at another similar eg
+normal Function
+ area(rect)
+ perimeter(rect)
+ scale(rect)
+Methods
+ rect.area()
+ rect.perimeter()
+ rect.scale()
+// In function area what ? scale what ?, in methods o rect.ares, react.scale or traingle.perimeter
+
+methods are not for performance or functions lacks or because of pointer only
+what it is for
+ Behavior ownership
+ API clarity
+ Interface compatibility
+ Large-code sanity
+ Expressing intent
+*/
+
+/*
+Another qtn you may ask is, why go avoided classes,but used methods
+
+Why no classes?
+
+Classes usually bring:
+		inheritance chains
+		fragile base classes
+		tight coupling
+		“is-a” abuse
+		override hell
+
+Go’s designers (Rob Pike, Ken Thompson, etc.) hated this.
+
+They saw:
+
+“Most real systems use composition, not inheritance.”
+
+So Go said:
+		 No classes
+		 No inheritance
+		 No virtual methods
+		 No constructors
+*/
