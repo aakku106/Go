@@ -26,12 +26,12 @@ func main() {
 		height: 3,
 	}
 	fmt.Println(Cat.Name+" height:", Cat.height)
-	
+
 	// Using getter/setter
 	fmt.Println("Dog height via getter:", Dog.GetHeight())
 	Dog.SetHeight(12)
 	fmt.Println("Dog height after setter:", Dog.GetHeight())
-	
+
 	fmt.Println("\n--- Now using WildAnimal from animal package! ---")
 	// Using WildAnimal from animal package
 	Lion := animal.WildAnimal{
@@ -42,9 +42,22 @@ func main() {
 	Lion.SetWeight(190) // Use setter for private field
 	fmt.Println(Lion)
 	fmt.Println(Lion.Species+" weight:", Lion.GetWeight())
-	
+
 	// Can also use functions from animal package
 	animal.PrintMonkey()
+
+	// we cna also do
+	Dog.Name = "Big dog"
+	fmt.Printf(Dog.Name)
+	horse := DomesticAnimal{
+		Name: "Horse",
+	}
+	fmt.Println(horse)
+	bufflow := DomesticAnimal{
+		height: 12,
+	}
+	fmt.Println(bufflow)
+	// See int type returns 0 and string type returns whitespace
 }
 
 /*
