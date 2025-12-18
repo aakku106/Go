@@ -37,4 +37,5 @@ func main() {
 
 		fmt.Println(val)
 	}
+	// simple _ says Go cimpiler to just ignore value
 }
