@@ -1,6 +1,9 @@
 package main
 
-import "math"
+import (
+	"fmt"
+	"math"
+)
 
 type Shape interface {
 	area() float64
@@ -20,6 +23,7 @@ type square struct {
 }
 
 func main() {
+	newRect := rectangle{height: 12.32, width: 32.12}
 
 }
 
