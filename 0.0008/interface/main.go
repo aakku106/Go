@@ -31,3 +31,8 @@ func (r *rectangle) area() float64 { return r.height * r.width }
 func (c *circle) area() float64    { return math.Pi * math.Pow(c.radious, 2) }
 func (t *traingle) area() float64  { return 0.5 * t.base * t.height }
 func (s *square) area() float64    { return math.Pow(s.length, 2) }
+func areaCalc(s Shape) {
+	fmt.Println("Area: ", s.area())
+}
+
+// There are more examples in example folder
