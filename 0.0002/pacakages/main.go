@@ -13,7 +13,7 @@ func main() {
 	// From another file inder same package
 	fmt.Println(thisIsFromAnotherFile)
 	fmt.Println(thisIsFromAnotherMain)
-	fmt.Println(ThisIsPrivate)
+	fmt.Println(thisIsPrivate)
 	fmt.Println(ThisIsPublic)
 }
 
