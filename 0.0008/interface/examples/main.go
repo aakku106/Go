@@ -35,4 +35,20 @@ func main() {
 	fmt.Println(newRect.area()) // Here i printed area in main function, i can insted use iinterface
 	printArea(&newRect)
 	printArea(&rectangle{}) // We can even do this but it will provly print area:0
+	// Playin gwith empty interface
+	emptyInterface()
+}
+func emptyInterface() {
+	// lest do some fun with empty interface
+	// they can be powerful
+	var number cat
+	number = 5
+	fmt.Println(number)
+	number = "cat"
+	fmt.Println(number)
+	/*
+				Wasent it fun ? any is just same
+				Go: here wo do strong type safty at compile time to avoid wired behavior of code
+		meanwhile users: Lest turn go into Js by using any everywhere
+	*/
 }
