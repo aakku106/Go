@@ -34,4 +34,5 @@ func main() {
 	go newRect.set(123.321, 321.123)
 	fmt.Println(newRect.area()) // Here i printed area in main function, i can insted use iinterface
 	printArea(&newRect)
+	printArea(&rectangle{}) // We can even do this but it will provly print area:0
 }
