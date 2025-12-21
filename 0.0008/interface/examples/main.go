@@ -14,9 +14,7 @@ type shape interface {
 }
 type rectangle struct{ length, breadth float64 }
 
-func printArea(s shape) {
-	fmt.Println("Area: ", s.area())
-}
+func printArea(s shape) { fmt.Println("Area: ", s.area()) }
 
 // func printArea(s shape)           { fmt.Println("Area: ", s.area()) }
 // func (r rectangle) area() float64 { return r.breadth * r.length }
