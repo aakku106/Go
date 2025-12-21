@@ -90,4 +90,5 @@ func emptyInterfaceVariadicType(v ...cat) {
 	fmt.Println(v)
 	//Use empty interface only when the structure is un-known
 	// Its compiles, dosent mean its correct
+	// IT cant be concurent
 }
