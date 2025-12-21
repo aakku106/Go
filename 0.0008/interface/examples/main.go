@@ -14,11 +14,23 @@ type shape interface {
 	area() float64
 }
 
-func printArea(s shape)           { fmt.Println("Area: ", s.area()) }
-func (r rectangle) area() float64 { return r.breadth * r.length }
-func set(nums ...float64) {
-
+// func printArea(s shape)           { fmt.Println("Area: ", s.area()) }
+// func (r rectangle) area() float64 { return r.breadth * r.length }
+func (r *rectangle) set(nums ...float64) {
+	switch {
+	case len(nums) == 2:
+		r.length = nums[0]
+		r.breadth = nums[1]
+	default:
+		fmt.Println("Not enough values")
+	}
+}
+func (r rectangle) area() float64 {
+	return r.length * r.breadth
 }
 
 func main() {
+	newRect := rectangle{}
+	newRect.set(123.321, 321.123)
+	fmt.Println(newRect.area())
 }
