@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"os"
 )
@@ -11,7 +10,18 @@ func main() {
 
 	fileAddress, err := os.Create("cat.txt")
 	if err != nil {
-		errors.New("cant create file")
+		fmt.Println(err)
 	}
 	fmt.Println(fileAddress)
+	file, err := os.Open("car.txt")
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(file, " cause car.txt dont exist till now in this dir")
+	file, err = os.Open("cat.txt")
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(file, " shows memory value cause cat.txt exists")
+
 }
