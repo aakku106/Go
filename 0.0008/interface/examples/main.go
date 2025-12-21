@@ -14,6 +14,10 @@ type shape interface {
 }
 type rectangle struct{ length, breadth float64 }
 
+func printArea(s shape) {
+	fmt.Println("Area: ", s.area())
+}
+
 // func printArea(s shape)           { fmt.Println("Area: ", s.area()) }
 // func (r rectangle) area() float64 { return r.breadth * r.length }
 func (r *rectangle) set(nums ...float64) {
@@ -31,6 +35,7 @@ func (r rectangle) area() float64 {
 
 func main() {
 	newRect := rectangle{}
-	newRect.set(123.321, 321.123)
-	fmt.Println(newRect.area())
+	go newRect.set(123.321, 321.123)
+	fmt.Println(newRect.area()) // Here i printed area in main function, i can insted use iinterface
+	printArea(&newRect)
 }
