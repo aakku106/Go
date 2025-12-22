@@ -33,4 +33,22 @@ func main() {
 		log.Println("It sems thers no file with name: fat.txt")
 	}
 	fmt.Println(string(fileRead))
+	// well these seems boring, lest do somethign more intresting in a new cleaner function
+	funHandeling()
+}
+
+func funHandeling() {
+	file, err := os.Create("studentName.txt")
+	if err != nil {
+		log.Println("Can't creat file named: ", file.Name())
+	}
+	fmt.Println("A file created with filename: ", file.Name())
+	file.WriteString("S.N|---|Name\t\t|\n")
+	file.WriteString("1. | Adarasha Gaihre\t|\n")
+	file.WriteString("2. | Aakku\t\t|\n")
+	file.WriteString("3. | CCN\t\t|\n")
+
+	read, err := os.ReadFile("studentName.txt")
+	fmt.Println(string(read))
+
 }
