@@ -47,8 +47,13 @@ func funHandeling() {
 	file.WriteString("1. | Adarasha Gaihre\t|\n")
 	file.WriteString("2. | Aakku\t\t|\n")
 	file.WriteString("3. | CCN\t\t|\n")
-
+	defer file.Close()
 	read, err := os.ReadFile("studentName.txt")
 	fmt.Println(string(read))
-
+	// Here 1st we created the file named studentName.txt, then
+	// stored its address in file and error in err is there is any, then,
+	// checked error with if err!=nil
+	// then we write in file using WriteString
+	// and used new value read to ReadFile
+	// readfile reads file and returns array of bytes(slice of byte to be specific)
 }
