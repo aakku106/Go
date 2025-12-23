@@ -55,7 +55,7 @@ func main() {
 		}
 		//this is basically like comparing value or key in map, but we need to know to use (int),(string), or out intended/needed type
 
-		//here you may think that variable n is just useless we could just use i insted, yes you can always do that
+		// Here you may think that variable n is just useless we could just use i insted, yes you can always do that
 		if _, ok := i.(string); ok {
 			fmt.Println(i, " is String")
 		} else {
