@@ -39,8 +39,22 @@ func main() {
 	} else {
 		fmt.Println("aal not found")
 	}
-	// this is simple value checking nothing special
+	// this is simple value checking nothing special althow it look verbose its very simple value checking
 
+	// lest play with interface (Type assertion they say)
+	// thers seperate folder in 0.0009/assertion
+	var i interface{} = "awwwwwwwwwwwwww"
+	if n, ok := i.(int); ok {
+		fmt.Println(n, " is int")
+	} else {
+		fmt.Println("Its not int")
+		if n, ok := i.(string); ok {
+			fmt.Println(n, " is String")
+		} else {
+			fmt.Println("Its not string")
+		}
+		//this is basically like comparing value or key in map, but we need to know to use (int),(string), or out intended/needed type
+	}
 }
 
 func isEven(n int) (bool, error) {
