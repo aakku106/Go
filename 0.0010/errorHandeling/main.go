@@ -61,6 +61,10 @@ func main() {
 		} else {
 			fmt.Println("Its not string")
 		}
+		/*
+			This allows you to check for the existence of a key without assigning the value to a variable.
+			This is particularly useful when the value is not needed but you still want to confirm the presence of the key
+		*/
 	}
 }
 
