@@ -66,6 +66,11 @@ func main() {
 			This is particularly useful when the value is not needed but you still want to confirm the presence of the key
 		*/
 	}
+	/*
+		You may ask,why are we even playing with type assertion
+		just look at Go/0.0008/interface/example
+		there we made use of any keywoard and brought chayous upon us this is just cleaning up this chayous <You better know good inglish to understand my comments.>
+	*/
 }
 
 func isEven(n int) (bool, error) {
