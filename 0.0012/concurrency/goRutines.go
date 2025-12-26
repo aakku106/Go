@@ -31,7 +31,7 @@ func C1() {
 
 		In our case, main function just did that it continued doing its job and ignored job of go get(...)
 		and when main function dies everything dies, althow we dont have any main function our code,
-		the behavior will be same when our program(main thread) dies it kills all other thereds/subthereds/hyperthreads with it
+		the behavior will be same when our program(main thread) dies it kills all other thereds/subthereds/hyperthreads/greenthre with it
 		so go get(...) output were not able to come until the main thread dies,so we saw no putput from go get()
 		what can we do to solve this ? well most easy way is to wait for them
 	*/
