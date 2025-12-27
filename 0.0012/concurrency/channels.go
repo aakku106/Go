@@ -41,4 +41,10 @@ This setisfies 1sr rule:
 // Lest look at T2 function (Also an example of un-buffered channel)
 */
 
+func T2() {
+	ch := make(chan string)
+	// we created a pipe named ch which can only carry sting
+	x := <-ch
+	fmt.Println(x)
+	go func() { ch <- "weee" }()
 }
