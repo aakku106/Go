@@ -3,28 +3,10 @@ package concurrency
 import "fmt"
 
 func T1() {
-	channel1 := make(chan string, 2)
+	// There are generally 2 types oc channels in Go
+	//	i.	Un-Buffered channel
+	//	ii. Buffered Channel
 
-	go func() {
-		channel1 <- "weeeeeeeeeeeeee"
-	}()
-	go func() {
-		channel1 <- "mmmmmmmmmeeeowwwwwwwwwwwwwww"
-		channel1 <- "mmmmmmmmmeeeowwwwwwwwwwwwwww"
-		channel1 <- "mmmmmmmmmeeeowwwwwwwwwwwwwww"
-	}()
-	//	go func() {
-	//		channel1 <- "aaaaaaaaaaaaaaaaaaa"
-	//	}()
-
-	fmt.Println(channel1)
-	mydata := <-channel1
-	fmt.Println(mydata)
-	mydata = <-channel1
-	fmt.Println(mydata)
-	mydata = <-channel1
-	fmt.Println(mydata)
-	mydata = <-channel1
-	fmt.Println(mydata)
+	// Lest look at un-Buffereed channel 1st in fucn T1
 
 }
