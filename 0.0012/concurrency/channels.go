@@ -111,3 +111,41 @@ here 2 is max cap not min cap
 In go Channels min cap is always 1
 // Lest look at another example B2
 */
+func B2() {
+	ch := make(chan string, 2)
+	go func() {
+		ch <- "106"
+	}()
+	go func() {
+		ch <- "weeeeeeeeeeeeeeee"
+	}()
+	x := <-ch
+	fmt.Println(x)
+}
+func B3() {
+	ch := make(chan string, 2)
+	go func() {
+		ch <- "106"
+		ch <- "cattt"
+	}()
+	x := <-ch
+	fmt.Println(x)
+}
+
+/*
+here in B2 we got valuw weeee which was assigned after 106,
+but in B3 we got value 106 which was assigned before cattt, and why is that ?
+*/
+func B4() {
+	ch := make(chan string, 2)
+	go func() {
+		ch <- "106"
+	}()
+	go func() {
+		ch <- "weeeeeeeeeeeeeeee"
+	}()
+	x := <-ch
+	y := <-ch
+	fmt.Println(x)
+	fmt.Println(y)
+}

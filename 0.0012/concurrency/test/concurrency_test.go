@@ -26,4 +26,7 @@ func TestChannels(t *testing.T) {
 	// Now test for buffered channel
 
 	concurrency.B1()
+	concurrency.B2()
+	concurrency.B3()
+	concurrency.B4()
 }
