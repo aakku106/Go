@@ -292,3 +292,17 @@ func B9() {
 	fmt.Println("B9 Ends here...............")
 	fmt.Println()
 } // Even this works
+/*
+But wait wasent the reule that: Send waits until receive happens, than what happened to this now
+well yes and thats the rule, and we onserved that in B6 and every other functions especially
+B8 & B9 are lying,
+actually what heppens is when a gorutine enters b8, it 1st create a int channel, and see go func() which fires up another green thread
+which sends 2 value and get blocked in 3rd one and always waits, and our initial gorutine(which was readign b8 initially) sees
+print statements
+	fmt.Println("B8 Ends here...............")
+	fmt.Println()
+prints them and main it self dyes, but that 3rd sender was always blocked and waiting, we felt nothing happened cause we had 2 gorutines one was blocked and one did it job and main itself dyed
+
+same thing happens in B9 too 2nd gorutine stops and wait atline :ch <- 12
+but we just ignored it and main dyed, so it was also killed with main no one noticed it was waiting there
+
