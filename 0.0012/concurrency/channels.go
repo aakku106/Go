@@ -198,4 +198,7 @@ So in case of B2 or B4
 So this means in go
 NOTE: The order in source code does not matter once goroutines exist.
 
+So the buffer ends up like
+either ["106", "weee"] or ["weee", "106"]
+our output reflects arrival order, not source order
 */
