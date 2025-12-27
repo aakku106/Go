@@ -252,6 +252,14 @@ func B7() {
 	fmt.Println()
 } // Bu this function will, its simplly because the ch<- value in B6 blocks the only one gorutine that was operating on that function
 // but since we created go func() which creates one more goruting, so one receives value and another GoRutine sends the value
+/*
+What really happened in b6 is that
+1st 2 sender were accepted by go
+	ch <- 12
+	ch <- 14
+but when gorutine came to ch <- 16, that deadlock cause we only have 1thread(greenThread/gorutine) and it wont jump
+ch <- 16, saying thers receiver down there
+*/
 
 func B8() {
 	fmt.Println()
