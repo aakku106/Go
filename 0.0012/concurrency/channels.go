@@ -306,3 +306,17 @@ prints them and main it self dyes, but that 3rd sender was always blocked and wa
 same thing happens in B9 too 2nd gorutine stops and wait atline :ch <- 12
 but we just ignored it and main dyed, so it was also killed with main no one noticed it was waiting there
 
+NOTE: Here was No deadlock panic because:
+	-	runtime only reports deadlock if main is blocked
+	-	here, main finishes happily
+No one cared about other
+Rule holds,but Nobody waited long enough to see it fail
+*/
+
+/* NOTE: Goroutines do not keep a Go program alive, Only main does
+ If you don’t explicitly:
+	-	receive
+	-	wait
+	-	synchronize
+	-	join
+*/
