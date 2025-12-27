@@ -282,7 +282,7 @@ func B9() {
 	fmt.Println()
 	fmt.Println("B9 starts here...............")
 
-	ch := make(chan int, 2)
+	ch := make(chan int)
 	go func() {
 		ch <- 12
 		ch <- 14
