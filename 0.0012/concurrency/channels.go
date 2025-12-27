@@ -137,6 +137,7 @@ here in B2 we got valuw weeee which was assigned after 106,
 but in B3 we got value 106 which was assigned before cattt, and why is that ?
 */
 func B4() {
+	fmt.Println("B4 starts here...............")
 	ch := make(chan string, 2)
 	go func() {
 		ch <- "106"
@@ -148,4 +149,32 @@ func B4() {
 	y := <-ch
 	fmt.Println(x)
 	fmt.Println(y)
+	fmt.Println("B4 Ends here...............")
 }
+
+/*
+Her we got weeeeee.... before and 106 after why ?
+*/
+func B5() {
+	fmt.Println()
+	fmt.Println()
+	fmt.Println("B5 starts here...............")
+	ch := make(chan string, 2)
+	go func() {
+		ch <- "106"
+		ch <- "cattt"
+	}()
+	fmt.Println(<-ch)
+	fmt.Println(<-ch)
+	fmt.Println("B5 Ends here...............")
+	fmt.Println()
+}
+
+/*
+Here we got value as aspected, 1st 10y than cattt,
+(
+	assigning value to variable wont change anything its same  if you do
+	x := <-ch; fmt.Println(x)  or
+	fmt.Println(<-ch)
+)
+*/

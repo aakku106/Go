@@ -26,7 +26,10 @@ func TestChannels(t *testing.T) {
 	// Now test for buffered channel
 
 	concurrency.B1()
+	// just 1 value assigned till here
 	concurrency.B2()
 	concurrency.B3()
 	concurrency.B4()
+	concurrency.B5()
+
 }
