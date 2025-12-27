@@ -214,3 +214,7 @@ Inside a single goroutine:
 So the channel buffer becomes(Always):["106", "cattt"]
 FIFO is respected because there is only one sender, this is clean and predictable case
 */
+// NOTE: In your computer B2&B4 may completly fip, but when i am trying its always weee.. 1st and 106 2nd (This may be in your case/computer/envirenment)
+// Who knows which GoRutine will run first
+// This is runtime-level questions.
+
