@@ -202,3 +202,15 @@ So the buffer ends up like
 either ["106", "weee"] or ["weee", "106"]
 our output reflects arrival order, not source order
 */
+
+/*
+AND in case of B3 or B5
+Why this prints 106 (always)
+
+Because now there is one sender
+
+Inside a single goroutine:
+- Instructions are executed in order
+So the channel buffer becomes(Always):["106", "cattt"]
+FIFO is respected because there is only one sender, this is clean and predictable case
+*/
