@@ -45,6 +45,14 @@ func T2() {
 	ch := make(chan string)
 	// we created a pipe named ch which can only carry sting
 	x := <-ch
-	fmt.Println(x)
+	//	fmt.Println(x)
 	go func() { ch <- "weee" }()
+	fmt.Println(x)
 }
+
+/*
+Now this will never work, because x:=<-ch blockes the thread(gorutine/green thread)
+So untill and unless go sees go func(){...} it will never create a new go rutine which would go inside go func(){}() and receives the value,
+than how do even we see example of
+- Receive waits until Send happens
+*/
