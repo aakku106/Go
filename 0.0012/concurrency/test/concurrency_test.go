@@ -20,4 +20,6 @@ func TestChannels(t *testing.T) {
 	//	concurrency.T2()
 	//
 	// why i commented this t2 function is becaue will will block the main gorutine and waits till inifinit until someones kill the process
+	// try Uncommenting if you dont get what am i trying to explain
+	concurrency.T3()
 }
