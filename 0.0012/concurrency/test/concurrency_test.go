@@ -22,4 +22,8 @@ func TestChannels(t *testing.T) {
 	// why i commented this t2 function is becaue will will block the main gorutine and waits till inifinit until someones kill the process
 	// try Uncommenting if you dont get what am i trying to explain
 	concurrency.T3()
+
+	// Now test for buffered channel
+
+	concurrency.B1()
 }

@@ -97,3 +97,17 @@ func B1() {
 	x := <-ch
 	fmt.Println(x)
 }
+
+/*
+In func B1 we created a pipe named ch which can only transfer 2 int at a time
+it's basically like buffered, but its max capacity is 2 unlike un-buffered max cap was 1
+
+in above example func B1
+we are only sending 1 value and receiving 1 value we sent
+but you might think why we sending ?, wasent it supposed to be int type, than you shall check /Go/0.0010/runes 1st
+
+And now next qtn may be the capacity was 2, but we only sent 1 value and it worked, yes
+here 2 is max cap not min cap
+In go Channels min cap is always 1
+// Lest look at another example B2
+*/
