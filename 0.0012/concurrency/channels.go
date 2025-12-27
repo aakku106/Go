@@ -87,3 +87,5 @@ no matter where we check, because its not holding value like array or slice, it 
 
 and length of x is 3 because length of string means how many caracter does it contain
 */
+
+// That was un-buffered channel in go, now lest look at buffered channel in go in function B1
