@@ -27,4 +27,18 @@ func T1() {
 	// you might think what are those wired symboles and wired code writtem, than continue reading
 }
 
+/*
+In above function T1, we created a pipe named ch which can only carry int,
+than go func()starts,
+and reaches: ch<-10 and
+waits there/ STOPs there, it won't continue, its waiting
+Why? : Because no one is receiving yet
+and in main, main reaches x:=<-ch
+now sender and receiver meet, value(10) is passed across through ch pipe, and both continue
+This setisfies 1sr rule:
+- Send wait untill Receive happens,
+, but what about receive waits until send happens,
+// Lest look at T2 function (Also an example of un-buffered channel)
+*/
+
 }
