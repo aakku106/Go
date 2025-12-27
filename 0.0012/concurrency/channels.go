@@ -89,3 +89,11 @@ and length of x is 3 because length of string means how many caracter does it co
 */
 
 // That was un-buffered channel in go, now lest look at buffered channel in go in function B1
+func B1() {
+	ch := make(chan int, 2)
+	go func() {
+		ch <- '?'
+	}()
+	x := <-ch
+	fmt.Println(x)
+}
