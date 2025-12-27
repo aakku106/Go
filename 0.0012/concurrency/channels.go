@@ -177,4 +177,14 @@ Here we got value as aspected, 1st 10y than cattt,
 	x := <-ch; fmt.Println(x)  or
 	fmt.Println(<-ch)
 )
+
+In go
+one law you must accept
+A channel preserves order per sender, not across senders
+
+This single sentence explains everything you’re seeing.
+- FIFO within one goroutine
+- No ordering guarantee between goroutines
+- Buffered channels only change blocking, not ordering guarantees
+*/
 */
