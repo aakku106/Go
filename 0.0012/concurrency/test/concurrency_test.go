@@ -17,4 +17,5 @@ func testGoRutines(t *testing.T) {
 
 func TestChannels(t *testing.T) {
 	concurrency.T1()
+	concurrency.T2()
 }
