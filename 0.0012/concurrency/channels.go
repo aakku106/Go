@@ -55,4 +55,13 @@ Now this will never work, because x:=<-ch blockes the thread(gorutine/green thre
 So untill and unless go sees go func(){...} it will never create a new go rutine which would go inside go func(){}() and receives the value,
 than how do even we see example of
 - Receive waits until Send happens
+
+the truth is T1 is the example of receiver waits until send happens,
+but i just told it was example of send waits until receive happens, yes i did told that, & I am correct
+, Becaue you never know if goRutine will get ch <- 10  inside go func(){}() first or
+	x := <-ch inside func T1(){}
+
+// So if goRutine reach ch <- 10  first than its example of send waits until receive happens, and
+if 	goRutine reaches x:=<-ch its example of Receive waits until Send happens
 */
+// Now lest look at another concept, that channels dont hold the data, they are just pipe passing down the data
