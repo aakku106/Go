@@ -44,3 +44,31 @@ func WaitToGetGet() {
 	go get("weeeeee")
 	time.Sleep(time.Second)
 }
+
+/*
+## Go rutines
+- go rutines are the green threads not the threads
+- they share heap
+- they have seperate stack
+- they follow M:N rule ie M:go rutines(green threads) N:threads(OS threads)
+
+If youu dont know what is process, thread, green thread, heap than no need to panik:
+### process
+- A os level container
+- own virtual adress space
+- own heap,stacks,globals
+- Isolated from other process by defult
+
+### Thread
+- Live inside process
+- Share same heap
+- Each thread has their own stack
+
+### Green thread
+- They are same as thread,but not os lvl
+- a multiple green threads makes a os thread
+- Eg: gorutines
+
+If still you didnt get it than no need to panic, just practise and watch activityMoniter or use top command you can see hte difference there when you run your program, but its good to watch a yt vdo rather than counting process and thread in terminal
+
+*/
