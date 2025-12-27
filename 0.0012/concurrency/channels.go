@@ -187,4 +187,15 @@ This single sentence explains everything you’re seeing.
 - No ordering guarantee between goroutines
 - Buffered channels only change blocking, not ordering guarantees
 */
+
+/*
+So in case of B2 or B4
+-	Two goroutines are launched
+-	Both attempt to send
+-	Channel has buffer size 2 → both sends succeed immediately
+-	Which goroutine runs first is undefined
+
+So this means in go
+NOTE: The order in source code does not matter once goroutines exist.
+
 */
