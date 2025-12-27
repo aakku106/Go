@@ -31,5 +31,8 @@ func TestChannels(t *testing.T) {
 	concurrency.B3()
 	concurrency.B4()
 	concurrency.B5()
+	// concurrency.B6()
+	concurrency.B7()
+	concurrency.B8()
 
 }
