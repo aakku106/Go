@@ -6,7 +6,7 @@ Welcome to your Week 3 code reviews! This week covers **error handling, HTTP, co
 
 ## 📊 Quick Summary
 
-**Overall Rating: 7.6/10**  
+**Overall Rating: 7.7/10**  
 **Total Files Reviewed: 13**  
 **Best File: channels.go (9/10)** 🌟  
 **Topics: Error Handling, File I/O, HTTP, Goroutines, Channels, Stack, Queue**
@@ -187,7 +187,7 @@ B3-B9: Advanced patterns → Deep understanding
 | HTTP            | 1      | 8.0/10     | 8.0     | 8.0     |
 | Concurrency     | 3      | 7.7/10     | **9.0** | 6.0     |
 | Data Structures | 4      | 7.5/10     | 8.0     | 7.0     |
-| **Overall**     | **12** | **7.6/10** | **9.0** | **5.0** |
+| **Overall**     | **12** | **7.7/10** | **9.0** | **6.0** |
 
 ---
 

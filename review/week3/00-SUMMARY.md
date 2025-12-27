@@ -2,9 +2,9 @@
 
 ## 📊 Overall Assessment
 
-**Week 3 Rating: 7.6/10**
+**Week 3 Rating: 7.7/10**
 
-**Progression**: Week 1 (7.0) → Week 2 (7.5) → **Week 3 (7.6)**
+**Progression**: Week 1 (7.0) → Week 2 (7.5) → **Week 3 (7.7)**
 
 **Solid progress** with the excellent channels.go file (323 lines!), but held back by tests without assertions and missing WaitGroup synchronization.
 
@@ -43,7 +43,7 @@
 - **Blocking Behavior**: Deep understanding!
 - **Testing**: Good learning progression (simple examples first!)
 
-**Rating: 8.5/10** - channels.go is excellent (9/10)! goRutines.go is perfect intro (8/10). Just need test assertions!
+**Rating: 8.5/10** - channels.go is excellent (9/10)! goRutines.go is perfect intro (8/10). Test file improved (6/10). Just need test assertions!
 
 ### 5. Data Structures Project (GitHub)
 
@@ -61,7 +61,7 @@
 | ---- | ------------ | ------------------------------ | ---------------------- | ------- |
 | 1    | Basics       | Syntax fundamentals            | Spelling               | 7.0     |
 | 2    | Intermediate | Structs, methods, pointers     | Error handling         | 7.5     |
-| 3    | **Advanced** | **Concurrency, HTTP, testing** | **No test assertions** | **7.6** |
+| 3    | **Advanced** | **Concurrency, HTTP, testing** | **No test assertions** | **7.7** |
 
 ---
 
@@ -203,7 +203,7 @@ q.front++
 | 0.0012/goRutines.go           | ~20     | 8/10     | Excellent intro!   |
 | **0.0012/channels.go**        | **323** | **9/10** | **EXCELLENT!** ⭐  |
 | 0.0012/select.go              | 0       | N/A      | Not started        |
-| 0.0012/test/                  | ~60     | 5/10     | No assertions!     |
+| 0.0012/test/                  | ~60     | 6/10     | Good organization  |
 
 ### Data Structures Project
 
