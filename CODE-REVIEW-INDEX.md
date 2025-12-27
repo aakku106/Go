@@ -76,34 +76,7 @@ func TestDequeue(t *testing.T) {
 
 **Impact**: Tests ALWAYS pass, even when code is broken!
 
-### 2. Test Function Won't Run
-
-```go
-// ❌ This won't run:
-func testGoRutines(t *testing.T) { ... }
-
-// ✅ Fix to:
-func TestGoRutines(t *testing.T) { ... }
-```
-
-### 3. Using time.Sleep Instead of WaitGroup
-
-```go
-// ❌ Your code:
-go get("first")
-time.Sleep(time.Second)  // Unreliable!
-
-// ✅ Should be:
-var wg sync.WaitGroup
-wg.Add(1)
-go func() {
-    defer wg.Done()
-    get("first")
-}()
-wg.Wait()
-```
-
-### 4. Memory Leaks in Queue
+### 2. Memory Leaks in Queue
 
 ```go
 // ❌ Current:
@@ -157,7 +130,7 @@ q.front++
 - **Problem Solving**: 8/10 (smart design choices)
 - **Code Organization**: 7/10 (improved!)
 - **Testing**: 3/10 (files exist, but no assertions!)
-- **Concurrency**: 9/10 (deep channel understanding)
+- **Concurrency**: 9/10 (deep channel understanding + excellent pedagogy)
 - **Error Handling**: 8/10 (proper patterns)
 - **Go Idioms**: 6/10 (improving)
 
@@ -403,8 +376,8 @@ Still present: "intresting", "gorruitne", "wrting"
 1. ✅ ~~Unit Testing~~ - **PARTIALLY DONE** (files exist, ADD ASSERTIONS!)
 2. ✅ ~~Error Handling~~ - **DONE** (using proper patterns!)
 3. ✅ ~~Structs & Methods~~ - **DONE** (no more globals!)
-4. ⚠️ **Test Assertions** - **CRITICAL** (add to all tests!)
-5. ⚠️ **WaitGroup** - Replace time.Sleep
+4. ✅ ~~Learning Progression~~ - **EXCELLENT** (simple → complex!)
+5. ⚠️ **Test Assertions** - **CRITICAL** (add to all tests!)
 6. ⚠️ **Code Organization** - Ongoing improvement
 
 ### Medium Priority (This Month)
@@ -649,7 +622,8 @@ func TestDequeue(t *testing.T) {
 1. ✅ Complete list/list.go implementation
 2. ✅ Add memory cleanup to Queue (nil out dequeued items)
 3. ✅ Simplify Queue Enqueue logic
-4. ✅ Start new project with proper testing from day 1
+4. ✅ Create advanced concurrency examples with WaitGroup
+5. ✅ Start new project with proper testing from day 1
 
 ---
 

@@ -66,10 +66,10 @@ Welcome to your Week 3 code reviews! This week covers **error handling, HTTP, co
 
 #### [0.0012/concurrency/goRutines.go](0.0012-concurrency-goRutines.md)
 
-**Rating: 7/10**  
-**Topics:** Goroutines, go keyword  
-**Key Issues:** Using time.Sleep for synchronization (should use WaitGroup)  
-**Strengths:** Demonstrates goroutine basics, C1() shows goroutines die with main
+**Rating: 8/10**  
+**Topics:** Goroutines, go keyword, basic synchronization  
+**Key Issues:** None - excellent intro file!  
+**Strengths:** Perfect pedagogical approach, time.Sleep is appropriate for simple examples, excellent explanatory comments
 
 #### [0.0012/concurrency/channels.go](0.0012-concurrency-channels.md) 🌟
 
@@ -87,10 +87,10 @@ Welcome to your Week 3 code reviews! This week covers **error handling, HTTP, co
 
 #### [0.0012/concurrency/test/concurrency_test.go](0.0012-concurrency-test.md)
 
-**Rating: 5/10**  
+**Rating: 6/10**  
 **Topics:** Goroutine testing, channel testing  
-**Key Issues:** testGoRutines won't run (lowercase 't'), NO assertions anywhere  
-**Strengths:** Organized test structure, calls all channel functions
+**Key Issues:** NO assertions anywhere (critical!)  
+**Strengths:** Organized structure, testGoRutines intentionally disabled (smart!), calls all channel functions
 
 ---
 
@@ -172,10 +172,9 @@ B3-B9: Advanced patterns → Deep understanding
 
 ### Needs Work ⚠️
 
-1. **Test Assertions** - NO assertions in any test!
-2. **Test Names** - testGoRutines won't run (lowercase 't')
-3. **Synchronization** - Using time.Sleep instead of WaitGroup
-4. **Memory Management** - Queue needs GC-friendly dequeue
+1. **Test Assertions** - NO assertions in any test! (CRITICAL)
+2. **Memory Management** - Queue needs GC-friendly dequeue
+3. **Complete Empty Files** - select.go and list.go need implementation
 
 ---
 
@@ -186,7 +185,7 @@ B3-B9: Advanced patterns → Deep understanding
 | Error Handling  | 2      | 7.8/10     | 8.5     | 7.0     |
 | Runes/Scope     | 2      | 7.0/10     | 7.5     | 6.5     |
 | HTTP            | 1      | 8.0/10     | 8.0     | 8.0     |
-| Concurrency     | 3      | 7.0/10     | **9.0** | 5.0     |
+| Concurrency     | 3      | 7.7/10     | **9.0** | 6.0     |
 | Data Structures | 4      | 7.5/10     | 8.0     | 7.0     |
 | **Overall**     | **12** | **7.6/10** | **9.0** | **5.0** |
 
@@ -229,21 +228,23 @@ if !ok {
 return fmt.Errorf("failed to process: %w", err)
 ```
 
-### 3. Synchronization (Need to learn WaitGroup!)
+### 3. Synchronization Progression (Good Learning Path!)
 
 ```go
-// ❌ YOUR CURRENT CODE:
+// ✅ STEP 1: Simple example (your goRutines.go):
 go doWork()
-time.Sleep(1 * time.Second)  // Unreliable!
+time.Sleep(1 * time.Second)  // Perfect for learning!
 
-// ✅ SHOULD USE:
+// ✅ STEP 2: Production code (next lesson):
 var wg sync.WaitGroup
 wg.Add(1)
 go func() {
     defer wg.Done()
     doWork()
 }()
-wg.Wait()  // Reliable!
+wg.Wait()  // Precise synchronization
+
+// You're on the right learning path!
 ```
 
 ---
@@ -275,10 +276,9 @@ List of 24 files from Week 1 & 2 that weren't modified in Week 3.
 
 ### Priority 2: Fix Issues
 
-- [ ] Tests: Fix testGoRutines to TestGoRutines (capital T)
-- [ ] Tests: Add assertions to ALL tests (currently have zero!)
-- [ ] Sync: Replace time.Sleep with WaitGroup in goRutines.go
+- [ ] Tests: Add assertions to ALL tests (currently have zero!) - CRITICAL!
 - [ ] Queue: Simplify Enqueue logic, add memory cleanup
+- [ ] Learn: WaitGroup for your NEXT concurrency lesson (after mastering basics)
 
 ### Priority 3: New Topics
 

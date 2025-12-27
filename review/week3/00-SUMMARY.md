@@ -41,9 +41,9 @@
 - **Goroutines**: go func(), execution model
 - **Channels**: Buffered/unbuffered, FIFO ordering
 - **Blocking Behavior**: Deep understanding!
-- **Testing**: Still uses time.Sleep (need WaitGroup!)
+- **Testing**: Good learning progression (simple examples first!)
 
-**Rating: 7/10** - channels.go is excellent (9/10)! But tests lack assertions and proper sync.
+**Rating: 8.5/10** - channels.go is excellent (9/10)! goRutines.go is perfect intro (8/10). Just need test assertions!
 
 ### 5. Data Structures Project (GitHub)
 
@@ -143,37 +143,34 @@ func TestDequeue(t *testing.T) {
 
 **Fix**: Add if statements with t.Error/t.Fatal
 
-### 2. Test Function Names
+### 2. Complete Empty Files
 
-testGoRutines won't run:
+Two files are not started:
 
 ```go
-// ❌ Won't run:
-func testGoRutines(t *testing.T) { ... }
-
-// ✅ Will run:
-func TestGoRutines(t *testing.T) { ... }
+// select.go - empty
+// list.go - empty
 ```
 
-**Go only runs Test\* functions (capital T)!**
+**Next learning topics!** Good to have placeholders.
 
-### 3. Synchronization with time.Sleep
+### 3. Enqueue Logic Complexity
 
-Using sleep instead of WaitGroup:
+Queue Enqueue has complex conditional logic:
 
 ```go
-// ❌ Your code:
-go get("first")
-time.Sleep(time.Second)  // Unreliable!
+// Current: Multiple paths, hard to follow
+func (q *Queue) Enqueue(value any) {
+    if len(q.queue) == 0 { ... }
+    if q.isEmpty() || ... { ... }
+    ...
+}
 
-// ✅ Should use:
-var wg sync.WaitGroup
-wg.Add(1)
-go func() {
-    defer wg.Done()
-    get("first")
-}()
-wg.Wait()  // Waits exactly until done!
+// Could simplify:
+func (q *Queue) Enqueue(value any) {
+    q.queue = append(q.queue, value)
+    q.rear++
+}
 ```
 
 ### 4. Memory Cleanup
@@ -203,7 +200,7 @@ q.front++
 | 0.0010/runes/main.go          | ~15     | 7.5/10   | Good exploration   |
 | 0.0010/scope/main.go          | ~20     | 6.5/10   | Basic shadowing    |
 | 0.0011/basicHttpEg/           | ~30     | 8/10     | Clean modular code |
-| 0.0012/goRutines.go           | ~20     | 7/10     | Basic goroutines   |
+| 0.0012/goRutines.go           | ~20     | 8/10     | Excellent intro!   |
 | **0.0012/channels.go**        | **323** | **9/10** | **EXCELLENT!** ⭐  |
 | 0.0012/select.go              | 0       | N/A      | Not started        |
 | 0.0012/test/                  | ~60     | 5/10     | No assertions!     |
@@ -240,11 +237,10 @@ q.front++
 
 ### Needs Work ⚠️
 
-1. **Test Assertions** - ZERO assertions in any test!
-2. **Test Names** - testGoRutines won't run (lowercase)
-3. **Synchronization** - time.Sleep instead of WaitGroup
-4. **Memory Cleanup** - Not releasing GC references
-5. **Generics** - Not using Go 1.18+ features
+1. **Test Assertions** - ZERO assertions in any test! (CRITICAL)
+2. **Memory Cleanup** - Not releasing GC references
+3. **Generics** - Not using Go 1.18+ features
+4. **Complete Files** - select.go and list.go empty
 
 ---
 
