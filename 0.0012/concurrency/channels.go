@@ -80,3 +80,10 @@ func T3() {
 	fmt.Println("Length of X: ", len(x))
 	fmt.Println(x)
 }
+
+/*
+See the length of ch is always 0
+no matter where we check, because its not holding value like array or slice, it only passes value when receiver and sender shacks the hand/ meets
+
+and length of x is 3 because length of string means how many caracter does it contain
+*/
