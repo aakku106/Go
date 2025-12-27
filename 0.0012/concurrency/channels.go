@@ -65,3 +65,18 @@ but i just told it was example of send waits until receive happens, yes i did to
 if 	goRutine reaches x:=<-ch its example of Receive waits until Send happens
 */
 // Now lest look at another concept, that channels dont hold the data, they are just pipe passing down the data
+
+func T3() {
+	ch := make(chan string)
+	// Here we created a pipe name ch which can carry(only) string type
+	fmt.Println("length of ch: ", len(ch))
+	go func() {
+		ch <- "Cat"
+		fmt.Println("length of ch: ", len(ch))
+	}()
+	fmt.Println("length of ch: ", len(ch))
+	x := <-ch
+	fmt.Println("length of ch: ", len(ch))
+	fmt.Println("Length of X: ", len(x))
+	fmt.Println(x)
+}
