@@ -17,5 +17,7 @@ func testGoRutines(t *testing.T) {
 
 func TestChannels(t *testing.T) {
 	concurrency.T1()
-	concurrency.T2()
+	//	concurrency.T2()
+	//
+	// why i commented this t2 function is becaue will will block the main gorutine and waits till inifinit until someones kill the process
 }
