@@ -218,3 +218,69 @@ FIFO is respected because there is only one sender, this is clean and predictabl
 // Who knows which GoRutine will run first
 // This is runtime-level questions.
 
+// Now let us see example where we have more than 2 value in channel with 2 buffer size in B6
+
+func B6() {
+	fmt.Println()
+	fmt.Println()
+	fmt.Println("B6 starts here...............")
+
+	ch := make(chan int, 2)
+	ch <- 12
+	ch <- 14
+	ch <- 16
+	fmt.Println(<-ch)
+
+	fmt.Println("B6 Ends here...............")
+	fmt.Println()
+} // This function will be always be block no matter what
+func B7() {
+	fmt.Println()
+	fmt.Println()
+	fmt.Println("B7 starts here...............")
+
+	ch := make(chan int, 2)
+	go func() {
+		ch <- 12
+		ch <- 14
+		ch <- 16
+	}()
+
+	fmt.Println(<-ch)
+
+	fmt.Println("B7 Ends here...............")
+	fmt.Println()
+} // Bu this function will, its simplly because the ch<- value in B6 blocks the only one gorutine that was operating on that function
+// but since we created go func() which creates one more goruting, so one receives value and another GoRutine sends the value
+
+func B8() {
+	fmt.Println()
+	fmt.Println()
+	fmt.Println("B8 starts here...............")
+
+	ch := make(chan int, 2)
+	go func() {
+		ch <- 12
+		ch <- 14
+		ch <- 16
+	}()
+
+	fmt.Println("B8 Ends here...............")
+	fmt.Println()
+} // Even this will run in buffered-channel
+
+func B9() {
+	fmt.Println()
+	fmt.Println()
+	fmt.Println("B9 starts here...............")
+
+	ch := make(chan int, 2)
+	go func() {
+		ch <- 12
+		ch <- 14
+		ch <- 16
+	}()
+
+	fmt.Println("B9 Ends here...............")
+	fmt.Println()
+}
