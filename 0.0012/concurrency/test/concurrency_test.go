@@ -14,10 +14,11 @@ func testGoRutines(t *testing.T) {
 
 	// that's basic demosestration of go rutines
 }
+
 // The small t instead of T is used here caus ei didn't wanted the output of goRutines file while i was testing other files
 // If you want to test gorutines.go file just change from t to T
 
-func TestChannels(t *testing.T) {
+func testChannels(t *testing.T) {
 	concurrency.T1()
 	//	concurrency.T2()
 	//
@@ -38,4 +39,7 @@ func TestChannels(t *testing.T) {
 	concurrency.B8()
 	concurrency.B9()
 
+}
+func TestGoSelect(t *testing.T) {
+	concurrency.S1()
 }
