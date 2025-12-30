@@ -63,10 +63,11 @@ func Solve2() {
 	ch := make(chan string)
 	go func() {
 		for _, value := range arr {
+			fmt.Println(value) // only 1 value ?
 			select {
 			case ch <- value:
 				fmt.Println(value)
-				// See we only got our 0th index element:"weee" andd not others
+				// See we only got our 0th index element:"weee" and not others
 			}
 		}
 	}()
