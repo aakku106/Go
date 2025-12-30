@@ -2,6 +2,7 @@ package test
 
 import (
 	"concurrency"
+	"concurrency/concurencypattern"
 	"testing"
 )
 
@@ -40,7 +41,15 @@ func testChannels(t *testing.T) {
 	concurrency.B9()
 
 }
-func TestGoSelect(t *testing.T) {
+func testGoSelect(t *testing.T) {
 	concurrency.S1()
 	concurrency.S2()
+	concurrency.S3()
+}
+func TestForSelect(t *testing.T) {
+	//	concurencypattern.Eg1()
+	//	concurencypattern.Eg2()
+	//	concurencypattern.Eg3()
+	//	concurencypattern.Solve()
+	concurencypattern.Solve2()
 }
