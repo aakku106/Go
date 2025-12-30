@@ -52,4 +52,5 @@ func TestForSelect(t *testing.T) {
 	//	concurencypattern.Eg3()
 	//	concurencypattern.Solve()
 	concurencypattern.Solve2()
+	concurencypattern.Fix1()
 }
