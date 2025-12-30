@@ -1,6 +1,10 @@
 package concurrency
 
+import "fmt"
+
 // in go select somewhat looks like switch-case (syntex)
+
+const Debug = true
 
 func S1() {
 	ch := make(chan int)
@@ -27,4 +31,11 @@ func S2() {
 	go func() {
 		c <- "weeeeee"
 	}()
+
+	select {
+	case getch := <-ch:
+		if Debug {
+			fmt.Println("got value: ", getch)
+		}
+	}
 }

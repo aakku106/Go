@@ -42,4 +42,5 @@ func testChannels(t *testing.T) {
 }
 func TestGoSelect(t *testing.T) {
 	concurrency.S1()
+	concurrency.S2()
 }
