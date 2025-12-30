@@ -75,3 +75,22 @@ func Solve2() {
 		fmt.Println(i, ".) Value got: ", value)
 	}
 }
+
+/*
+So here the initial for loop itterated only 1 time,
+oki no problem cause we only have 2 goRutines one sends another receives and tham main simpally dyes,
+but main point/question or confusion here is whare are those garbage/wired value comming from & and why didnt we
+atleast received "weee" ?
+
+also the for loop itterated only once, then from where did even got(receive) for i, value := range <-ch got its value without send
+*/
+/*
+Actually the problem it self is that exact line:
+	for i, value := range <-ch
+here what we did was not itterated how many time we got data, we actually itterated over the string "weee"
+exactly 4 times (Now did you got it whu i used weee and slice of size 4 ?), and those runed we got was
+UTF-8 unicode value of "w"-->[119] & "e"-->[101] three time
+
+so our main mistake was <-ch, so lest fix it
+
+*/
