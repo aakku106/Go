@@ -142,6 +142,7 @@ concurrency/concurencypattern
 
 // The real culpreata was that i in ch loop it self
 // The resion that channel wont give 2 value is cause it only passes the value not store to give index
+// un-comment fix1 and fix1fix if you wanna see how it throw error
 func Soln() {
 	arr := []string{"weee", "cat", "awww", "lol"}
 	ch := make(chan string)
@@ -181,5 +182,12 @@ func Test() {
 // See the length of ch is still 0, althow it passes 4 value
 // and ch itself return a address
 /*
-Actually what happened is the loop itterated over the size of buffer not value of it
+Actually what heppened here is range ch runs until the ch is closed
+Always remember:
+- range over channel on receive itterates until it's closed by sender
+In above eg, we closed ch after for loop, so it only itterated 4 time, cause there was 4 elements in arr
+So, if i had not closed ch after for loop, for value := range ch  would always wait until main itself dies
+(But in our case the main won't even die cause that range ch would always block main cause we didnt closed in go func(){}())
 */
+
+// 1 more thing Closing the channel is the sender’s responsibility, we closed ch after looping over arr
