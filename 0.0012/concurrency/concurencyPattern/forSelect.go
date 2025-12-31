@@ -269,11 +269,14 @@ func Example4() {
 
 // Now this example stops until check get any and give any value
 // We could also do this insted
+var check = make(chan bool)
+
 func Start() {
 	ch := make(chan string)
 	value := []string{"cat", "eat", "rat"}
 	go Sec(&ch, value)
 	go Sec2(&ch)
+	<-check
 }
 
 func Sec(ch *chan string, value []string) {
@@ -282,12 +285,19 @@ func Sec(ch *chan string, value []string) {
 	}
 	close(*ch)
 }
-func Sec2(ch *chan string) (check chan bool) {
-	check = make(chan bool)
+func Sec2(ch *chan string) {
 	for val := range *ch {
 		fmt.Println("Got val in Sec2", val)
 	}
 	check <- true
 	defer close(check)
-	return
 }
+
+// Thsi 3 function do same thign as what our example4 did
+// One thing to note, the porgram didnt worked because we passed true in check,
+// It worked we passed some value in that check
+/*
+But if you call Start function 2 time or anytime more than one time
+It is because our check channel was globally decleared
+The above program may even panic if you call multipe Start(),like 8 to 12 times
+*/
