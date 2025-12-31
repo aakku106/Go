@@ -158,6 +158,28 @@ func Soln() {
 	}
 }
 
+// he we got the value we wanted, but how ? lest check
+
+func Test() {
+	arr := []string{"weee", "cat", "awww", "lol"}
+	ch := make(chan string)
+	go func() {
+		for _, value := range arr {
+			select {
+			case ch <- value:
+			}
+		}
+		close(ch)
+	}()
+	fmt.Println(len(ch))
+	for value := range ch {
+		fmt.Println("Value got: ", value)
+	}
+	fmt.Println(ch)
+}
+
+// See the length of ch is still 0, althow it passes 4 value
+// and ch itself return a address
 /*
  Well we got error here saying:
 concurrency/concurencypattern
