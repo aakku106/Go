@@ -113,6 +113,33 @@ so our main mistake was <-ch, so lest fix it
 //	}
 //}
 
+/*
+ Well we got error here saying:
+concurrency/concurencypattern
+../concurencypattern/forSelect.go:111:9: range over ch (variable of type chan string) permits only one iteration variable
+*/
+// THis is where we use close() function
+
+//func Fix1Fix() {
+//	arr := []string{"weee", "cat", "awww", "lol"}
+//	fmt.Println(arr) // we can see its strign
+//	ch := make(chan string)
+//	go func() {
+//		for _, value := range arr {
+//			fmt.Println(value) // only 1 value ?
+//			select {
+//			case ch <- value:
+//				fmt.Println(value)
+//				// See we only got our 0th index element:"weee" and not others
+//			}
+//			close(ch)
+//		}
+//	}()
+//	for i, value := range ch {
+//		fmt.Println(i, ".) Value got: ", value)
+//	}
+//}
+
 	arr := []string{"weee", "cat", "awww", "lol"}
 	fmt.Println(arr) // we can see its strign
 	ch := make(chan string)
