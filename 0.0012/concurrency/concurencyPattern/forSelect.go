@@ -191,3 +191,78 @@ So, if i had not closed ch after for loop, for value := range ch  would always w
 */
 
 // 1 more thing Closing the channel is the sender’s responsibility, we closed ch after looping over arr
+
+func Example() {
+	arr := []string{"weee", "cat", "awww", "lol"}
+	ch := make(chan string, 4)
+	go func() {
+		for _, value := range arr {
+			select {
+			case ch <- value:
+			}
+		}
+		close(ch)
+	}()
+	fmt.Println(len(ch))
+	for value := range ch {
+		fmt.Println("Value got: ", value)
+	}
+	fmt.Println(ch)
+}
+func Example2() {
+	arr := []string{"weee", "cat", "awww", "lol"}
+	ch := make(chan string, 106)
+	go func() {
+		for _, value := range arr {
+			select {
+			case ch <- value:
+			}
+		}
+		close(ch)
+	}()
+	fmt.Println(len(ch))
+	for value := range ch {
+		fmt.Println("Value got: ", value)
+	}
+	fmt.Println(ch)
+}
+
+// See the buffer size really dosen't matter, when we handle when we close channel
+// Notice our program is not asynk it's synchironous, we only have 2 thread/goRutine one sends another(main) receive
+func Example3() {
+	arr := []string{"weee", "cat", "awww", "lol"}
+	ch := make(chan string, 106)
+	go func() {
+		for _, value := range arr {
+			select {
+			case ch <- value:
+			}
+		}
+		close(ch)
+	}()
+	go func() {
+		for value := range ch {
+			fmt.Println("Value got: ", value)
+		}
+	}()
+}
+
+// This func shall never print any value, cause main dies even before anything happens
+func Example4() {
+	arr := []string{"weee", "cat", "awww", "lol"}
+	ch := make(chan string, 106)
+	check := make(chan bool)
+	go func() {
+		for _, value := range arr {
+			ch <- value
+		}
+		close(ch)
+	}()
+	go func() {
+		for value := range ch {
+			fmt.Println("Value got: ", value)
+		}
+		check <- true
+	}()
+	fmt.Println(<-check)
+}
