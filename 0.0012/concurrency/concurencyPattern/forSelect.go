@@ -23,7 +23,7 @@ func Eg2() {
 	}
 }
 
-// this will be also always clocked, cause we never received value, but this time we used forSelect pattern
+// this will be also always clocked, cause we never received value, but this time we used forSelect pattern.(Just using select wont solve our problem here, and in our case using or not using select make no difference, just folllow the flow and you will get everything)
 // ie. whenever ch gets value our flow will move forward
 func Eg3() {
 	arr := []string{"weee", "cat", "awww", "lol"}
@@ -39,7 +39,7 @@ func Eg3() {
 }
 
 // Well we did receive the value, but our one and only gorutine was always stopped at 1st itteration of our 1st for loop
-// Lest solve that
+// Lest solve that.(You could simpally use defult, but we not doing that now)
 func Solve() {
 	arr := []string{"weee", "cat", "awww", "lol"}
 	ch := make(chan string)
@@ -300,4 +300,13 @@ func Sec2(ch *chan string) {
 But if you call Start function 2 time or anytime more than one time
 It is because our check channel was globally decleared
 The above program may even panic if you call multipe Start(),like 8 to 12 times
+The above 3 func can be written in more cleaner and profection one see other file for that
+*/
+/*
+check := make(chan bool)
+<-check
+is a  poor man’s WaitGroup
+Passing *chan is unnecessary and slightly dangerous
+
+The above func was a tripical example of pipeline
 */
