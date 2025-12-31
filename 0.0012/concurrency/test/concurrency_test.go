@@ -54,6 +54,13 @@ func TestForSelect(t *testing.T) {
 	//	concurencypattern.Solve2()
 	//	concurencypattern.Fix1()
 	//	concurencypattern.Fix1Fix()
-	concurencypattern.Soln()
-	concurencypattern.Test()
+	//	concurencypattern.Soln()
+	//	concurencypattern.Test()
+	//	concurencypattern.Example()
+	//	concurencypattern.Example2()
+	//	concurencypattern.Example3()
+	//	concurencypattern.Example4()
+	concurencypattern.Start()
+	concurencypattern.Start()
+
 }
