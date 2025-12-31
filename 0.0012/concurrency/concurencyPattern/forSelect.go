@@ -181,7 +181,5 @@ func Test() {
 // See the length of ch is still 0, althow it passes 4 value
 // and ch itself return a address
 /*
- Well we got error here saying:
-concurrency/concurencypattern
-../concurencypattern/forSelect.go:111:9: range over ch (variable of type chan string) permits only one iteration variable
+Actually what happened is the loop itterated over the size of buffer not value of it
 */
