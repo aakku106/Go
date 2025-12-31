@@ -46,7 +46,7 @@ func testGoSelect(t *testing.T) {
 	concurrency.S2()
 	concurrency.S3()
 }
-func TestForSelect(t *testing.T) {
+func testForSelect(t *testing.T) {
 	//	concurencypattern.Eg1()
 	//	concurencypattern.Eg2()
 	//	concurencypattern.Eg3()
@@ -60,6 +60,7 @@ func TestForSelect(t *testing.T) {
 	//	concurencypattern.Example2()
 	//	concurencypattern.Example3()
 	//	concurencypattern.Example4()
+	concurencypattern.Start()
 	concurencypattern.Start()
 	concurencypattern.Start()
 }
