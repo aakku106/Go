@@ -64,3 +64,7 @@ func testForSelect(t *testing.T) {
 	concurencypattern.Start()
 	concurencypattern.Start()
 }
+
+func TestExample(t *testing.T) {
+	concurencypattern.Parent()
+}
