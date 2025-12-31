@@ -94,7 +94,25 @@ UTF-8 unicode value of "w"-->[119] & "e"-->[101] three time
 so our main mistake was <-ch, so lest fix it
 
 */
-func Fix1() {
+//func Fix1() {
+//	arr := []string{"weee", "cat", "awww", "lol"}
+//	fmt.Println(arr) // we can see its strign
+//	ch := make(chan string)
+//	go func() {
+//		for _, value := range arr {
+//			fmt.Println(value) // only 1 value ?
+//			select {
+//			case ch <- value:
+//				fmt.Println(value)
+//				// See we only got our 0th index element:"weee" and not others
+//			}
+//		}
+//	}()
+//	for i, value := range ch {
+//		fmt.Println(i, ".) Value got: ", value)
+//	}
+//}
+
 	arr := []string{"weee", "cat", "awww", "lol"}
 	fmt.Println(arr) // we can see its strign
 	ch := make(chan string)
