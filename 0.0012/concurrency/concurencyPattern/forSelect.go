@@ -266,3 +266,28 @@ func Example4() {
 	}()
 	fmt.Println(<-check)
 }
+
+// Now this example stops until check get any and give any value
+// We could also do this insted
+func Start() {
+	ch := make(chan string)
+	value := []string{"cat", "eat", "rat"}
+	go Sec(&ch, value)
+	go Sec2(&ch)
+}
+
+func Sec(ch *chan string, value []string) {
+	for _, val := range value {
+		*ch <- val
+	}
+	close(*ch)
+}
+func Sec2(ch *chan string) (check chan bool) {
+	check = make(chan bool)
+	for val := range *ch {
+		fmt.Println("Got val in Sec2", val)
+	}
+	check <- true
+	defer close(check)
+	return
+}
