@@ -140,21 +140,21 @@ concurrency/concurencypattern
 //	}
 //}
 
+// The real culpreata was that i in ch loop it self
+// The resion that channel wont give 2 value is cause it only passes the value not store to give index
+func Soln() {
 	arr := []string{"weee", "cat", "awww", "lol"}
-	fmt.Println(arr) // we can see its strign
 	ch := make(chan string)
 	go func() {
 		for _, value := range arr {
-			fmt.Println(value) // only 1 value ?
 			select {
 			case ch <- value:
-				fmt.Println(value)
-				// See we only got our 0th index element:"weee" and not others
 			}
 		}
+		close(ch)
 	}()
-	for i, value := range ch {
-		fmt.Println(i, ".) Value got: ", value)
+	for value := range ch {
+		fmt.Println("Value got: ", value)
 	}
 }
 
