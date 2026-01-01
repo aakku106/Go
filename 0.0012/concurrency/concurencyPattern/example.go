@@ -37,4 +37,7 @@ Until we get value in done channel, the defult runs
 
 In our Parent func, after calling doSomeThing func, We simulated some work by time.sleep,
 It(parent goRutine) does some work till 5 sec, and we close done, and case <-done: runs and doSomething returns, mainitself dies
+
+
+Here you could use done := make(chan struct{}), which is zero allocation
 */
