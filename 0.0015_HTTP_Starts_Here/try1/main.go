@@ -42,3 +42,21 @@ and what we Used here was Write() method
 
 // If that explanation felt something straight from aliean work, than its not much of a problem
 // For now just focus on How ?, and after buildign something and getting hit with erros then explore Why ?
+
+/*
+Upon repuest on localhost:5555
+we got response
+HTTP/1.1 200 OK
+Date: Mon, 05 Jan 2026 18:04:01 GMT
+Content-Length: 18
+Content-Type: text/plain; charset=utf-8
+
+NOTE: The date will vary accorting to your OS current time and your setted location
+
+and upon curl we got
+ curl http://localhost:5555/
+Welcome Master CCN
+
+To understand what really happening here, you need to have knowlage of client server articture aand know basic go
+Things we ignored here: mux, pattern(why even 5555/cat or :5555/<anothing>/<anything>/... gives same response as :5555)
+*/
