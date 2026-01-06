@@ -72,6 +72,10 @@ func getCat(w http.ResponseWriter, r *http.Request) {
 	}
 	w.WriteHeader(http.StatusOK)
 	w.Write(j)
-
-	// fmt.Fprintf(w, CatCache)
 }
+
+// This was a simple example for Get and Post Request, and this looks un-readable on 1st glance
+// How to test ter's rest.http file in same dir ./rest.http
+// If using just highlight the path/url you wanna get/post and press your shortcut for go to file under the curser
+// If using Vs code you can see a little blue test saying send request press that
+// Else use Postman or any other software of your liking
