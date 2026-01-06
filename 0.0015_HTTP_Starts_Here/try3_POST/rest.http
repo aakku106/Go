@@ -1,0 +1,9 @@
+http://localhost/cat/4
+
+POST http://localhost/cat
+Content-Type: application/json
+
+{
+    "catName": "MewMew",
+    "catAge": 2
+}
