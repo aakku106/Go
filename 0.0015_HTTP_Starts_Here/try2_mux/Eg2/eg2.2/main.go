@@ -29,3 +29,5 @@ func handleRoot(w http.ResponseWriter, r *http.Request) {
 /*
 Now this server is listening in port 80 or simpally localhost it self
 */
+
+// Till now w have only looking into GET request, lest look into PUT in try3_POST/main.go
