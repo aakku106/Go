@@ -79,3 +79,5 @@ func getCat(w http.ResponseWriter, r *http.Request) {
 // If using just highlight the path/url you wanna get/post and press your shortcut for go to file under the curser
 // If using Vs code you can see a little blue test saying send request press that
 // Else use Postman or any other software of your liking
+
+// This looks verbose for 1st time, look stripted Down version of this in ./stripedDown/main.go
