@@ -31,7 +31,6 @@ func createCat(w http.ResponseWriter, r *http.Request) {
 	json.NewDecoder(r.Body).Decode(&cat)
 	CatCache[len(CatCache)+1] = cat
 	w.WriteHeader(http.StatusNoContent)
-	fmt.Fprintf(w, "wee")
 }
 
 func getCat(w http.ResponseWriter, r *http.Request) {
@@ -42,3 +41,6 @@ func getCat(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Write(j)
 }
+
+// This still feels entidimading
+// Lest abort this POST think, and focus back on serving HTML or other kind of document fro our server insted of one line of text which only renders insider pre tag look in 0.0015/try4/main.go
