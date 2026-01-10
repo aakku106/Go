@@ -1,11 +1,11 @@
 # Go Learning - Code Review Index
 
-**Latest Review**: January 3, 2026 (Week 4)  
-**Learning Duration**: 1 month (4 weeks)  
-**Overall Rating**: 9.0/10  
-**Files Reviewed**: 40+ Go files across 4 weeks
+**Latest Review**: January 11, 2026 (Week 5)  
+**Learning Duration**: 5 weeks  
+**Overall Rating**: 6.8/10 (Week 5)  
+**Files Reviewed**: 50+ Go files across 5 weeks
 
-**Week Progression**: Week 1 (7.0/10) → Week 2 (8.0/10) → Week 3 (7.7/10) → Week 4 (9.0/10)
+**Week Progression**: Week 1 (7.0/10) → Week 2 (8.0/10) → Week 3 (7.7/10) → Week 4 (9.0/10) → **Week 5 (6.8/10)**
 
 ---
 
@@ -31,58 +31,89 @@ Detailed analysis of every Go file:
 - Rating: 7.7/10
 - Best file: channels.go (9/10) - 323 lines
 
-**Week 4**: `/review/week4/` - Latest
+**Week 4**: `/review/week4/`
 
 - Concurrency patterns, WaitGroup, test assertions
 - Rating: 9.0/10
 - Best file: forSelect.go (10/10) - 313 lines
 
-**Total**: 60+ markdown files with detailed feedback
+**Week 5**: `/review/week5/` - Latest
+
+- HTTP servers, JSON APIs, singly linked list
+- Rating: 6.8/10
+- Best file: try3_POST/main.go (8.5/10)
+- **Regression from Week 4** - error handling not maintained
+
+**Total**: 70+ markdown files with detailed feedback
 
 ---
 
 ## Start Here
 
-1. **Read**: `/review/week4/README.md` - Week 4 overview
-2. **Read**: `/review/week4/00-SUMMARY.md` - Full week 4 assessment
+1. **Read**: `/review/week5/README.md` - Week 5 overview
+2. **Read**: `/review/week5/00-SUMMARY.md` - Full week 5 assessment
 3. **Review**: Outstanding issues (listed below)
-4. **Start**: Next learning phase
+4. **Fix**: Week 5 regressions before proceeding
 
 ---
 
-## Outstanding Issues (Week 4)
+## Outstanding Issues (Week 5)
 
-### 1. Test Assertions - FIXED
+### 1. Error Handling Regression - CRITICAL ⚠️
 
-All test files now have proper assertions with t.Fatal checks. FIFO/LIFO verification implemented.
+**Week 4**: All files had error handling (9.0/10)  
+**Week 5**: Only 1 of 7 HTTP files has error handling (6.8/10)
 
-### 2. Complete Placeholder Files
+**Impact**: 6 HTTP files ignore errors from `ListenAndServe()`
+
+**Fix Required**:
+
+```go
+// Wrong (Week 5):
+server.ListenAndServe()
+
+// Right (Week 3-4):
+if err := server.ListenAndServe(); err != nil {
+    log.Fatal(err)
+}
+```
+
+### 2. Linked List Test Assertions - CRITICAL ⚠️
+
+**Week 4**: Queue tests had comprehensive assertions  
+**Week 5**: Linked list tests have ZERO assertions
+
+**Impact**: Tests print output instead of verifying correctness
+
+2 of 3 test functions have lowercase 't' (won't run with `go test`)
+
+### 3. InsertAtLast Bug - MAJOR 🐛
+
+**File**: `datastructures/list/SingelyLinkList.go`  
+**Issue**: Returns last node instead of original head
+
+```go
+// Current (wrong):
+return head  // After loop, head is LAST node
+
+// Should be:
+return l  // Original head
+```
+
+### 4. LinkList Interface Design Flaw
+
+**Issue**: Interface signatures don't match implementation  
+**Impact**: `SingelyLinkList` does NOT implement `LinkList` interface
+
+### 5. Complete Placeholder Files (Ongoing)
 
 - `0.0013/generics.go` - Empty placeholder
 - `0.0012/concurrency/concurencyPattern/generators.go` - Not implemented
-- `datastructures/list/list.go` - Still empty from Week 3
+- `datastructures/list/SingelyLinkList.go` - Has 3 empty functions
 
-### 3. Test Function Naming
+### 6. Spelling Errors (Ongoing)
 
-```go
-// Current (won't run automatically):
-func testLinearQueue(t *testing.T)
-
-// Should be:
-func TestLinearQueue(t *testing.T)
-```
-
-Note: May be intentional to control execution.
-
-### 4. Add Missing Test Cases
-
-- Empty stack test
-- Self-healing verification for queue
-- Panic recovery tests
-
-### 5. Spelling Errors
-
-Consistent spelling errors throughout code. Enable spell-check in editor.
+Still present in ALL Week 5 files despite Week 4 feedback. Enable Code Spell Checker extension.
 
 ---
 
@@ -127,21 +158,35 @@ Consistent spelling errors throughout code. Enable spell-check in editor.
 - Production pattern awareness (context.Context, lifecycle management)
 - Rating: 9.0/10
 
-### Skills Assessment (Current - Week 4)
+**Week 5**: HTTP Servers & Linked Lists
 
-- **Algorithm Implementation**: 8.5/10
-- **Conceptual Understanding**: 9.5/10 (forSelect.go debugging is exceptional)
-- **Problem Solving**: 9/10 ("weee" test case design)
-- **Code Organization**: 7/10
-- **Testing**: 9/10 (comprehensive assertions added)
-- **Concurrency**: 9.5/10 (patterns, WaitGroup, lifecycle awareness)
-- **Error Handling**: 8/10
-- **Go Idioms**: 7/10
-- **Production Awareness**: 8/10 (context.Context, chan struct{}, performance)
+- HTTP server basics (net/http, ServeMux, Server struct)
+- JSON API development (encoding/decoding, validation)
+- RWMutex for concurrent map access
+- HTML templating (text/template)
+- First linked list implementation (InsertAtBeginning, InsertAtLast)
+- **ERROR HANDLING REGRESSION**: Only 1 of 7 HTTP files has error handling
+- **TEST QUALITY REGRESSION**: Linked list tests have no assertions
+- Read stdlib source (net/http/server.go) - good learning practice
+- Rating: 6.8/10
 
-### Overall: 9.0/10
+### Skills Assessment (Current - Week 5)
 
-Significant improvement from Week 3. Test assertions resolved, WaitGroup mastered, production patterns understood.
+- **Algorithm Implementation**: 7.5/10 (linked list has bug)
+- **Conceptual Understanding**: 8.5/10 (stdlib reading is good)
+- **Problem Solving**: 7/10 (inconsistent application)
+- **Code Organization**: 7/10 (unchanged)
+- **Testing**: 6/10 (regression - no assertions in new tests)
+- **Concurrency**: 9/10 (RWMutex correct, maintained from Week 4)
+- **Error Handling**: 5/10 (⚠️ major regression from Week 4)
+- **Go Idioms**: 7/10 (unchanged)
+- **Production Awareness**: 7.5/10 (try3_POST is production-quality)
+- **HTTP Development**: 7/10 (new skill, but missing error handling)
+- **Data Structures**: 6/10 (first linked list, has bugs)
+
+### Overall: 6.8/10
+
+**Regression from Week 4.** New topics learned (HTTP, linked lists) but prior patterns not applied (error handling, test assertions). Inconsistent code quality - can write production code (try3_POST) but doesn't apply same discipline to all files.
 
 ---
 
@@ -401,19 +446,33 @@ Common errors: "prority", "lenght", "itterated", "heppened"
 
 ### Completed (Weeks 1-4)
 
-1. Unit Testing - DONE (comprehensive assertions)
-2. Error Handling - DONE (proper patterns)
+1. Unit Testing - DONE (comprehensive assertions in Week 4)
+2. Error Handling - DONE in Week 4, **REGRESSED in Week 5** ⚠️
 3. Structs & Methods - DONE (no globals)
 4. Concurrency Basics - DONE (channels, select, WaitGroup)
-5. Test Assertions - DONE (all tests verify)
+5. Test Assertions - DONE in Week 4, **REGRESSED in Week 5** ⚠️
 6. WaitGroup - DONE (perfect implementation)
 
-### High Priority (Week 5)
+### Started but Incomplete (Week 5)
 
-1. Complete placeholder files (generics.go, generators.go, list.go)
-2. context.Context for cancellation/timeout
-3. sync.Mutex for shared state
-4. Worker pool patterns
+1. HTTP Servers - Basic understanding, missing error handling
+2. Linked Lists - First implementation, has bugs
+3. JSON APIs - One production-quality file (try3_POST)
+4. RWMutex - Correct usage demonstrated
+
+### CRITICAL Priority (Week 6) 🚨
+
+1. **Restore error handling** - Add to all 6 HTTP files missing it
+2. **Fix linked list bugs** - InsertAtLast return value, test assertions
+3. **Add test assertions** - Fix 2 test function names, add all assertions
+4. **Enable spell-check** - Install Code Spell Checker extension
+
+### High Priority (Week 6)
+
+1. Write HTTP tests using httptest package
+2. Fix template race condition (parse once, not per request)
+3. Complete linked list (InsertAt, InsertAfter, InsertBefore, Delete)
+4. Fix LinkList interface signatures
 
 ### Medium Priority (Month 2)
 
@@ -546,25 +605,34 @@ Week 3 (Complete): Concurrency + HTTP [7.7/10]
          O(1) queue optimization
          Tests without assertions (critical issue)
 ↓
-Week 4 (Complete): Patterns + Testing [9.0/10]
+Week 4 (Complete): Patterns + Testing [9.0/10] ⭐ PEAK
          forSelect.go (10/10) - "weee" debugging
          Test assertions ADDED (all tests fixed)
          WaitGroup mastered
          Production patterns learned
 ↓
-Week 5+ (Next): Real Projects [Target: maintain 9+/10]
-         Complete placeholder files
-         context.Context patterns
-         HTTP server implementation
-         Production-ready code
+Week 5 (Complete): HTTP + Linked Lists [6.8/10] ⚠️ REGRESSION
+         HTTP server basics (7 files)
+         JSON API (try3_POST is production-quality)
+         First linked list (has bugs)
+         ERROR HANDLING LOST (only 1 of 7 files)
+         TEST ASSERTIONS LOST (linked list tests)
+         Reading stdlib source (good practice)
+↓
+Week 6 (Next): Fix Regressions [Target: restore 8+/10]
+         Restore error handling discipline
+         Fix linked list bugs and tests
+         Complete HTTP implementation
+         Maintain Week 4 quality standards
 ```
 
 ### Progress Analysis
 
-**1-Month Achievement**: 9.0/10 overall rating  
-**Major Milestone**: Test assertions issue resolved  
-**Best File**: forSelect.go (10/10) - Hall of Fame entry  
-**Learning Rate**: Accelerating (biggest jump Week 3→4)
+**5-Week Journey**: 7.0 → 8.0 → 7.7 → 9.0 → 6.8  
+**Highest Point**: Week 4 (9.0/10) - forSelect.go Hall of Fame  
+**Current State**: Week 5 regression (-2.2 from Week 4)  
+**Root Cause**: Speed over quality - exploring new topics without maintaining discipline  
+**Learning Rate**: Fast topic exploration, inconsistent pattern application
 
 ---
 
@@ -623,7 +691,15 @@ func TestDequeue(t *testing.T) {
 
 ### Review Files
 
-**Week 4** (Latest):
+**Week 5** (Latest):
+
+- [Week 5 README](review/week5/README.md)
+- [Week 5 Summary](review/week5/00-SUMMARY.md)
+- [try3_POST/main.go (8.5/10)](review/week5/0.0015-try3-POST-main.md) - Best HTTP file
+- [Linked list bugs](review/week5/datastructures-SingelyLinkList.md)
+- [Test regression](review/week5/datastructures-SinglyLinkedList_test.md)
+
+**Week 4**:
 
 - [Week 4 README](review/week4/README.md)
 - [Week 4 Summary](review/week4/00-SUMMARY.md)
@@ -668,46 +744,64 @@ func TestDequeue(t *testing.T) {
 - [Generics](0.0013/) (placeholder)
 - [Data Structures Tests](datastructures/)
 
+**Week 5**:
+
+- [HTTP Servers](0.0015_HTTP_Starts_Here/) - 7 files
+- [Singly Linked List](datastructures/list/) - 3 files
+
 ---
 
 ## Summary
 
-**4 Weeks of Go Learning**:
+**5 Weeks of Go Learning**:
 
 - Week 1: Basics & Data Structures (7.0/10)
 - Week 2: OOP Concepts (8.0/10)
 - Week 3: Concurrency Basics (7.7/10)
-- Week 4: Patterns & Testing (9.0/10)
+- Week 4: Patterns & Testing (9.0/10) ⭐ PEAK
+- Week 5: HTTP & Linked Lists (6.8/10) ⚠️ REGRESSION
 
-**Key Achievements**:
+**Key Achievements (All Weeks)**:
 
 - Deep channel understanding (323-line exploration)
 - O(1) queue optimization
 - Systematic debugging methodology ("weee" technique)
-- Test assertions implemented
+- Test assertions implemented (Week 4)
 - WaitGroup mastered
 - Production pattern awareness
+- HTTP server development (Week 5)
+- First data structure built from scratch (linked list)
+- Reading stdlib source code
 
 **Outstanding Work**:
 
-- forSelect.go (10/10) - Hall of Fame entry
-- channels.go (9/10) - Professional learning methodology
-- linearQueue_test.go (9.5/10) - Comprehensive assertions
+- forSelect.go (10/10) - Hall of Fame entry (Week 4)
+- channels.go (9/10) - Professional learning methodology (Week 3)
+- linearQueue_test.go (9.5/10) - Comprehensive assertions (Week 4)
+- try3_POST/main.go (8.5/10) - Production-quality JSON API (Week 5)
 
-**Strengths Demonstrated**:
+**Current Strengths**:
 
 1. Systematic exploration and debugging
 2. Independent problem-solving
 3. Advanced optimizations (O(1) queue)
 4. Conceptual depth (understanding WHY, not just HOW)
-5. Production pattern awareness
+5. Can write production-quality code when focused
 
-**Current Focus**:
+**Week 5 Issues**:
 
-- Complete placeholder files (generics, generators, list)
-- Maintain testing discipline
-- Learn context.Context patterns
-- Build real-world projects
+1. ⚠️ Error handling regression (Week 4: 9/10 → Week 5: 5/10)
+2. ⚠️ Test assertion regression (Week 4 patterns not applied)
+3. 🐛 Linked list InsertAtLast bug (returns wrong node)
+4. 🐛 Interface design flaw (signatures don't match)
+5. Inconsistent quality (try3_POST is 8.5/10, others missing basics)
+
+**Critical Focus (Week 6)**:
+
+- **Restore error handling** - Add to all HTTP files
+- **Fix linked list bugs** - InsertAtLast, test assertions
+- **Maintain discipline** - Apply Week 4 patterns consistently
+- **Enable spell-check** - Same errors in every file
 
 **Resources**:
 
@@ -717,6 +811,6 @@ func TestDequeue(t *testing.T) {
 
 ---
 
-_Code Review Index - 1 Month Milestone_  
-_Latest Review: Week 4 (January 3, 2026)_  
-_Overall Rating: 9.0/10_
+_Code Review Index - 5 Week Journey_  
+_Latest Review: Week 5 (January 11, 2026)_  
+_Overall Rating: 6.8/10 (Week 5) | Peak: 9.0/10 (Week 4)_
