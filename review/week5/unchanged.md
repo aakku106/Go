@@ -2,6 +2,8 @@
 
 The following files exist in the workspace but were not modified during Week 5 (Jan 4-10, 2026). These files were reviewed in previous weeks and remain unchanged.
 
+**Note**: Week 5 added new HTTP files (0.0015/) and implemented singly linked list (datastructures/list/). Queue test files had minor cleanup (test naming, debug removal) but no functional changes.
+
 ---
 
 ## Concurrency (Week 4)
