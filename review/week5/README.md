@@ -1,21 +1,21 @@
 # Week 5 Code Review Index
 
-Week 5 code reviews covering HTTP server development.
+Week 5 code reviews covering HTTP server development and singly linked list implementation.
 
 **Review Period**: January 4-10, 2026  
-**Focus**: net/http package, ServeMux routing, JSON APIs, HTML templating
+**Focus**: net/http package, ServeMux routing, JSON APIs, HTML templating, linked list data structure
 
 ---
 
 ## Quick Summary
 
-**Overall Rating: 7.6/10**  
-**Total Files Reviewed: 10** (7 HTTP + 3 Data Structures)  
-**Best File: linearQueue_test.go (10/10) & prorityQueue_test.go (10/10)**  
+**Overall Rating: 6.8/10**  
+**Total Files Reviewed: 10** (7 HTTP + 3 Linked List)  
+**Best File: try3_POST/main.go (8.5/10)**  
 **Worst File: stripedDown/main.go (3/10)**  
-**Topics: HTTP servers, routing, JSON, templates, test naming fixes**  
-**Critical Achievement: Fixed test function naming - tests now run automatically**  
-**Critical Issue (HTTP): Error handling present in only 1 of 7 HTTP files**
+**Topics: HTTP servers, routing, JSON, templates, singly linked lists**  
+**Critical Achievement: First data structure built from scratch (linked list)**  
+**Critical Issue: Error handling regression + linked list test assertions missing**
 
 ---
 
@@ -23,25 +23,25 @@ Week 5 code reviews covering HTTP server development.
 
 ### Notable Achievements
 
-1. **Test Function Naming Fixed** - linearQueue_test.go and prorityQueue_test.go updated with correct Test\* names (will run automatically!)
-2. **try3_POST/main.go** - First HTTP file with proper error handling, concurrency safety (RWMutex), JSON encoding/decoding, and validation
+1. **try3_POST/main.go** - Production-quality JSON API with error handling, RWMutex concurrency safety, and validation
+2. **First Linked List Implementation** - Built singly linked list from scratch with InsertAtBeginning, InsertAtLast, PrintList
 3. **Template Usage** - Learned text/template package for HTML rendering
 4. **HTTP Method Routing** - Used Go 1.22+ syntax ("POST /cat", "GET /cat/{id}")
-5. **Progressive Learning** - Systematic progression from basic server to JSON API
-6. **Responsive to Feedback** - Week 4 identified test naming issues, Week 5 fixed them
+5. **stdlib Reading** - Read net/http/server.go source code (good learning practice)
 
 ### Major Issues
 
 1. **Error Handling Regression (HTTP)** - Only 1 of 7 HTTP files has error handling (try3_POST)
-2. **Spelling Errors** - Persistent across HTTP files despite Week 4 feedback
-3. **Race Conditions** - Global template variable in try4
-4. **No HTTP Testing** - Zero test files for HTTP handlers (but data structure tests improved!)
+2. **Linked List Test Quality** - Tests print output instead of using assertions (Week 4 regression)
+3. **Spelling Errors** - Persistent across all files despite Week 4 feedback
+4. **InsertAtLast Bug** - Returns wrong node (last instead of head)
+5. **Interface Design Flaw** - LinkList interface signatures don't match implementation
 
 ---
 
 ## File Reviews
 
-### HTTP Server Basics
+### HTTP Server Development
 
 #### [0.0015_HTTP_Starts_Here/try1/main.go](0.0015-try1-main.md)
 
@@ -70,46 +70,46 @@ Demonstrates multiplexer for routing. Spelling improved but error handling still
 #### [0.0015_HTTP_Starts_Here/try2_mux/Eg2/main.go](0.0015-try2-Eg2-main.md)
 
 **Rating: 8/10**  
-**Topics:** Explicit Server struct, abstraction understanding  
-**Key Issues:** Server.Addr bug (says :8080, listens on :80), no error handling, 6 spelling errors  
-**Strengths:** Discovered standard library abstraction, read source code, explained wrapper pattern
+**Topics:** http.Server struct, Addr/Handler fields, stdlib exploration  
+**Key Issues:** Addr bug (says 8080, uses 80), no error handling  
+**Strengths:** Read stdlib source, discovered abstraction, conceptual understanding
 
-Strong conceptual understanding marred by critical Addr bug. Shows active learning by reading stdlib source.
+Best exploratory learning in Week 5. Read `/net/http/server.go` to understand how `ListenAndServe` wraps `Server` struct.
 
 ---
 
-#### [0.0015_HTTP_Starts_Here/try2_mux/Eg2/eg2.2/main.go](0.0015-try2-Eg2-eg2.2-main.md)
+#### [0.0015_HTTP_Starts_Here/try2_mux/eg2.2/main.go](0.0015-try2-eg2.2-main.md)
 
 **Rating: 6.5/10**  
-**Topics:** Default port behavior (port 80)  
-**Key Issues:** Port 80 requires sudo (undocumented), no error handling, PUT/POST confusion, no logging  
-**Strengths:** Minimal code demonstrating concept
+**Topics:** Default port behavior (port 80), minimal server  
+**Key Issues:** No privilege documentation, PUT/POST confusion, rushed  
+**Strengths:** Shows default port behavior
 
-Shows default port 80 behavior but doesn't document sudo requirement or handle permission errors. Feels rushed.
-
----
-
-### JSON API
-
-#### [0.0015_HTTP_Starts_Here/try3_POST/main.go](0.0015-try3-POST-main.md) 🌟
-
-**Rating: 8.5/10** - **BEST FILE**  
-**Topics:** POST/GET, JSON encoding/decoding, sync.RWMutex, path parameters  
-**Key Issues:** ID generation bug (uses len(map)), Content-Type typo ("app/json"), 4 spelling errors  
-**Strengths:** Error handling throughout, RWMutex for concurrency, proper status codes, validation
-
-First Week 5 file with comprehensive error handling and production patterns. Shows significant improvement. Best work of the week.
+Quick experiment with port 80. Missing context (requires sudo) and has conceptual errors.
 
 ---
 
-#### [0.0015_HTTP_Starts_Here/try3_POST/stripedDown/main.go](0.0015-try3-POST-stripedDown-main.md)
+### JSON API Development
 
-**Rating: 3/10** - **WORST FILE**  
+#### [0.0015_HTTP_Starts_Here/try3_POST/main.go](0.0015-try3-POST-main.md)
+
+**Rating: 8.5/10** ⭐ **BEST HTTP FILE**  
+**Topics:** POST, JSON, error handling, RWMutex, validation, status codes  
+**Key Issues:** Spelling errors (handeler, decalering)  
+**Strengths:** Error handling, concurrency safety, validation, JSON encode/decode
+
+Production-quality API with proper error handling, RWMutex for thread-safe map access, JSON validation, and correct HTTP status codes.
+
+---
+
+#### [0.0015_HTTP_Starts_Here/stripedDown/main.go](0.0015-stripedDown-main.md)
+
+**Rating: 3/10** ⚠️ **WORST FILE**  
 **Topics:** Anti-pattern demonstration  
-**Key Issues:** Every error ignored, no concurrency safety (race conditions), no validation, misleading comments  
-**Strengths:** None (intentionally broken)
+**Key Issues:** Intentionally broken, variable naming disaster, no comments  
+**Strengths:** None (intentionally bad)
 
-Stripped version with all error handling removed. This code will crash under load. Should be deleted or clearly marked as anti-pattern example.
+Deliberately bad code showing what not to do. Should have comments explaining why it's bad.
 
 ---
 
@@ -118,59 +118,59 @@ Stripped version with all error handling removed. This code will crash under loa
 #### [0.0015_HTTP_Starts_Here/try4/main.go](0.0015-try4-main.md)
 
 **Rating: 7/10**  
-**Topics:** HTML templates, text/template package  
-**Key Issues:** Race condition (global template variable), template.Must panics, parsing on every request, 8 spelling errors  
-**Strengths:** Template usage, HTML separation, hot reload awareness
+**Topics:** text/template, template.Must, Execute  
+**Key Issues:** Race condition (global template), parse-per-request inefficiency  
+**Strengths:** Template basics, multiple handler integration
 
-Demonstrates templates but has critical race condition from global variable shared across concurrent requests. Parses templates on every request (performance issue).
-
----
-
-### Data Structures - Test Naming Fixed
-
-#### [datastructures/queue/linearQueue_test.go](datastructures-linearQueue-test.md) ⭐
-
-**Rating: 10/10** - **PERFECT!**  
-**Topics:** Queue testing, test naming fix  
-**Key Achievement:** Fixed `testLinearQueue` → `TestLinearQueue` (will run automatically!)  
-**Strengths:** Comprehensive FIFO testing, proper assertions, **NOW RUNS WITH `go test`**
-
-Critical fix from Week 4 feedback. Single character change (lowercase 't' → uppercase 'T') makes production-ready test suite.
+Demonstrates HTML templating but has race condition from global variable and inefficient parsing.
 
 ---
 
-#### [datastructures/queue/prorityQueue_test.go](datastructures-prorityQueue-test.md) ⭐
+### Singly Linked List (Data Structures)
 
-**Rating: 10/10** - **PERFECT!**  
-**Topics:** Priority queue testing, test naming fixes  
-**Key Achievement:** Fixed ALL 4 test functions (TestIsEmpty, TestEnqueue, TestLength, TestProrityQueue)  
-**Strengths:** Advanced memory reclaim testing, all tests now run automatically
+#### [datastructures/list/linkList.go](datastructures-linkList.md)
 
-Systematic fix of all test naming issues. Shows you understood Week 4 feedback and applied it comprehensively.
+**Rating: 6/10**  
+**Topics:** Interface design, type definitions, linked list structures  
+**Key Issues:** Interface signatures don't match implementation, Create() in interface, DoublyLinkList missing prev  
+**Strengths:** Interface concept, any type usage, package organization
+
+Interface design attempt but signatures don't match implementation - SingelyLinkList doesn't actually implement LinkList.
 
 ---
 
-#### [datastructures/stack/stack_test.go](datastructures-stack-test.md)
+#### [datastructures/list/SingelyLinkList.go](datastructures-SingelyLinkList.md)
 
-**Rating: 9/10**  
-**Topics:** Stack testing  
-**Status:** Unchanged from Week 4 (already had correct names)  
-**Strengths:** Test names already correct (TestPush, TestPop), comprehensive assertions
+**Rating: 7/10**  
+**Topics:** Linked list implementation, InsertAtBeginning, InsertAtLast, traversal  
+**Key Issues:** InsertAtLast returns wrong node, empty placeholders, spelling errors  
+**Strengths:** InsertAtBeginning perfect, correct algorithms, debug pattern
 
-No changes needed - shows selective fixing of only files with issues.
+First linked list implementation. InsertAtBeginning is textbook correct (O(1)), but InsertAtLast has return value bug.
+
+---
+
+#### [datastructures/list/SinglyLinkedList_test.go](datastructures-SinglyLinkedList_test.md)
+
+**Rating: 4/10**  
+**Topics:** Linked list testing  
+**Key Issues:** 2 of 3 tests don't run (lowercase 't'), zero assertions, PrintList instead of verification  
+**Strengths:** One correct test name, mixed type testing
+
+Tests print output instead of verifying correctness. Week 4 regression - you wrote proper assertions in queue tests but not here.
 
 ---
 
 ## Rating Summary
 
-| File Category            | Count  | Avg Rating | Best       | Status                 |
-| ------------------------ | ------ | ---------- | ---------- | ---------------------- |
-| Basic HTTP               | 2      | 7.25/10    | 7.5/10     | Functional             |
-| Server Struct            | 2      | 7.25/10    | 8/10       | Learning               |
-| JSON API                 | 2      | 5.75/10    | **8.5/10** | One good, one broken   |
-| Templates                | 1      | 7/10       | 7/10       | Race condition         |
-| **Data Structure Tests** | **3**  | **9.7/10** | **10/10**  | **Test naming fixed!** |
-| **Overall**              | **10** | **7.6/10** | **10/10**  | **Improved**           |
+| File Category       | Count | Avg Rating | Best       | Worst | Status                   |
+| ------------------- | ----- | ---------- | ---------- | ----- | ------------------------ |
+| Basic HTTP          | 2     | 7.25/10    | 7.5/10     | 7/10  | Functional               |
+| Server Struct       | 2     | 7.25/10    | 8/10       | 6.5/10| Learning                 |
+| JSON API            | 2     | 5.75/10    | **8.5/10** | 3/10  | One good, one broken     |
+| Templates           | 1     | 7/10       | 7/10       | 7/10  | Race condition           |
+| **Linked List**     | **3** | **5.7/10** | **7/10**   | **4/10** | **Incomplete/buggy**  |
+| **Overall**         | **10**| **6.8/10** | **8.5/10** | **3/10** | **Mixed quality**     |
 
 ---
 
@@ -182,38 +182,31 @@ No changes needed - shows selective fixing of only files with issues.
 | 2    | OOP                   | 8.0/10     | +1.0        |
 | 3    | Concurrency           | 7.7/10     | -0.3        |
 | 4    | Patterns & Tests      | **9.0/10** | **+1.3**    |
-| 5    | **HTTP & Test Fixes** | **7.6/10** | **-1.4**    |
+| 5    | **HTTP & Linked List**| **6.8/10** | **-2.2**    |
 
-**Drop from Week 4, but smaller than initially measured.** HTTP error handling regression (-1.8) partially offset by data structure test fixes (+0.4).
+**Significant regression from Week 4.** HTTP error handling discipline lost, linked list tests have no assertions despite Week 4 showing you know how to write proper tests.
 
 ---
 
 ## Technical Highlights
 
-### 1. Test Function Naming Fixed (Data Structures)
+### 1. Reading stdlib Source Code
 
-**Week 4 Issue**: Test functions named `testLinearQueue`, `testEnqueue`, etc. (lowercase 't')  
-**Week 5 Fix**: All renamed to `TestLinearQueue`, `TestEnqueue`, etc. (uppercase 'T')
+Comments in Eg2/main.go reference reading `net/http/server.go`. **Excellent learning practice** - understanding standard library implementation helps you use it correctly.
 
-**Impact**:
+You discovered this abstraction:
 
-- Tests now run automatically with `go test`
-- CI/CD pipelines will execute these tests
-- No manual invocation needed
+```go
+// In /net/http/server.go:
+func ListenAndServe(addr string, handler Handler) error {
+    server := &Server{Addr: addr, Handler: handler}
+    return server.ListenAndServe()
+}
+```
 
-**Files Fixed**:
+**Same quality as Week 4's forSelect.go exploration.** You're learning by reading source code, not just tutorials.
 
-- linearQueue_test.go: 1 function renamed
-- prorityQueue_test.go: 4 functions renamed
-- stack_test.go: Already correct (no changes needed)
-
-**This shows responsive learning - you read Week 4 feedback and applied it systematically.**
-
-### 2. Reading stdlib Source Code (HTTP)
-
-Comments in Eg2/main.go reference reading `net/http/server.go`. **Good practice** - understanding standard library implementation helps you use it correctly.
-
-### 3. Error Handling in try3_POST
+### 2. Error Handling in try3_POST
 
 First Week 5 HTTP file with proper error handling:
 
@@ -225,9 +218,9 @@ if err != nil {
 }
 ```
 
-All errors checked, proper status codes used, validation implemented.
+All errors checked, proper status codes used, validation implemented. **This is Week 4 quality.**
 
-### 4. Concurrency Safety (RWMutex)
+### 3. Concurrency Safety (RWMutex)
 
 ```go
 var cacheMutex sync.RWMutex
@@ -243,9 +236,9 @@ cat, ok := CatCache[id]
 cacheMutex.RUnlock()
 ```
 
-Correct use of RWMutex for concurrent access to shared map.
+Correct use of RWMutex for concurrent access to shared map. Multiple readers, exclusive writers.
 
-### 5. HTTP Method Routing (Go 1.22+)
+### 4. HTTP Method Routing (Go 1.22+)
 
 ```go
 mux.HandleFunc("POST /cat", createCat)
@@ -255,7 +248,19 @@ mux.HandleFunc("GET /cat/{id}", getCat)
 id := r.PathValue("id")
 ```
 
-Modern Go 1.22+ routing syntax with path parameters.
+Modern Go 1.22+ routing syntax with method constraints and path parameters.
+
+### 5. Linked List InsertAtBeginning (Perfect)
+
+```go
+func (l *SingelyLinkList) InsertAtBeginning(data any) *SingelyLinkList {
+    node := Create(data)
+    node.next = l
+    return node
+}
+```
+
+**Textbook correct.** O(1) time complexity, returns new head, proper pointer manipulation. This shows you understand linked list mechanics.
 
 ### 6. Template Parsing
 
@@ -264,7 +269,7 @@ tem = template.Must(template.ParseFiles("./htmlFiles/cat.html"))
 tem.Execute(w, nil)
 ```
 
-Basic template usage (though has race condition from global variable).
+Basic template usage (though has race condition from global variable and parse-per-request inefficiency).
 
 ---
 
@@ -273,7 +278,7 @@ Basic template usage (though has race condition from global variable).
 ### 1. Error Handling Regression
 
 **Week 3-4**: Error handling patterns learned (comma-ok, error wrapping, http.Error)  
-**Week 5**: Only 1 of 7 files has error handling
+**Week 5**: Only 1 of 7 HTTP files has error handling
 
 **Files without error handling:**
 
@@ -284,9 +289,34 @@ Basic template usage (though has race condition from global variable).
 - stripedDown/main.go
 - try4/main.go
 
-**You learned this in Week 3. Why aren't you applying it?**
+**You learned this in Week 3. You demonstrated it in Week 4. Why isn't it in Week 5 HTTP files?**
 
-### 2. Spelling Errors Persist
+### 2. Test Assertions Missing (Linked List)
+
+**Week 4 queue tests:**
+
+```go
+func TestLinearQueue(t *testing.T) {
+    q := LinearQueue{}
+    q.Enqueue(106)
+    if q.LengthOfQueue() != 1 {  // ✓ Assertion
+        t.Fatal("Expected length 1")
+    }
+}
+```
+
+**Week 5 linked list tests:**
+
+```go
+func testCreate(t *testing.T) {  // ✗ Wrong name
+    head := Create(123)
+    head.PrintList()  // ✗ No assertion
+}
+```
+
+**This is backwards learning.** You wrote proper tests in Week 4, then wrote manual verification scripts in Week 5.
+
+### 3. Spelling Errors Persist
 
 **Week 4 Review Said**: "Enable spell-check in your editor"  
 **Week 5 Reality**: Spelling errors in every file
@@ -294,66 +324,127 @@ Basic template usage (though has race condition from global variable).
 Common errors:
 
 - "Initilizating" (appears in 5+ files)
-- "simpally" (appears in 4+ files)
-- "lest" instead of "let's"
-- "handeler" instead of "handler"
+- "Inseart" (linked list debug message)
+- "Itterated" (linked list test)
+- "handeler" (try3_POST)
+- "decalering" (try3_POST)
 
 **This is not a knowledge gap. This is not proofreading.**
 
-### 3. Race Conditions
-
-**try4/main.go**:
+### 4. InsertAtLast Return Bug
 
 ```go
-var tem *template.Template  // Global
-
-func handleCat(w http.ResponseWriter, r *http.Request) {
-    tem = template.Must(...)  // Overwrites global
-}
-
-func handleDog(w http.ResponseWriter, r *http.Request) {
-    tem = template.Must(...)  // Overwrites global
+func (l *SingelyLinkList) InsertAtLast(data any) *SingelyLinkList {
+    node := Create(data)
+    head := l
+    for head.next != nil {
+        head = head.next  // head is now LAST node
+    }
+    head.next = node
+    return head  // ❌ Returns LAST node, not original head!
 }
 ```
 
-Concurrent requests will corrupt template state.
+**Algorithm is correct, return value is wrong.** After loop, `head` points to last node, not original head.
 
-### 4. No Tests
+**Impact**: Chained calls lose the list:
 
-**Week 4**: Added test assertions to all data structures  
-**Week 5**: Zero HTTP handler tests
-
-You should have:
-
-- TestHandleRoot
-- TestCreateCat
-- TestGetCat (found)
-- TestGetCat (not found)
-- TestInvalidJSON
+```go
+list := Create(1)
+list = list.InsertAtLast(2)  // Returns node 1 ✓
+list = list.InsertAtLast(3)  // Returns node 2 ✗ (loses node 1!)
+```
 
 ---
 
-## Areas for Improvement
+## What You're Learning
 
-### 1. Restore Error Handling Discipline
+### New Concepts (Week 5)
 
-Every HTTP handler should:
+1. **HTTP Servers** - net/http package, handlers, routing, server struct
+2. **JSON APIs** - encoding/decoding, validation, status codes
+3. **HTML Templates** - text/template, parsing, execution
+4. **Linked Lists** - Pointer manipulation, head management, traversal
+5. **RWMutex** - Read/write locks for concurrent map access
+
+### Not Applied from Week 4
+
+1. **Error Handling** - Learned in Week 3-4, not used in Week 5 HTTP
+2. **Test Assertions** - Demonstrated in Week 4 queue tests, not used in Week 5 linked list tests
+3. **Spell-Check** - Recommended in Week 4, still not enabled
+
+---
+
+## Recommendations
+
+### Critical (Fix Immediately)
+
+1. **Restore Error Handling**:
 
 ```go
+// Wrong (Week 5):
+server.ListenAndServe()
+
+// Right (Week 3-4):
 if err := server.ListenAndServe(); err != nil {
     log.Fatal(err)
 }
 ```
 
-Not optional. Required.
+2. **Add Test Assertions**:
 
-### 2. Fix Spelling
+```go
+// Wrong (Week 5):
+func testCreate(t *testing.T) {
+    head := Create(123)
+    head.PrintList()
+}
 
-Enable spell-check. The same errors appear in every file.
+// Right (Week 4 pattern):
+func TestCreate(t *testing.T) {
+    head := Create(123)
+    if head == nil {
+        t.Fatal("Create returned nil")
+    }
+    if head.data != 123 {
+        t.Fatalf("Expected 123, got %v", head.data)
+    }
+}
+```
 
-### 3. Add HTTP Tests
+3. **Enable Spell-Check**:
 
-Learn httptest package:
+- VS Code: Install "Code Spell Checker" extension
+- Enable in settings
+- Review before committing
+
+### Major (This Week)
+
+1. **Fix InsertAtLast Return**:
+
+```go
+func (l *SingelyLinkList) InsertAtLast(data any) *SingelyLinkList {
+    node := Create(data)
+    current := l
+    for current.next != nil {
+        current = current.next
+    }
+    current.next = node
+    return l  // Return original head, not current
+}
+```
+
+2. **Fix LinkList Interface**:
+
+```go
+type LinkList interface {
+    InsertAtBeginning(data any) LinkList  // Add return type
+    InsertAtLast(data any)
+    // Remove Create - it's a constructor
+}
+```
+
+3. **Write HTTP Tests**:
 
 ```go
 func TestCreateCat(t *testing.T) {
@@ -368,89 +459,39 @@ func TestCreateCat(t *testing.T) {
 }
 ```
 
-### 4. Parse Templates Once
+### Soon (Week 6)
 
-```go
-// Wrong (current):
-func handler(w http.ResponseWriter, r *http.Request) {
-    t := template.Must(template.ParseFiles("file.html"))  // Every request
-    t.Execute(w, nil)
-}
-
-// Right:
-var tpl = template.Must(template.ParseFiles("file.html"))  // Once
-
-func handler(w http.ResponseWriter, r *http.Request) {
-    tpl.Execute(w, nil)
-}
-```
-
-### 5. Learn Middleware
-
-Logging, auth, CORS all done via middleware:
-
-```go
-func loggingMiddleware(next http.HandlerFunc) http.HandlerFunc {
-    return func(w http.ResponseWriter, r *http.Request) {
-        log.Printf("%s %s", r.Method, r.URL.Path)
-        next(w, r)
-    }
-}
-
-mux.HandleFunc("/cat", loggingMiddleware(handleCat))
-```
+1. **HTTP Middleware** - Logging, auth, error recovery
+2. **Context** - Request timeouts, cancellation
+3. **Database** - Replace in-memory maps with SQLite/PostgreSQL
+4. **Complete Linked List** - Implement InsertAt, InsertAfter, InsertBefore, Delete
+5. **DoublyLinkedList** - Add prev pointer, implement bidirectional traversal
 
 ---
 
-## Comparison to Week 4
+## Week 4 Recommendations Applied?
 
-| Aspect         | Week 4               | Week 5                                |
-| -------------- | -------------------- | ------------------------------------- |
-| Error Handling | Comprehensive        | Mostly absent                         |
-| Testing        | Added assertions     | No tests                              |
-| Spelling       | Reduced              | Same level                            |
-| Concurrency    | WaitGroup mastery    | RWMutex (good) + race condition (bad) |
-| Best File      | forSelect.go (10/10) | try3_POST (8.5/10)                    |
-| Consistency    | High                 | Low                                   |
+**HTTP Files:**
+- ❌ Add error handling → Only 1 of 7 files has it
+- ❌ Fix spelling → Still present (all files)
+- ❌ Complete placeholders → Empty functions in SingelyLinkList.go
 
-**Week 4 showed systematic improvement. Week 5 shows inconsistent application of learned principles.**
+**Linked List Tests:**
+- ❌ Test function naming → 2 of 3 tests have lowercase 't'
+- ❌ Test assertions → Zero assertions, only PrintList()
 
----
-
-## Final Verdict
-
-**7.2/10 (C+)** - Learned HTTP server basics, routing, JSON APIs, and templates. try3_POST shows you can write production-quality code when focused. However, most files lack error handling, spelling errors persist, and Week 4's discipline was not maintained. One excellent file (try3_POST) brings up the average, but the other files show rushed work.
-
-**This is passing but disappointing after Week 4's strong performance.**
+**Overall: 0 of 2 critical recommendations followed.**
 
 ---
 
-## Recommendations for Week 6
+## Final Assessment
 
-### Must Fix
+**Week 5 is a regression from Week 4's excellence.** You're learning new topics (HTTP, linked lists) but not applying patterns you already know (error handling, test assertions).
 
-1. **Error Handling**: Every file, every error, every time
-2. **Spelling**: Enable spell-check immediately
-3. **Testing**: Write httptest tests for all handlers
+**The good**: try3_POST shows you **can** write production-quality code. InsertAtBeginning shows you **understand** linked list mechanics. Reading stdlib source shows you're learning deeply.
 
-### Should Learn
+**The problem**: Inconsistent application of known patterns. Error handling exists in 1 HTTP file but absent in 6 others. Test assertions exist in queue tests but absent in linked list tests.
 
-1. Middleware pattern
-2. Context for request scoping
-3. Database integration (replace in-memory maps)
-4. Proper template structure (parse once, execute many)
+**Root cause**: Speed over quality. You're exploring new topics faster than you're applying learned discipline.
 
-### Could Explore
-
-1. WebSockets
-2. gRPC
-3. GraphQL
-4. Authentication/Authorization
-
----
-
-## Summary
-
-**Strengths**: JSON API with error handling (try3_POST), RWMutex concurrency, template usage  
-**Critical Issues**: Error handling regression (6 of 7 files), spelling errors (all files), no tests  
-**Grade**: C+ (Learned HTTP basics, missing production discipline)
+**Week 6 goal**: Apply Week 3-4 patterns to ALL code, not just some files.
