@@ -163,26 +163,26 @@ Tests print output instead of verifying correctness. Week 4 regression - you wro
 
 ## Rating Summary
 
-| File Category       | Count | Avg Rating | Best       | Worst | Status                   |
-| ------------------- | ----- | ---------- | ---------- | ----- | ------------------------ |
-| Basic HTTP          | 2     | 7.25/10    | 7.5/10     | 7/10  | Functional               |
-| Server Struct       | 2     | 7.25/10    | 8/10       | 6.5/10| Learning                 |
-| JSON API            | 2     | 5.75/10    | **8.5/10** | 3/10  | One good, one broken     |
-| Templates           | 1     | 7/10       | 7/10       | 7/10  | Race condition           |
-| **Linked List**     | **3** | **5.7/10** | **7/10**   | **4/10** | **Incomplete/buggy**  |
-| **Overall**         | **10**| **6.8/10** | **8.5/10** | **3/10** | **Mixed quality**     |
+| File Category   | Count  | Avg Rating | Best       | Worst    | Status               |
+| --------------- | ------ | ---------- | ---------- | -------- | -------------------- |
+| Basic HTTP      | 2      | 7.25/10    | 7.5/10     | 7/10     | Functional           |
+| Server Struct   | 2      | 7.25/10    | 8/10       | 6.5/10   | Learning             |
+| JSON API        | 2      | 5.75/10    | **8.5/10** | 3/10     | One good, one broken |
+| Templates       | 1      | 7/10       | 7/10       | 7/10     | Race condition       |
+| **Linked List** | **3**  | **5.7/10** | **7/10**   | **4/10** | **Incomplete/buggy** |
+| **Overall**     | **10** | **6.8/10** | **8.5/10** | **3/10** | **Mixed quality**    |
 
 ---
 
 ## Week Progression
 
-| Week | Focus                 | Rating     | Improvement |
-| ---- | --------------------- | ---------- | ----------- |
-| 1    | Basics                | 7.0/10     | Baseline    |
-| 2    | OOP                   | 8.0/10     | +1.0        |
-| 3    | Concurrency           | 7.7/10     | -0.3        |
-| 4    | Patterns & Tests      | **9.0/10** | **+1.3**    |
-| 5    | **HTTP & Linked List**| **6.8/10** | **-2.2**    |
+| Week | Focus                  | Rating     | Improvement |
+| ---- | ---------------------- | ---------- | ----------- |
+| 1    | Basics                 | 7.0/10     | Baseline    |
+| 2    | OOP                    | 8.0/10     | +1.0        |
+| 3    | Concurrency            | 7.7/10     | -0.3        |
+| 4    | Patterns & Tests       | **9.0/10** | **+1.3**    |
+| 5    | **HTTP & Linked List** | **6.8/10** | **-2.2**    |
 
 **Significant regression from Week 4.** HTTP error handling discipline lost, linked list tests have no assertions despite Week 4 showing you know how to write proper tests.
 
@@ -472,11 +472,13 @@ func TestCreateCat(t *testing.T) {
 ## Week 4 Recommendations Applied?
 
 **HTTP Files:**
+
 - ❌ Add error handling → Only 1 of 7 files has it
 - ❌ Fix spelling → Still present (all files)
 - ❌ Complete placeholders → Empty functions in SingelyLinkList.go
 
 **Linked List Tests:**
+
 - ❌ Test function naming → 2 of 3 tests have lowercase 't'
 - ❌ Test assertions → Zero assertions, only PrintList()
 
