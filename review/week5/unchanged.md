@@ -42,15 +42,16 @@ The following files exist in the workspace but were not modified during Week 5 (
 ### datastructures/queue/
 
 - **linearQueue.go** - O(1) queue implementation (reviewed Week 1: 8.5/10)
-- **linearQueue_test.go** - Queue tests with assertions (reviewed Week 4: 9.5/10)
 - **prorityQueue.go** - Priority queue implementation (reviewed Week 1: 7.5/10)
-- **prorityQueue_test.go** - Priority queue tests (reviewed Week 4: 9/10)
 - **queue.go** - Queue interface (reviewed Week 1: 7/10)
+
+**Note**: Test files (linearQueue_test.go, prorityQueue_test.go) were modified in Week 5 - test function naming fixed.
 
 ### datastructures/stack/
 
 - **stack.go** - Stack implementation (reviewed Week 1: 7.5/10)
-- **stack_test.go** - Stack tests (reviewed Week 4: 9/10)
+
+**Note**: Test file (stack_test.go) unchanged in Week 5 - already had correct test function names.
 
 ### datastructures/list/
 

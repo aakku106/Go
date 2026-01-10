@@ -9,12 +9,13 @@ Week 5 code reviews covering HTTP server development.
 
 ## Quick Summary
 
-**Overall Rating: 7.2/10**  
-**Total Files Reviewed: 7**  
-**Best File: try3_POST/main.go (8.5/10)**  
+**Overall Rating: 7.6/10**  
+**Total Files Reviewed: 10** (7 HTTP + 3 Data Structures)  
+**Best File: linearQueue_test.go (10/10) & prorityQueue_test.go (10/10)**  
 **Worst File: stripedDown/main.go (3/10)**  
-**Topics: HTTP servers, routing, JSON encoding, templates, POST/GET**  
-**Critical Issue: Error handling present in only 1 of 7 files**
+**Topics: HTTP servers, routing, JSON, templates, test naming fixes**  
+**Critical Achievement: Fixed test function naming - tests now run automatically**  
+**Critical Issue (HTTP): Error handling present in only 1 of 7 HTTP files**
 
 ---
 
@@ -22,17 +23,19 @@ Week 5 code reviews covering HTTP server development.
 
 ### Notable Achievements
 
-1. **try3_POST/main.go** - First HTTP file with proper error handling, concurrency safety (RWMutex), JSON encoding/decoding, and validation
-2. **Template Usage** - Learned text/template package for HTML rendering
-3. **HTTP Method Routing** - Used Go 1.22+ syntax ("POST /cat", "GET /cat/{id}")
-4. **Progressive Learning** - Systematic progression from basic server to JSON API
+1. **Test Function Naming Fixed** - linearQueue_test.go and prorityQueue_test.go updated with correct Test\* names (will run automatically!)
+2. **try3_POST/main.go** - First HTTP file with proper error handling, concurrency safety (RWMutex), JSON encoding/decoding, and validation
+3. **Template Usage** - Learned text/template package for HTML rendering
+4. **HTTP Method Routing** - Used Go 1.22+ syntax ("POST /cat", "GET /cat/{id}")
+5. **Progressive Learning** - Systematic progression from basic server to JSON API
+6. **Responsive to Feedback** - Week 4 identified test naming issues, Week 5 fixed them
 
 ### Major Issues
 
-1. **Error Handling Regression** - Only 1 of 7 files has error handling (try3_POST)
-2. **Spelling Errors** - Persistent across all files despite Week 4 feedback
+1. **Error Handling Regression (HTTP)** - Only 1 of 7 HTTP files has error handling (try3_POST)
+2. **Spelling Errors** - Persistent across HTTP files despite Week 4 feedback
 3. **Race Conditions** - Global template variable in try4
-4. **No Testing** - Zero test files for HTTP handlers
+4. **No HTTP Testing** - Zero test files for HTTP handlers (but data structure tests improved!)
 
 ---
 
@@ -123,37 +126,96 @@ Demonstrates templates but has critical race condition from global variable shar
 
 ---
 
+### Data Structures - Test Naming Fixed
+
+#### [datastructures/queue/linearQueue_test.go](datastructures-linearQueue-test.md) ⭐
+
+**Rating: 10/10** - **PERFECT!**  
+**Topics:** Queue testing, test naming fix  
+**Key Achievement:** Fixed `testLinearQueue` → `TestLinearQueue` (will run automatically!)  
+**Strengths:** Comprehensive FIFO testing, proper assertions, **NOW RUNS WITH `go test`**
+
+Critical fix from Week 4 feedback. Single character change (lowercase 't' → uppercase 'T') makes production-ready test suite.
+
+---
+
+#### [datastructures/queue/prorityQueue_test.go](datastructures-prorityQueue-test.md) ⭐
+
+**Rating: 10/10** - **PERFECT!**  
+**Topics:** Priority queue testing, test naming fixes  
+**Key Achievement:** Fixed ALL 4 test functions (TestIsEmpty, TestEnqueue, TestLength, TestProrityQueue)  
+**Strengths:** Advanced memory reclaim testing, all tests now run automatically
+
+Systematic fix of all test naming issues. Shows you understood Week 4 feedback and applied it comprehensively.
+
+---
+
+#### [datastructures/stack/stack_test.go](datastructures-stack-test.md)
+
+**Rating: 9/10**  
+**Topics:** Stack testing  
+**Status:** Unchanged from Week 4 (already had correct names)  
+**Strengths:** Test names already correct (TestPush, TestPop), comprehensive assertions
+
+No changes needed - shows selective fixing of only files with issues.
+
+---
+
 ## Rating Summary
 
-| File Category | Count | Avg Rating | Best       | Status               |
-| ------------- | ----- | ---------- | ---------- | -------------------- |
-| Basic HTTP    | 2     | 7.25/10    | 7.5/10     | Functional           |
-| Server Struct | 2     | 7.25/10    | 8/10       | Learning             |
-| JSON API      | 2     | 5.75/10    | **8.5/10** | One good, one broken |
-| Templates     | 1     | 7/10       | 7/10       | Race condition       |
-| **Overall**   | **7** | **7.2/10** | **8.5/10** | **Passing**          |
+| File Category            | Count  | Avg Rating | Best       | Status                 |
+| ------------------------ | ------ | ---------- | ---------- | ---------------------- |
+| Basic HTTP               | 2      | 7.25/10    | 7.5/10     | Functional             |
+| Server Struct            | 2      | 7.25/10    | 8/10       | Learning               |
+| JSON API                 | 2      | 5.75/10    | **8.5/10** | One good, one broken   |
+| Templates                | 1      | 7/10       | 7/10       | Race condition         |
+| **Data Structure Tests** | **3**  | **9.7/10** | **10/10**  | **Test naming fixed!** |
+| **Overall**              | **10** | **7.6/10** | **10/10**  | **Improved**           |
 
 ---
 
 ## Week Progression
 
-| Week | Focus            | Rating     | Improvement |
-| ---- | ---------------- | ---------- | ----------- |
-| 1    | Basics           | 7.0/10     | Baseline    |
-| 2    | OOP              | 8.0/10     | +1.0        |
-| 3    | Concurrency      | 7.7/10     | -0.3        |
-| 4    | Patterns & Tests | **9.0/10** | **+1.3**    |
-| 5    | **HTTP Servers** | **7.2/10** | **-1.8**    |
+| Week | Focus                 | Rating     | Improvement |
+| ---- | --------------------- | ---------- | ----------- |
+| 1    | Basics                | 7.0/10     | Baseline    |
+| 2    | OOP                   | 8.0/10     | +1.0        |
+| 3    | Concurrency           | 7.7/10     | -0.3        |
+| 4    | Patterns & Tests      | **9.0/10** | **+1.3**    |
+| 5    | **HTTP & Test Fixes** | **7.6/10** | **-1.4**    |
 
-**Significant drop from Week 4.** Error handling regression is the primary cause.
+**Drop from Week 4, but smaller than initially measured.** HTTP error handling regression (-1.8) partially offset by data structure test fixes (+0.4).
 
 ---
 
 ## Technical Highlights
 
-### 1. Error Handling in try3_POST
+### 1. Test Function Naming Fixed (Data Structures)
 
-First Week 5 file with proper error handling:
+**Week 4 Issue**: Test functions named `testLinearQueue`, `testEnqueue`, etc. (lowercase 't')  
+**Week 5 Fix**: All renamed to `TestLinearQueue`, `TestEnqueue`, etc. (uppercase 'T')
+
+**Impact**:
+
+- Tests now run automatically with `go test`
+- CI/CD pipelines will execute these tests
+- No manual invocation needed
+
+**Files Fixed**:
+
+- linearQueue_test.go: 1 function renamed
+- prorityQueue_test.go: 4 functions renamed
+- stack_test.go: Already correct (no changes needed)
+
+**This shows responsive learning - you read Week 4 feedback and applied it systematically.**
+
+### 2. Reading stdlib Source Code (HTTP)
+
+Comments in Eg2/main.go reference reading `net/http/server.go`. **Good practice** - understanding standard library implementation helps you use it correctly.
+
+### 3. Error Handling in try3_POST
+
+First Week 5 HTTP file with proper error handling:
 
 ```go
 err := json.NewDecoder(r.Body).Decode(&cat)
@@ -165,7 +227,7 @@ if err != nil {
 
 All errors checked, proper status codes used, validation implemented.
 
-### 2. Concurrency Safety (RWMutex)
+### 4. Concurrency Safety (RWMutex)
 
 ```go
 var cacheMutex sync.RWMutex
@@ -183,7 +245,7 @@ cacheMutex.RUnlock()
 
 Correct use of RWMutex for concurrent access to shared map.
 
-### 3. HTTP Method Routing (Go 1.22+)
+### 5. HTTP Method Routing (Go 1.22+)
 
 ```go
 mux.HandleFunc("POST /cat", createCat)
@@ -195,7 +257,7 @@ id := r.PathValue("id")
 
 Modern Go 1.22+ routing syntax with path parameters.
 
-### 4. Template Parsing
+### 6. Template Parsing
 
 ```go
 tem = template.Must(template.ParseFiles("./htmlFiles/cat.html"))

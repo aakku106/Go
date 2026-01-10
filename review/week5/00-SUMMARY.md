@@ -1,12 +1,48 @@
-# Week 5 Summary: HTTP Server Development
+# Week 5 Summary: HTTP Server Development + Test Improvements
 
 ## Overall Assessment
 
-**Week 5 Rating: 7.2/10**
+**Week 5 Rating: 7.6/10**
 
-**Progression**: Week 1 (7.0) → Week 2 (8.0) → Week 3 (7.7) → Week 4 (9.0) → **Week 5 (7.2)**
+**Progression**: Week 1 (7.0) → Week 2 (8.0) → Week 3 (7.7) → Week 4 (9.0) → **Week 5 (7.6)**
 
-**Significant regression from Week 4.** Error handling discipline from Week 3-4 was not maintained. Only 1 of 7 files has proper error handling. Spelling errors persist in every file despite repeated feedback.
+**Regression from Week 4, but mitigated by test improvements.** HTTP error handling discipline from Week 3-4 was not maintained (7 HTTP files average 7.2/10). However, data structure test naming issues identified in Week 4 were systematically fixed (+0.4 to overall rating).
+
+### Split Assessment
+
+- **HTTP Development (7 files)**: 7.2/10 - Error handling regression
+- **Data Structure Tests (3 files)**: 9.7/10 - Test naming fixed (responsive learning)
+- **Overall**: 7.6/10 - HTTP issues partially offset by test improvements
+
+---
+
+## Week 5 Changes
+
+### HTTP Server Development (New)
+
+7 files exploring net/http package:
+
+- Basic servers (try1, try2_mux)
+- Server struct (Eg2, eg2.2)
+- JSON API (try3_POST, stripedDown)
+- HTML templates (try4)
+
+### Data Structure Test Fixes (Responsive Learning)
+
+**Week 4 Issue**: Test functions named `testLinearQueue`, `testEnqueue` (lowercase 't')  
+**Week 5 Fix**: All renamed to `TestLinearQueue`, `TestEnqueue` (uppercase 'T')
+
+**Impact**:
+
+- Tests now run automatically with `go test`
+- CI/CD integration possible
+- Shows you read feedback and applied it systematically
+
+**Files Modified**:
+
+- linearQueue_test.go: testLinearQueue → TestLinearQueue (10/10)
+- prorityQueue_test.go: 4 functions fixed (testIsEmpty → TestIsEmpty, etc.) (10/10)
+- stack_test.go: Already correct, no changes (9/10 maintained)
 
 ---
 
@@ -716,6 +752,28 @@ func handleCat(w http.ResponseWriter, r *http.Request) {
 
 ---
 
+## Comparative Analysis: Week 4 vs Week 5
+
+### What Improved
+
+1. **Test Naming** - Systematically fixed across all affected files
+2. **Stdlib Reading** - Reading net/http/server.go source shows maturity
+3. **HTTP Fundamentals** - Strong grasp of Handler, ServeMux, Server concepts
+4. **JSON APIs** - try3_POST shows you can build production-quality APIs
+
+### What Regressed
+
+1. **Error Handling** - Went from 9/10 (Week 4) to 7.2/10 (Week 5 HTTP)
+2. **Spell-Check** - Same errors despite explicit Week 4 feedback
+3. **Testing** - Week 4 added tests, Week 5 HTTP has zero tests
+4. **Code Quality** - stripedDown/main.go (3/10) would not have passed Week 4 standards
+
+### Root Cause
+
+**Speed over quality.** HTTP experimentation prioritized rapid iteration over applying learned patterns. Test fixes show you **can** maintain discipline when focused.
+
+---
+
 ## What You Still Need
 
 ### Immediate (Week 6)
@@ -793,20 +851,29 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 **Last week you were told to:**
 
-- ❌ Fix spelling → Still present (all files)
+### Week 4 Recommendations Applied?
+
+**HTTP Files:**
+
+- ❌ Add error handling → Only 1 of 7 files has it
+- ❌ Fix spelling → Still present (all HTTP files)
 - ❌ Complete placeholders (generics.go, generators.go) → Still empty
-- ✅ Test assertions → N/A (no tests in Week 5)
+- ✅ Test assertions → N/A (no HTTP tests in Week 5)
 - ✅ WaitGroup → N/A (no concurrency beyond RWMutex)
 
-**Only 1 of 2 applicable recommendations followed.**
+**Data Structure Tests:**
+
+- ✅ Fix test function names → **All test naming issues fixed!**
+
+**Overall: 2 of 3 applicable recommendations followed.** You responded to test naming feedback but not error handling or spelling feedback.
 
 ### Next Week (Week 6)
 
-1. Implement middleware for logging and error recovery
-2. Add database persistence (SQLite or PostgreSQL)
-3. Write comprehensive HTTP tests
-4. Learn context.Context for timeouts
-5. Implement authentication (sessions or JWT)
+1. Restore error handling discipline from Week 4
+2. Write comprehensive HTTP tests (httptest package)
+3. Implement middleware for logging and error recovery
+4. Add database persistence (SQLite or PostgreSQL)
+5. Learn context.Context for request timeouts
 
 ---
 
