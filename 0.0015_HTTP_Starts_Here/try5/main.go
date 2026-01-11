@@ -36,3 +36,23 @@ func handleRoot(writer http.ResponseWriter, request *http.Request) {
 func handleRoot(writer http.ResponseWriter, request *http.Request)      {}
 func handlePortfolio(writer http.ResponseWriter, request *http.Request) {}
 func handleCon
+/*
+What we observed here
+1st lest ignore everything other, adn focus on Header,
+upon using curl, you might see something clean like
+Header:  map[Accept:[* / *] User-Agent:[curl/8.7.1]]
+its showing user-agent(client) is curl version 8.XX.XX
+its actually showing how go actually store header in memory, in go Header is :
+type Header map[string][]string
+here * / * means it accepts any media types in HTTP it means
+it acepcts HTML,JSON,XML,or even plain text
+
+But if we make request from browseres we wee see lots of stuffs
+Accept":[]string{"text/html,application/xhtml+xml,application/xml;q=0.9,* / *;q=0.8
+also with this we wee see accepted language, encoding,Cookie,Dnt,priority, useragent,
+and many more things
+And its browser browser espisific, some bowsers like safari focuses more on speed,batterylife and ecosystem
+and other browser like firefox just dumps everythig, because it has to run/work every-where
+So you may see consize header on curl, clean and platform specific from safari and verbose from firefox and chorimum
+*/
+
