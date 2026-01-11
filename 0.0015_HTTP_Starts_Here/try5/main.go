@@ -22,6 +22,7 @@ func InitilizeServer() {
 	if err := server.ListenAndServe(); err != nil {
 		log.Println("Error: ", err)
 	}
+}
 
 }
 
