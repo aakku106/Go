@@ -56,3 +56,19 @@ and other browser like firefox just dumps everythig, because it has to run/work 
 So you may see consize header on curl, clean and platform specific from safari and verbose from firefox and chorimum
 */
 
+func handlePortfolio(writer http.ResponseWriter, request *http.Request) {
+	fmt.Println("Body:", request.Body)
+	fmt.Println("Method: ", request.Method)
+	fmt.Println("URL: ", request.URL)
+	fmt.Println("URL.path: ", request.URL.Path)
+	fmt.Printf("%#v\n", request.Header)
+	// shows: http.Header{"Accept":[]string{"*/*"}, "User-Agent":[]string{"curl/8.7.1"}}
+	// thats just mormating not new magic
+}
+func handleContact(writer http.ResponseWriter, request *http.Request) {
+	fmt.Println("Body:", request.Body)
+	fmt.Println("Method: ", request.Method)
+	fmt.Println("URL: ", request.URL)
+	fmt.Println("URL.path: ", request.URL.Path)
+	fmt.Println("Header: ", request.Header)
+}
