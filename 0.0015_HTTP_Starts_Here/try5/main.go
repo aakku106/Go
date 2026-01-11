@@ -33,9 +33,6 @@ func handleRoot(writer http.ResponseWriter, request *http.Request) {
 	fmt.Println("Header: ", request.Header)
 }
 
-func handleRoot(writer http.ResponseWriter, request *http.Request)      {}
-func handlePortfolio(writer http.ResponseWriter, request *http.Request) {}
-func handleCon
 /*
 What we observed here
 1st lest ignore everything other, adn focus on Header,
