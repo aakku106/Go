@@ -24,6 +24,13 @@ func InitilizeServer() {
 	}
 }
 
+// Insted of making a working serverthis time, lest understand some basic methods this time
+func handleRoot(writer http.ResponseWriter, request *http.Request) {
+	fmt.Println("Body:", request.Body)
+	fmt.Println("Method: ", request.Method)
+	fmt.Println("URL: ", request.URL)
+	fmt.Println("URL.path: ", request.URL.Path)
+	fmt.Println("Header: ", request.Header)
 }
 
 func handleRoot(writer http.ResponseWriter, request *http.Request)      {}
