@@ -7,7 +7,6 @@ import (
 )
 
 func InitilizeServer() {
-
 	fmt.Println("Starting The server in port 8080")
 
 	mux := http.NewServeMux()
