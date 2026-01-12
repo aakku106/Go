@@ -110,3 +110,18 @@ if request.Method == http.MethodDelete{
 
 this way the func won't proceed
 */
+
+/*
+	fmt.Println("Body:", request.Body)
+	fmt.Println("Method: ", request.Method)
+	fmt.Println("URL: ", request.URL)
+	fmt.Println("URL.path: ", request.URL.Path)
+	fmt.Println("Header: ", request.Header)
+
+In this file we covered Header
+and Method
+and some status codes
+in next file we will look into Body
+*/
+
+// NEXT: ./main2.go
