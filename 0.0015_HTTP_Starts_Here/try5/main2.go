@@ -24,6 +24,10 @@ func InitilizeServer2() {
 }
 
 func handleRoot2(writer http.ResponseWriter, request *http.Request) {
+	if request.Method != "GET" {
+		// "GET" is same do http.MethodGet(As i already explained in main.go file)
+		http.Error(writer, "Only Get here", http.StatusMethodNotAllowed)
+	}
 	fmt.Println("Body:", request.Body)
 	fmt.Fprintf(writer, "weeeeeeeeeeeeeeeeeeee")
 	writer.Write([]byte("aaaaaaaaaaaaaaaaaa"))
