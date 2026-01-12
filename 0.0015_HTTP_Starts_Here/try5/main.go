@@ -100,4 +100,13 @@ if request.Method == "DELETE"{
 }
 
 This is because those are just strings and ints value
+
+actually If you dont want to continue func you could do is return like:
+
+if request.Method == http.MethodDelete{
+ http.Error(writer,"NO DELETE allouded",http.StatusNotAllowed)
+ return
+}
+
+this way the func won't proceed
 */
