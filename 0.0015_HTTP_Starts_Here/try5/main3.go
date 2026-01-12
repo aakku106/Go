@@ -41,7 +41,7 @@ Most of these feels extermly difficult, and mostly not used in http servers
 Lest go one bu one
 
  1. request.URl: whole struct(Whatver client request sends
-    <path included in this func its / and for below func it will be /contact>)
+    <path included in above func is / and for below func it will be /contact>)
 
  2. URL.Query(): when you call Query, it internally
     split on &
