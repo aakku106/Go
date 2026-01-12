@@ -79,3 +79,28 @@ func handleContact(writer http.ResponseWriter, request *http.Request) {
 		http.Error(writer, "NO DELETE allouded", 405)
 	}
 }
+
+/*
+In this last func all other things are similar, but what we lookded into was
+error handeling
+http.Error gives message to users that Method not allowed, btu dont panic or stop server or do anything, if we have defined somethign related to POST in our func, func will proseed the request
+
+and
+log.printf will show log in server: 2026/01/12 08:35:01 Method Not allodwed here, 405
+whicl will also not stop the flow of func
+
+Here we used if request was not GET ?
+but if we just want to implement, lest say we dont want anyont to make DELETE request in /contact
+than what we could do is,
+
+if request.Method == http.MethodDelete{
+ http.Error(w,"NO DELETE allouded",http.StatusNotAllowed)
+}
+
+or what we also could do for same thing was
+
+if request.Method == "DELETE"{
+ http.Error(w,"NO DELETE allouded",405)
+}
+
+*/
