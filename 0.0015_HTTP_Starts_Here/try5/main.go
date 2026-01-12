@@ -66,6 +66,9 @@ func handleContact(writer http.ResponseWriter, request *http.Request) {
 	if request.Method != http.MethodGet {
 		http.Error(writer, "Method Not Allowed", http.StatusMethodNotAllowed)
 	}
+	if request.Method != http.MethodGet {
+		log.Println("Method Not allodwed here,", http.StatusMethodNotAllowed)
+	}
 	fmt.Println("Body:", request.Body)
 	fmt.Println("Method: ", request.Method)
 	fmt.Println("URL: ", request.URL)
