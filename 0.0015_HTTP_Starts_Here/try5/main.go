@@ -90,13 +90,14 @@ but if we just want to implement, lest say we dont want anyont to make DELETE re
 than what we could do is,
 
 if request.Method == http.MethodDelete{
- http.Error(w,"NO DELETE allouded",http.StatusNotAllowed)
+ http.Error(writer,"NO DELETE allouded",http.StatusNotAllowed)
 }
 
 or what we also could do for same thing was
 
 if request.Method == "DELETE"{
- http.Error(w,"NO DELETE allouded",405)
+ http.Error(writer,"NO DELETE allouded",405)
 }
 
+This is because those are just strings and ints value
 */
