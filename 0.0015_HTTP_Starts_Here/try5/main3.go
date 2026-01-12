@@ -55,6 +55,11 @@ Lest go one bu one
     curl "http://localhost:8080/?name=aakku&age=20&skill=go&skill=js&specility=go" upon calling this, Queru make map like
     map[ age[20] name[aakku] skill[go js] specility[go] ]
     it cont loss and data by collasping(collasping = loosing data)
+    NOTE: One shall never pass sensitive data here and sending large paylod is also a bad idea(Use post body insted)
+
+ 3. URL.RawQuery: this simpally preservs exact bytes ie upon using same eg as before
+    we will got name=aakku&age=20&skill=go, this may  seems useless at 1st loop but its used in
+    Proxies,Signature verification,Request replay, Logging raw traffic
 */
 func handleContact3(writer http.ResponseWriter, request *http.Request) {
 	fmt.Println("URL QUERY map: ", request.URL.Query())
