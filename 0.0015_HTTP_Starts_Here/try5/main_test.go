@@ -10,5 +10,5 @@ I use TMUX and MAC so i never close my mac and tmux never kills my servers so i
 intensionally made this test fiel which autokills itself in ~600 sec its saves my CPU,Memory and most imp battery
 */
 func TestDummy(t *testing.T) {
-	InitilizeServer2()
+	InitilizeServer3()
 }
