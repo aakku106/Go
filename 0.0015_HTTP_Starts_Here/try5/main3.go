@@ -96,5 +96,7 @@ NOTE: One shall not be confused betn URL.Host and request.Host,
 
 8. URL.Opaque: Opaque is used when the URL does not follow hierarchical rules(Thats all no need to explore more until you need).
 
+9. URL.OmitHost:Serilization/ turning url into string, ignore this one too until you absoutly need it
+	used internerly by proxies and url re-write logic
 URL ≠ Request ≠ Connection ≠ Headers
 */
