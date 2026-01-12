@@ -60,6 +60,14 @@ Lest go one bu one
  3. URL.RawQuery: this simpally preservs exact bytes ie upon using same eg as before
     we will got name=aakku&age=20&skill=go, this may  seems useless at 1st loop but its used in
     Proxies,Signature verification,Request replay, Logging raw traffic
+
+ 4. URL.Path: its reuting key, or everything before ?
+    This is the spine of HTTP.
+    Routers depend on it.
+    Middleware depends on it.
+    Reverse proxies rewrite it.
+
+Knowing this much is enough for now, althow shalow explenation of others are at buttom(2ns last coment or last multiline comment) comment
 */
 func handleContact3(writer http.ResponseWriter, request *http.Request) {
 	fmt.Println("URL QUERY map: ", request.URL.Query())
@@ -72,4 +80,21 @@ func handleContact3(writer http.ResponseWriter, request *http.Request) {
 	fmt.Println("Host:", request.Header)
 	fmt.Println("Path:", request.URL.Path)
 	fmt.Println("RawQuery:", request.URL.RawQuery)
+	fmt.Println("TLS", request.TLS)
 }
+
+/*
+5. URL.Scheme: used in Proxy server,custom http clients
+6. URL.Host: this url points to that Host
+	(this is almost never used in servers)
+NOTE: One shall not be confused betn URL.Host and request.Host,
+			URL.Host means: this url points to that host
+			request.Host  : this request was sent to this host
+
+7. URL.User: Legacy, good not to use, good not to learn(use modern auth insted) unless specifily needed
+	 URLs predate modern auth headers, So they sadly still exists.
+
+8. URL.Opaque: Opaque is used when the URL does not follow hierarchical rules(Thats all no need to explore more until you need).
+
+URL ≠ Request ≠ Connection ≠ Headers
+*/
