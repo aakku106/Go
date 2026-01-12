@@ -74,4 +74,8 @@ func handleContact(writer http.ResponseWriter, request *http.Request) {
 	fmt.Println("URL: ", request.URL)
 	fmt.Println("URL.path: ", request.URL.Path)
 	fmt.Println("Header: ", request.Header)
+
+	if request.Method == "DELETE" {
+		http.Error(writer, "NO DELETE allouded", 405)
+	}
 }
