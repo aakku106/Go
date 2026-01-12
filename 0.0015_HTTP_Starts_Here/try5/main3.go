@@ -54,7 +54,7 @@ Lest go one bu one
     thats all, and one more thing it request was
     curl "http://localhost:8080/?name=aakku&age=20&skill=go&skill=js&specility=go" upon calling this, Queru make map like
     map[ age[20] name[aakku] skill[go js] specility[go] ]
-    it cont loss and data by collasping(collasping = loosing data)
+    it can't loss  data by collasping(collasping = loosing data)
     NOTE: One shall never pass sensitive data here and sending large paylod is also a bad idea(Use post body insted)
 
  3. URL.RawQuery: this simpally preservs exact bytes ie upon using same eg as before
