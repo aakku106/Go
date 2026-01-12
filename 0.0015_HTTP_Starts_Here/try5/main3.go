@@ -100,3 +100,6 @@ NOTE: One shall not be confused betn URL.Host and request.Host,
 	used internerly by proxies and url re-write logic
 URL ≠ Request ≠ Connection ≠ Headers
 */
+
+// NEXT: we will loot into request.TLS in ./main4.go
+// also look how reverse proxies mutate Host, Scheme, and Path, and why X-Forwarded-* exists
