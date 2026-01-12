@@ -63,6 +63,9 @@ func handlePortfolio(writer http.ResponseWriter, request *http.Request) {
 	// thats just mormating not new magic
 }
 func handleContact(writer http.ResponseWriter, request *http.Request) {
+	if request.Method != http.MethodGet {
+		http.Error(writer, "Method Not Allowed", http.StatusMethodNotAllowed)
+	}
 	fmt.Println("Body:", request.Body)
 	fmt.Println("Method: ", request.Method)
 	fmt.Println("URL: ", request.URL)
