@@ -60,11 +60,27 @@ try1, try2_mux, and try3_POST were earlier experiments from Week 5 that were **c
 
 ---
 
-## Note
+## Datastructures Repository Changes
 
-Week 6 work was **entirely in the main Go repository**. The datastructures repository had **0 commits** during Week 6.
+**Commit**: `11b4360 - "dubug on"` (Jan 17, 2026)
 
-Git confirmed only these folders changed:
+### Modified in datastructures/list/
+
+- `linkList.go` - Debug variable added
+- `SingelyLinkList.go` - Debug mode added, Week 5 bug fixed
+- `SinglyLinkedList_test.go` - Assertions added (improvement from Week 5)
+
+### NOT Modified in datastructures/
+
+- `queue/` - All files from initial commit, no changes
+- `stack/` - All files from initial commit, no changes
+- `doc/` - All files from initial commit, no changes
+
+---
+
+## Main Repository Changes
+
+Git confirmed only these folders changed in main Go repo:
 
 - `try4/` (modified)
 - `try5/` (created)

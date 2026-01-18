@@ -2,10 +2,10 @@
 
 **Latest Review**: January 17, 2026 (Week 6)  
 **Learning Duration**: 6 weeks  
-**Overall Rating**: 8.42/10 (Week 6)  
-**Files Reviewed**: 56+ Go files across 6 weeks
+**Overall Rating**: 8.3/10 (Week 6)  
+**Files Reviewed**: 59 Go files across 6 weeks
 
-**Week Progression**: Week 1 (7.0/10) → Week 2 (8.0/10) → Week 3 (7.7/10) → Week 4 (9.0/10) → Week 5 (6.8/10) → **Week 6 (8.42/10)**
+**Week Progression**: Week 1 (7.0/10) → Week 2 (8.0/10) → Week 3 (7.7/10) → Week 4 (9.0/10) → Week 5 (6.8/10) → **Week 6 (8.3/10)**
 
 ---
 
@@ -47,11 +47,13 @@ Detailed analysis of every Go file:
 **Week 6**: `/review/week6/` - Latest
 
 - HTTP request deep dive (headers, body, URL, TLS)
-- Rating: 8.42/10
+- Datastructures cleanup (linked list bug fixed, Debug mode added)
+- Rating: 8.3/10
 - Best file: try5/main3.go (9.5/10) - URL exploration
-- **Strong recovery** - Week 5 regression fixed, systematic API exploration
+- Fixes Week 5 regressions (HTTP error handling, linked list bug, test assertions)
+- Issues: try4 not fixed, datastructures tests have typos (T.Fatal, testNew...)
 
-**Total**: 76+ markdown files with detailed feedback
+**Total**: 80+ markdown files with detailed feedback
 
 ---
 
@@ -60,31 +62,34 @@ Detailed analysis of every Go file:
 1. **Read**: `/review/week6/README.md` - Week 6 overview
 2. **Read**: `/review/week6/00-SUMMARY.md` - Full week 6 assessment
 3. **Review**: Outstanding issues (listed below)
-4. **Fix**: Week 5 regressions in try4/main.go
+4. **Fix**: Week 5 regressions in try4 + datastructures test typos
 
 ---
 
 ## Outstanding Issues (Week 5-6)
 
-### 1. Error Handling in try4 - MAJOR ⚠️
+### 1. try4 Template Error Handling - MAJOR ⚠️
 
 **Week 5**: try4/main.go missing error handling for templates  
-**Week 6**: try4/main.go **still not fixed**
+**Week 6**: **still not fixed**
 
-**Impact**: Template errors ignored (can crash server)
-
-**Fix Required**:
+Fix:
 
 ```go
-// Current (wrong):
-tmpl.Execute(writer, data)
-
-// Should be:
 if err := tmpl.Execute(writer, data); err != nil {
     log.Println("Template error:", err)
     http.Error(writer, "Internal error", 500)
 }
 ```
+
+### 2. Datastructures Test Bugs - CRITICAL ⚠️
+
+**SinglyLinkedList_test.go**:
+
+- Line 11: `T.Fatal` (capital T) - won't compile
+- Line 7: `testNewSinglyLinkedList` (lowercase) - won't run
+
+Run `go test` to see errors.
 
 ### 2. Linked List Test Assertions - CRITICAL ⚠️
 
@@ -178,35 +183,36 @@ Still present in ALL Week 5 files despite Week 4 feedback. Enable Code Spell Che
 - Read stdlib source (net/http/server.go) - good learning practice
 - Rating: 6.8/10
 
-**Week 6**: HTTP Request Deep Dive
+**Week 6**: HTTP Request Deep Dive + Datastructures Cleanup
 
 - Systematic http.Request exploration (headers, body, URL, TLS)
 - io.ReadCloser discovery (request.Body)
 - url.Values type exploration (Query parameters)
 - Type inspection methodology (looking up definitions)
-- **ERROR HANDLING FIXED**: All 5 new files have proper error handling
-- Professional API exploration pattern (print → discover → research → document)
-- TLS/HTTPS security awareness
-- Intentional anti-pattern demonstration (learning through mistakes)
-- Rating: 8.42/10
+- **HTTP error handling fixed**: All 5 new files have error handling
+- **Datastructures bug fixed**: InsertAtLast now returns correct head
+- **Datastructures tests improved**: Assertions added (Week 5 had none)
+- Debug mode added to datastructures
+- Issues: try4 not fixed, datastructures tests have typos, spelling errors
+- Rating: 8.3/10
 
 ### Skills Assessment (Current - Week 6)
 
-- **Algorithm Implementation**: 7.5/10 (unchanged - no new algorithms)
-- **Conceptual Understanding**: 8.5/10 (systematic API exploration)
-- **Problem Solving**: 8/10 (improved - creative solutions like battery-saving test)
-- **Code Organization**: 7/10 (unchanged)
-- **Testing**: 6.5/10 (improved understanding, but wrong tool usage)
-- **Concurrency**: 9/10 (maintained)
-- **Error Handling**: 8/10 (⬆️ major improvement - Week 5 regression fixed)
-- **Go Idioms**: 7.5/10 (improving - type awareness)
-- **Production Awareness**: 7.5/10 (TLS/security awareness added)
-- **HTTP Development**: 8.5/10 (deep exploration of request internals)
-- **Data Structures**: 6/10 (unchanged - no new work)
+- **Algorithm Implementation**: 7.5/10
+- **Conceptual Understanding**: 8.5/10
+- **Problem Solving**: 8/10 (improved)
+- **Code Organization**: 7/10
+- **Testing**: 6.5/10 (assertions added but typos remain)
+- **Concurrency**: 9/10
+- **Error Handling**: 8/10 (major improvement)
+- **Go Idioms**: 7.5/10
+- **Production Awareness**: 7.5/10
+- **HTTP Development**: 8.5/10 (deep request exploration)
+- **Data Structures**: 7/10 (bug fixed, Debug mode added)
 
-### Overall: 8.42/10
+### Overall: 8.3/10
 
-**Strong recovery from Week 5.** Week 5's critical error handling issue **completely fixed** in all new Week 6 files. Demonstrates professional-level API exploration (systematic type inspection, hypothesis testing, documentation). Learning methodology improved significantly. Remaining issues: spelling errors, not applying Week 5 feedback to try4, inconsistent exploration depth.
+Fixes Week 5 critical regressions (HTTP error handling, linked list bug, test assertions). HTTP exploration systematic. Datastructures improved with Debug mode. Remaining issues: try4 not fixed, test typos (T.Fatal), spelling errors. Doesn't apply all previous feedback.
 
 ---
 

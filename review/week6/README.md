@@ -1,12 +1,12 @@
 # Week 6 Code Reviews - README
 
 **Review Period**: January 11-17, 2026  
-**Focus**: HTTP Request Deep Dive + Error Handling Fixes  
-**Total Files Reviewed**: 6
+**Focus**: HTTP Request Deep Dive + Error Handling Fixes + Datastructures Cleanup  
+**Total Files Reviewed**: 9
 
 ---
 
-## Files Reviewed
+## Main Repository Files (HTTP)
 
 ### 1. [try4/main.go](0.0015-try4-main.md) - 8/10
 
@@ -179,28 +179,67 @@ func TestDummyForAutoShutDown(t *testing.T) {
 
 ---
 
+## Datastructures Repository Files
+
+### 7. [datastructures/list/linkList.go](datastructures-list-linkList.md) - Not Reviewed
+
+**Topic**: Interface definition + Debug variable
+
+### 8. [datastructures/list/SingelyLinkList.go](datastructures-list-SingelyLinkList.md) - 8.5/10
+
+**Topic**: Singly Linked List Implementation with Debug Mode  
+**Status**: ✅ Week 5 bug FIXED
+
+**What Changed**:
+
+- Debug mode added (var Debug bool = true)
+- InsertAtLast bug FIXED (now returns original head, not last node)
+- All insert methods working correctly
+
+**Issues**:
+
+- InsertAt not implemented (returns error)
+
+### 9. [datastructures/list/SinglyLinkedList_test.go](datastructures-list-SinglyLinkedList_test.md) - 7.5/10
+
+**Topic**: Linked List Tests with Assertions  
+**Status**: ✅ Assertions added (Week 5 had NONE)
+
+**What Changed**:
+
+- Tests now have proper assertions (t.Error, t.Errorf, t.Fatal)
+- Error case testing added
+- Edge case testing added
+
+**Critical Issues**:
+
+- Line 11: `T.Fatal` (capital T) - won't compile
+- `testNewSinglyLinkedList` (lowercase) - won't run with `go test`
+- TestTEmp is debug code
+
+---
+
 ## Week 6 Statistics
 
-**Total Files**: 6  
-**Average Rating**: 8.42/10  
+**Total Files**: 9 (6 HTTP + 3 datastructures)  
+**Average Rating**: 8.3/10  
 **Week 5 Average**: 6.8/10  
-**Improvement**: +1.62 points ⬆️
+**Improvement**: +1.5 points ⬆️
 
 **Rating Distribution**:
 
 - 9-10: 2 files (main2, main3)
-- 8-9: 3 files (try4, main1, main4)
-- 7-8: 1 file (main_test)
+- 8-9: 4 files (try4, main1, main4, SingelyLinkList)
+- 7-8: 2 files (main_test, SinglyLinkedList_test)
+- Not reviewed: 1 file (linkList.go)
 
 ---
 
 ## Key Achievements
 
-### 1. Week 5 Regression FIXED ✅
+### 1. Week 5 Regressions FIXED ✅
 
-**Week 5 Critical Issue**: Error handling missing in 6 of 7 HTTP files
-
-**Week 6 Solution**: All 5 new files (main1-main4, main_test) have:
+**HTTP Files - Error handling missing**: All 5 new files (main1-main4, main_test) have:
 
 ```go
 if err := server.ListenAndServe(); err != nil {
@@ -208,57 +247,58 @@ if err := server.ListenAndServe(); err != nil {
 }
 ```
 
-**This fixes the most critical issue from Week 5.**
+**Datastructures - InsertAtLast bug**: Fixed (now returns original head)
 
-### 2. Professional API Exploration
+**Datastructures - Test assertions**: Added (Week 5 had ZERO)
 
-**main1.go**: Discovered `request.Header` is `map[string][]string` through printing  
-**main2.go**: Discovered `request.Body` is `io.ReadCloser` through experimentation  
-**main3.go**: Looked up `url.Values` type definition before using
+### 2. Debug Mode Added (Datastructures)
 
-**This is how professionals learn APIs**: experiment → observe → read docs → understand.
+```go
+var Debug bool = true  // list/linkList.go
 
-### 3. Type Awareness
+if Debug {
+    fmt.Println("DEBUG: Creating a NODE")
+}
+```
 
-You're discovering Go's type system:
+Toggle debug output without commenting code. Professional pattern.
 
-- Interfaces (`io.ReadCloser`)
-- Maps (`map[string][]string`)
-- Structs (`http.Server`, `url.URL`)
-- Type aliases (`url.Values`)
+### 3. Professional API Exploration (HTTP)
 
-### 4. Intentional Anti-Patterns
+**main1.go**: Discovered `request.Header` is `map[string][]string`  
+**main2.go**: Discovered `request.Body` is `io.ReadCloser`  
+**main3.go**: Looked up `url.Values` type definition
 
-main2.go documents dangerous pattern (missing `return` after error) **on purpose** to demonstrate the problem. This shows deep understanding.
+Systematic: experiment → observe → read docs → understand.
+
+### 4. Intentional Anti-Patterns (HTTP)
+
+main2.go documents dangerous pattern (missing `return` after error) on purpose to demonstrate the problem.
 
 ---
 
 ## Persistent Issues
 
-### 1. try4/main.go Not Fixed
+### 1. try4/main.go Not Fixed (HTTP)
 
-Week 5 feedback identified:
+Week 5 issues still present:
 
 - Missing error handling for `template.Execute`
 - Race condition with template package
 
-**These were not addressed in Week 6.** File was modified but not improved.
+File modified but not improved.
 
-### 2. Shallow Exploration in main4.go
+### 2. Datastructures Test Bugs Won't Compile
 
-main1-main3 followed pattern:
+SinglyLinkedList_test.go:
 
-1. Print value
-2. Discover type
-3. Read type definition
-4. Explore all fields/methods
-5. Document findings
+- Line 11: `T.Fatal` (capital T) - compilation error
+- `testNewSinglyLinkedList` (lowercase) - won't run
+- TestTEmp is leftover debug code
 
-**main4.go stopped at step 1.** Didn't explore `request.TLS` fields.
+**Run `go test` and you'll see errors.**
 
-### 3. Spelling Errors Across All Files
-
-Common errors:
+### 3. Spelling Errors (HTTP Files)
 
 - "Initilize" → "Initialize"
 - "dengerious" → "dangerous"
@@ -271,32 +311,31 @@ Common errors:
 
 ## Overall Assessment
 
-**Week 6 Rating**: 8.42/10 (Strong Recovery)  
-**Week 5 Rating**: 6.8/10 (Regression)  
-**Progress**: +1.62 points
+**Week 6 Rating**: 8.3/10  
+**Week 5 Rating**: 6.8/10  
+**Progress**: +1.5 points
 
 ### What Went Right
 
-1. **Critical regression fixed**: Error handling added to all new files
-2. **Systematic exploration**: main1-main3 show professional learning approach
-3. **Type awareness**: Discovering Go's type system through experimentation
-4. **Practical thinking**: Battery-saving test shows workflow awareness
-5. **Documentation**: Included curl commands, output, explanations
+1. Error handling fixed in HTTP files
+2. Linked list bug fixed in datastructures
+3. Test assertions added (Week 5 had none)
+4. Debug mode added (professional pattern)
+5. Systematic HTTP exploration (main1-main3)
 
 ### What Went Wrong
 
-1. **try4 not improved**: Week 5 issues not addressed
-2. **Inconsistent depth**: main4 shallow compared to main1-main3
-3. **Spelling errors**: Across all files
-4. **Wrong tool for job**: Test used for development workflow
+1. try4 Week 5 issues not fixed
+2. Datastructures tests have compilation errors (T.Fatal typo)
+3. HTTP spelling errors
+4. main4 shallow exploration
+5. main_test wrong tool for development
 
 ### Trajectory
 
-**Week 4**: 9.0/10 (Peak)  
-**Week 5**: 6.8/10 (Regression - error handling missing)  
-**Week 6**: 8.42/10 (Strong recovery - error handling fixed)
-
-**You're back on track.** Week 6 shows you learned from Week 5 mistakes.
+Week 4: 9.0/10  
+Week 5: 6.8/10 (error handling regression)  
+Week 6: 8.3/10 (recovery)
 
 ---
 
@@ -304,20 +343,36 @@ Common errors:
 
 ### Critical
 
-**1. Address try4 Issues**:
+**1. Fix Datastructures Test Bugs**:
 
 ```go
-// Add error handling
+// Line 11: T.Fatal → t.Fatal
+// Line 7: testNewSinglyLinkedList → TestNewSinglyLinkedList
+```
+
+**2. Fix try4 Issues**:
+
+```go
 if err := tmpl.Execute(writer, data); err != nil {
     log.Println("Template error:", err)
     http.Error(writer, "Internal error", 500)
 }
-
-// Fix race condition
-var tmpl = template.Must(template.New("try4.html").ParseFiles("try4.html"))
 ```
 
-**2. Maintain Exploration Depth**:
+**3. Run Spell-Check**:
+
+```zsh
+brew install codespell
+codespell try5/*.go
+```
+
+### Recommended
+
+**4. Maintain HTTP Exploration Depth** - Don't stop early like main4
+
+**5. Learn Context Package** - For timeouts/cancellation
+
+**6. Explore HTTP Client** - Making requests, not just receiving
 
 When exploring new APIs, follow your main1-main3 pattern:
 
