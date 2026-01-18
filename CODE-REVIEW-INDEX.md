@@ -1,11 +1,11 @@
 # Go Learning - Code Review Index
 
-**Latest Review**: January 11, 2026 (Week 5)  
-**Learning Duration**: 5 weeks  
-**Overall Rating**: 6.8/10 (Week 5)  
-**Files Reviewed**: 50+ Go files across 5 weeks
+**Latest Review**: January 17, 2026 (Week 6)  
+**Learning Duration**: 6 weeks  
+**Overall Rating**: 8.42/10 (Week 6)  
+**Files Reviewed**: 56+ Go files across 6 weeks
 
-**Week Progression**: Week 1 (7.0/10) → Week 2 (8.0/10) → Week 3 (7.7/10) → Week 4 (9.0/10) → **Week 5 (6.8/10)**
+**Week Progression**: Week 1 (7.0/10) → Week 2 (8.0/10) → Week 3 (7.7/10) → Week 4 (9.0/10) → Week 5 (6.8/10) → **Week 6 (8.42/10)**
 
 ---
 
@@ -37,44 +37,52 @@ Detailed analysis of every Go file:
 - Rating: 9.0/10
 - Best file: forSelect.go (10/10) - 313 lines
 
-**Week 5**: `/review/week5/` - Latest
+**Week 5**: `/review/week5/`
 
 - HTTP servers, JSON APIs, singly linked list
 - Rating: 6.8/10
 - Best file: try3_POST/main.go (8.5/10)
 - **Regression from Week 4** - error handling not maintained
 
-**Total**: 70+ markdown files with detailed feedback
+**Week 6**: `/review/week6/` - Latest
+
+- HTTP request deep dive (headers, body, URL, TLS)
+- Rating: 8.42/10
+- Best file: try5/main3.go (9.5/10) - URL exploration
+- **Strong recovery** - Week 5 regression fixed, systematic API exploration
+
+**Total**: 76+ markdown files with detailed feedback
 
 ---
 
 ## Start Here
 
-1. **Read**: `/review/week5/README.md` - Week 5 overview
-2. **Read**: `/review/week5/00-SUMMARY.md` - Full week 5 assessment
+1. **Read**: `/review/week6/README.md` - Week 6 overview
+2. **Read**: `/review/week6/00-SUMMARY.md` - Full week 6 assessment
 3. **Review**: Outstanding issues (listed below)
-4. **Fix**: Week 5 regressions before proceeding
+4. **Fix**: Week 5 regressions in try4/main.go
 
 ---
 
-## Outstanding Issues (Week 5)
+## Outstanding Issues (Week 5-6)
 
-### 1. Error Handling Regression - CRITICAL ⚠️
+### 1. Error Handling in try4 - MAJOR ⚠️
 
-**Week 4**: All files had error handling (9.0/10)  
-**Week 5**: Only 1 of 7 HTTP files has error handling (6.8/10)
+**Week 5**: try4/main.go missing error handling for templates  
+**Week 6**: try4/main.go **still not fixed**
 
-**Impact**: 6 HTTP files ignore errors from `ListenAndServe()`
+**Impact**: Template errors ignored (can crash server)
 
 **Fix Required**:
 
 ```go
-// Wrong (Week 5):
-server.ListenAndServe()
+// Current (wrong):
+tmpl.Execute(writer, data)
 
-// Right (Week 3-4):
-if err := server.ListenAndServe(); err != nil {
-    log.Fatal(err)
+// Should be:
+if err := tmpl.Execute(writer, data); err != nil {
+    log.Println("Template error:", err)
+    http.Error(writer, "Internal error", 500)
 }
 ```
 
@@ -170,23 +178,35 @@ Still present in ALL Week 5 files despite Week 4 feedback. Enable Code Spell Che
 - Read stdlib source (net/http/server.go) - good learning practice
 - Rating: 6.8/10
 
-### Skills Assessment (Current - Week 5)
+**Week 6**: HTTP Request Deep Dive
 
-- **Algorithm Implementation**: 7.5/10 (linked list has bug)
-- **Conceptual Understanding**: 8.5/10 (stdlib reading is good)
-- **Problem Solving**: 7/10 (inconsistent application)
+- Systematic http.Request exploration (headers, body, URL, TLS)
+- io.ReadCloser discovery (request.Body)
+- url.Values type exploration (Query parameters)
+- Type inspection methodology (looking up definitions)
+- **ERROR HANDLING FIXED**: All 5 new files have proper error handling
+- Professional API exploration pattern (print → discover → research → document)
+- TLS/HTTPS security awareness
+- Intentional anti-pattern demonstration (learning through mistakes)
+- Rating: 8.42/10
+
+### Skills Assessment (Current - Week 6)
+
+- **Algorithm Implementation**: 7.5/10 (unchanged - no new algorithms)
+- **Conceptual Understanding**: 8.5/10 (systematic API exploration)
+- **Problem Solving**: 8/10 (improved - creative solutions like battery-saving test)
 - **Code Organization**: 7/10 (unchanged)
-- **Testing**: 6/10 (regression - no assertions in new tests)
-- **Concurrency**: 9/10 (RWMutex correct, maintained from Week 4)
-- **Error Handling**: 5/10 (⚠️ major regression from Week 4)
-- **Go Idioms**: 7/10 (unchanged)
-- **Production Awareness**: 7.5/10 (try3_POST is production-quality)
-- **HTTP Development**: 7/10 (new skill, but missing error handling)
-- **Data Structures**: 6/10 (first linked list, has bugs)
+- **Testing**: 6.5/10 (improved understanding, but wrong tool usage)
+- **Concurrency**: 9/10 (maintained)
+- **Error Handling**: 8/10 (⬆️ major improvement - Week 5 regression fixed)
+- **Go Idioms**: 7.5/10 (improving - type awareness)
+- **Production Awareness**: 7.5/10 (TLS/security awareness added)
+- **HTTP Development**: 8.5/10 (deep exploration of request internals)
+- **Data Structures**: 6/10 (unchanged - no new work)
 
-### Overall: 6.8/10
+### Overall: 8.42/10
 
-**Regression from Week 4.** New topics learned (HTTP, linked lists) but prior patterns not applied (error handling, test assertions). Inconsistent code quality - can write production code (try3_POST) but doesn't apply same discipline to all files.
+**Strong recovery from Week 5.** Week 5's critical error handling issue **completely fixed** in all new Week 6 files. Demonstrates professional-level API exploration (systematic type inspection, hypothesis testing, documentation). Learning methodology improved significantly. Remaining issues: spelling errors, not applying Week 5 feedback to try4, inconsistent exploration depth.
 
 ---
 
@@ -553,7 +573,6 @@ func Peek() (int, error) {
 ### Top Files
 
 1. **0.0012/concurrency/concurencyPattern/forSelect.go** - 10/10
-
    - 313 lines of systematic debugging
    - "weee" test case design
    - Intentional bug discovery methodology
@@ -561,27 +580,23 @@ func Peek() (int, error) {
    - Professional-level debugging
 
 2. **0.0012/concurrency/channels.go** - 9/10
-
    - 323 lines of systematic exploration
    - Buffered/unbuffered channels mastery
    - Discovered and fixed deadlocks independently
    - Professional learning methodology
 
 3. **datastructures/queue/linearQueue_test.go** - 9.5/10
-
    - Comprehensive assertions (fixed from Week 3)
    - FIFO verification
    - Edge case coverage
    - Clear error messages
 
 4. **datastructures/queue/linearQueue.go** - 8/10
-
    - O(1) dequeue with front/rear pointers
    - Advanced optimization
    - Proper (any, bool) returns
 
 5. **0.0014/Matrix.go** - 8.5/10
-
    - Perfect WaitGroup implementation (first try)
    - Variable capture correct
    - Performance awareness
@@ -666,7 +681,6 @@ func TestDequeue(t *testing.T) {
 ### THIS WEEKEND (4-6 hours)
 
 1. ✅ Add assertions to ALL test files (2-3 hours)
-
    - linearQueue_test.go
    - stack_test.go
    - concurrency_test.go
