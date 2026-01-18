@@ -598,17 +598,17 @@ Len()  // Idiomatic
 
 ### High Priority (This Week)
 
-5. **Fix tests** - Use public API, stop accessing private fields
-6. **Add edge cases** - Test empty, overflow, underflow
-7. **Rename methods** - LengthOfStack → Len, LengthOfQueue → Len
-8. **Add stack interface** - Consistency with other structures
+1. **Fix tests** - Use public API, stop accessing private fields
+2. **Add edge cases** - Test empty, overflow, underflow
+3. **Rename methods** - LengthOfStack → Len, LengthOfQueue → Len
+4. **Add stack interface** - Consistency with other structures
 
 ### Medium Priority (Next Week)
 
-9. **Add benchmarks** - Performance testing
-10. **Complete test coverage** - Aim for 80%+
-11. **Add godoc** - Document all exported types/methods
-12. **Fix documentation** - Type assertion example won't compile
+1. **Add benchmarks** - Performance testing
+2. **Complete test coverage** - Aim for 80%+
+3. **Add godoc** - Document all exported types/methods
+4. **Fix documentation** - Type assertion example won't compile
 
 ---
 

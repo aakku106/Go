@@ -1,16 +1,21 @@
 # Week 6 Summary
 
 **Period**: January 11-17, 2026  
-**Rating**: 3.8/10  
-**Status**: Major Regression from Week 5
+**Overall Rating**: 4.9/10 (weighted average of both repos)  
+**Repositories**: Main (3.8/10) + Datastructures (5.6/10)  
+**Status**: Mixed - Main repo regression, datastructures shows learning
 
 ---
 
 ## Overview
 
-Week 6 explored HTTP request internals through the try5 package, focusing on Header, Method, URL, Body, and TLS properties. While educational content quality improved (especially URL parsing explanation), implementation quality **collapsed**. Three files have identical error handling bugs, one file is non-functional, and the test file abuses the testing framework.
+Week 6 covers **two separate repositories**:
 
-**This is the worst-performing week so far.**
+1. **Main Repository** (3.8/10): HTTP request internals (try5 package) - Header, Method, URL, Body, TLS. Educational content improved but implementation quality **collapsed**. Three files have identical error handling bugs, one file is non-functional, and the test file abuses the testing framework. **Major regression from Week 5.**
+
+2. **Datastructures Repository** (5.6/10): New repo implementing linked lists, queues (linear + priority), and stacks with Go interfaces. Shows strong understanding of interfaces (excellent 7.5/10 documentation) but hampered by typo propagation and test encapsulation violations. **All code functional, learning visible.**
+
+**Datastructures is significantly better than main repo** (5.6 vs 3.8 = 47% improvement), bringing Week 6 average to 4.9/10.
 
 ---
 
@@ -29,7 +34,32 @@ Week 6 explored HTTP request internals through the try5 package, focusing on Hea
 
 ---
 
+## Datastructures Repository Files
+
+**See detailed reviews**: [datastructures-README.md](datastructures-README.md) and [datastructures-00-SUMMARY.md](datastructures-00-SUMMARY.md)
+
+| File                          | Status | Lines | Rating | Key Issue                          |
+| ----------------------------- | ------ | ----- | ------ | ---------------------------------- |
+| list/linkList.go              | New    | 37    | 5/10   | Critical typo: `SingelyLinkList`   |
+| list/SingelyLinkList.go       | New    | 93    | 6/10   | Value receiver inefficiency        |
+| list/SinglyLinkedList_test.go | New    | 59    | 4/10   | Test won't run (lowercase name)    |
+| queue/queue.go                | New    | 33    | 7/10   | `ProrityQueue` typo                |
+| queue/linearQueue.go          | New    | 89    | 5.5/10 | Logic flaw in Enqueue              |
+| queue/linearQueue_test.go     | New    | 56    | 6/10   | Missing edge cases                 |
+| queue/prorityQueue.go         | New    | 104   | 5/10   | Complex nested function            |
+| queue/prorityQueue_test.go    | New    | 150   | 7/10   | Best test file                     |
+| stack/stack.go                | New    | 39    | 4/10   | Arbitrary uint16 cap + bad comment |
+| stack/stack_test.go           | New    | 41    | 5/10   | Direct field access                |
+| doc/SingallyLinkedList.md     | New    | 210   | 7.5/10 | ⭐ BEST FILE IN WEEK 6             |
+| go.mod                        | New    | 3     | N/A    | Module definition                  |
+
+**Datastructures Average**: 5.6/10 (excluding go.mod)
+
+---
+
 ## Critical Issues
+
+### Main Repository
 
 ### 1. Broken Error Handling (3 Files)
 
@@ -96,9 +126,80 @@ func TestDummy(t *testing.T) {
 
 **Why This Is Wrong**: Using testing framework for process management. Should use `context.WithTimeout` or signal handling instead.
 
+### Datastructures Repository
+
+### 1. Typo Propagation
+
+**Files Affected**: 8+ files across entire codebase
+
+```go
+// In linkList.go (interface definition)
+type SingelyLinkList struct {  // Missing 'l'
+    data any
+    next *SingelyLinkList
+}
+
+// In queue.go (interface definition)
+type ProrityQueue struct {  // Missing 'i'
+    // ...
+}
+```
+
+`SingelyLinkList` appears in:
+
+- linkList.go (interface)
+- SingelyLinkList.go (filename + implementation)
+- SinglyLinkedList_test.go (type assertions)
+- SingallyLinkedList.md (references)
+
+**Impact**: Typos propagate through entire codebase. Shows copy-paste without review.
+
+### 2. Self-Aware Bad Code (Worst Pattern)
+
+**File**: stack/stack.go
+
+```go
+// Lines 28-39: 12-line comment
+// Initially i thought it was cool and bigBrain idea,
+// but i tind of broked go idology...
+// (oki i accept it was a bad idea to put that cap...)
+// still this methods are only used in testing
+// and wont generally interfare in production...
+// but i still decided to keep it for now
+```
+
+**This comment**:
+
+- Admits code is wrong ("broked go idology")
+- Admits it's bad ("bad idea")
+- Justifies keeping it ("wont generally interfare")
+- Has 6 typos
+
+**Engineering principle violated**: **If you know it's wrong, DELETE IT.** Don't document bad decisions.
+
+### 3. Test Encapsulation Violations
+
+**Files Affected**: ALL 4 test files
+
+```go
+// Anti-pattern in every test file:
+if len(queue.queue) != 3 {  // Accessing private field
+    t.Error("...")
+}
+
+// Should be:
+if queue.Len() != 3 {  // Public API
+    t.Error("...")
+}
+```
+
+**Impact**: Tests break if implementation changes (e.g., slice → linked list), even if public API stays same.
+
 ---
 
 ## Pattern Analysis
+
+### Main Repository
 
 ### The "Initilize" Epidemic
 
@@ -207,6 +308,8 @@ Week 5 review identified:
 
 ## Statistics
 
+### Main Repository
+
 | Metric                      | Value                            |
 | --------------------------- | -------------------------------- |
 | Total Files                 | 5 new, 1 modified (comment only) |
@@ -217,6 +320,31 @@ Week 5 review identified:
 | Non-Functional Code         | 2 files                          |
 | Proper Tests                | 0                                |
 | Client-Facing HTTP Services | 0                                |
+
+### Datastructures Repository
+
+| Metric                  | Value              |
+| ----------------------- | ------------------ |
+| Total Files             | 12 new             |
+| Lines of Code           | ~840               |
+| Spelling Errors         | 30+                |
+| "SingelyLinkList" Count | 8+                 |
+| "ProrityQueue" Count    | 7+                 |
+| Broken Code             | 0 (all functional) |
+| Test Encapsulation Bugs | 4/4 test files     |
+| Test Coverage Average   | ~60%               |
+
+### Week 6 Combined
+
+| Metric           | Value                         |
+| ---------------- | ----------------------------- |
+| Total Files      | 17 (5 main + 12 data)         |
+| Total Lines      | ~1,165                        |
+| Average Rating   | 4.9/10                        |
+| Best File        | doc/SingallyLinkedList.md 7.5 |
+| Worst File       | try5/main_test.go 1.0         |
+| Functional Files | 15/17 (88%)                   |
+| Documentation    | 1 (excellent)                 |
 
 ---
 
@@ -245,7 +373,9 @@ Week 5 review identified:
 
 ## Comparison to Week 5
 
-| Category            | Week 5     | Week 6      | Change        |
+### Main Repository Only
+
+| Category            | Week 5     | Week 6 Main | Change        |
 | ------------------- | ---------- | ----------- | ------------- |
 | **Average Rating**  | 6.8/10     | 3.8/10      | **-3.0**      |
 | **Best File**       | 8.5/10     | 6.5/10      | **-2.0**      |
@@ -255,7 +385,20 @@ Week 5 review identified:
 | **Spell Errors**    | Improving  | Same        | **No change** |
 | **Functional Code** | Most files | 3/5 files   | **Worse**     |
 
-**Every metric declined.**
+**Main repo: Every metric declined.**
+
+### Including Datastructures
+
+| Category      | Week 5 | Week 6 Main | Week 6 Data | Week 6 Combined |
+| ------------- | ------ | ----------- | ----------- | --------------- |
+| Avg Rating    | 6.8/10 | 3.8/10      | 5.6/10      | 4.9/10          |
+| Best File     | 8.5/10 | 6.5/10      | 7.5/10      | 7.5/10 ⭐       |
+| Worst File    | 3/10   | 1/10        | 4/10        | 1/10 💀         |
+| Documentation | Some   | None        | Excellent   | Excellent       |
+| Learning      | Yes    | No          | Yes         | Mixed           |
+| Functional    | 85%    | 60%         | 100%        | 88%             |
+
+**Datastructures brings Week 6 average from 3.8 to 4.9 (+29%).**
 
 ---
 
@@ -304,7 +447,7 @@ Week 5 had try3_POST (8.5/10) with:
 ### Long-term
 
 1. **Learn error patterns** - Understand functions that require manual return
-2. **Study testing** - Read https://go.dev/doc/tutorial/add-a-test
+2. **Study testing** - Read <https://go.dev/doc/tutorial/add-a-test>
 3. **TLS fundamentals** - Understand certificate requirements before coding
 4. **Stop documenting bugs** - If you know it's wrong, fix it
 5. **Apply feedback** - Previous reviews are worth reading
@@ -313,11 +456,11 @@ Week 5 had try3_POST (8.5/10) with:
 
 ## Final Verdict
 
-**Week 6: 3.8/10 - Major Regression**
+### Main Repository: 3.8/10 - Major Regression
 
 Good educational exploration of HTTP request internals, **terrible implementation**. Three files have identical error handling bugs showing copy-paste without understanding. One file doesn't compile. Test file abuses framework. Zero improvement from Week 5 feedback.
 
-**This week demonstrates**:
+**This demonstrates**:
 
 - ✅ Curiosity about HTTP internals
 - ✅ Ability to read documentation
@@ -328,31 +471,67 @@ Good educational exploration of HTTP request internals, **terrible implementatio
 - ❌ Spell-checking
 - ❌ Code review discipline
 
-**You can explore and learn concepts, but you're not consolidating that knowledge into working code.**
+### Datastructures Repository: 5.6/10 - Learning Visible
+
+New repository implementing data structures with Go interfaces. **Excellent documentation** (7.5/10) proves strong understanding of interfaces. All code functional despite typo propagation and test issues. Self-aware bad code in stack.go is concerning (documenting wrong decisions instead of deleting them).
+
+**This demonstrates**:
+
+- ✅ Interface understanding (excellent doc)
+- ✅ Data structure implementation
+- ✅ Package organization
+- ✅ All code works
+- ⚠️ Testing basics (works but incomplete)
+- ❌ Encapsulation (tests access private fields)
+- ❌ Spell-checking (typo propagation)
+- ❌ Deleting bad code (documents it instead)
+
+### Week 6 Combined: 4.9/10 - Tale of Two Repositories
+
+**Main repo** shows regression and cargo-cult copying.  
+**Datastructures** shows learning and functional code.
+
+**Best achievement**: ⭐ Interface documentation (7.5/10) - best file in Week 6  
+**Worst failure**: 💀 Testing framework abuse (1/10) + self-aware bad code (4/10)
+
+**You can explore and learn concepts (datastructures proves it), but you're not applying feedback (main repo proves it).**
 
 ---
 
 ## Action Items for Week 7
 
-**Must Do**:
+### Main Repository - Must Do
 
-1. Fix all `http.Error` calls - add `return`
-2. Delete or fix main4.go
-3. Delete main_test.go
-4. Enable spell-check
-5. Read Week 5 review
+1. **Fix error handling** - Add `return` after every `http.Error()` call
+2. **Delete or fix main4.go** - Either add certificates or remove
+3. **Delete main_test.go** - Use `context.WithTimeout` instead
+4. **Enable spell-check** - "Initilize" × 5 is unacceptable
+5. **Read Week 5 review** - Apply what worked in try3_POST
 
-**Should Do**:
+### Datastructures Repository - Must Do
 
-1. Write actual tests
-2. Add client responses
-3. Remove code duplication
-4. Apply Week 5 feedback
+1. **Fix broken test** - Rename `testNewSinglyLinkedList` → `TestNewSinglyLinkedList`
+2. **Delete bad code** - Remove uint16 stack cap + 12-line rambling comment
+3. **Fix typos** - Rename `SingelyLinkList` → `SinglyLinkedList` everywhere
+4. **Fix tests** - Use public API, stop accessing private fields
+5. **Enable spell-check** - Same as main repo
 
-**Could Do**:
+### Both Repositories - Should Do
 
-1. Refactor into `package main` with proper main()
-2. Add proper shutdown handling
-3. Learn certificate generation for HTTPS
+1. **Add edge case tests** - Empty structures, overflow, underflow
+2. **Add benchmarks** - Performance testing
+3. **Add godoc comments** - All exported types/methods
+4. **Pointer receivers** - Change value receivers to pointers
+5. **Apply feedback** - You're making same mistakes repeatedly
 
-**Bottom Line**: Week 6 is a step backward. Fix the error handling before moving to Week 7.
+### Could Do
+
+1. **Main**: Refactor into proper `package main`, add shutdown handling
+2. **Datastructures**: Add Stack interface for consistency
+3. **Both**: Set up pre-commit hooks for spell-check
+
+**Bottom Line**:
+
+- **Main repo** is a step backward - fix error handling immediately
+- **Datastructures** shows promise - fix P0/P1 issues (30 minutes) to unlock potential
+- **Week 7**: Don't start new work until Week 6 critical issues are fixed

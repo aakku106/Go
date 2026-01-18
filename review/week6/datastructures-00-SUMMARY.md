@@ -454,8 +454,8 @@ fmt.Println(singlyList.data)  // ← Won't work (unexported)
 
 Fields are lowercase (unexported) - can't access from different package.
 
-4. **Oversimplifies** - "Under the hood" section missing nuances
-5. **No method sets** - Doesn't explain pointer vs value receivers
+1. **Oversimplifies** - "Under the hood" section missing nuances
+2. **No method sets** - Doesn't explain pointer vs value receivers
 
 **If fixed**: Would be 8.5/10 - excellent beginner resource.
 
@@ -758,7 +758,7 @@ func Pop() (any, bool)  // Value + success
 func InsertAfter(data any, index uint) (LinkList, error)
 ```
 
-2. **Boolean returns**:
+1. **Boolean returns**:
 
 ```go
 func Dequeue() (any, bool)  // false = empty
@@ -964,48 +964,48 @@ func NewNode(data any) *SingelyLinkList {
 
 ### P1 - Bad Design
 
-2. **Arbitrary uint16 stack cap** - Artificial limitation
+1. **Arbitrary uint16 stack cap** - Artificial limitation
    - **Fix**: Delete LengthOfStack, add `Len() int`
    - **Impact**: High - bad API design
    - **Effort**: 10 minutes
 
-3. **Rambling comment** - 12 lines explaining bad code
+2. **Rambling comment** - 12 lines explaining bad code
    - **Fix**: Delete lines 28-39 in stack.go
    - **Impact**: High - unprofessional
    - **Effort**: 1 minute
 
 ### P2 - Maintainability
 
-4. **Direct field access in tests** - Breaks encapsulation
+1. **Direct field access in tests** - Breaks encapsulation
    - **Fix**: Replace `len(x.queue)` with `x.Len()`
    - **Impact**: Medium - tests fragile
    - **Effort**: 30 minutes (10+ locations)
 
-5. **Typo propagation** - SingelyLinkList, ProrityQueue
+2. **Typo propagation** - SingelyLinkList, ProrityQueue
    - **Fix**: Find/replace everywhere
    - **Impact**: Medium - unprofessional
    - **Effort**: 2 hours (cascading renames)
 
 ### P3 - Missing Features
 
-6. **No edge case tests** - Empty, overflow, underflow
+1. **No edge case tests** - Empty, overflow, underflow
    - **Fix**: Add test cases
    - **Impact**: Medium - incomplete coverage
    - **Effort**: 2-3 hours
 
-7. **No benchmarks** - Performance unknown
+2. **No benchmarks** - Performance unknown
    - **Fix**: Add benchmark functions
    - **Impact**: Low - nice to have
    - **Effort**: 1 hour
 
 ### P4 - Polish
 
-8. **Verbose method names** - LengthOfX vs Len
+1. **Verbose method names** - LengthOfX vs Len
    - **Fix**: Rename methods (cascading change)
    - **Impact**: Low - works but non-idiomatic
    - **Effort**: 1 hour
 
-9. **Value receivers** - PrintList copies struct
+2. **Value receivers** - PrintList copies struct
    - **Fix**: Change to pointer receivers
    - **Impact**: Low - performance optimization
    - **Effort**: 30 minutes
@@ -1024,36 +1024,36 @@ func NewNode(data any) *SingelyLinkList {
 
 ### Phase 2: Encapsulation (1 hour)
 
-4. ✅ Replace all `len(x.queue)` with `x.Len()` in tests
-5. ✅ Replace all `len(x.stack)` with `x.Len()` in tests
-6. ✅ Remove type assertions accessing private fields
+1. ✅ Replace all `len(x.queue)` with `x.Len()` in tests
+2. ✅ Replace all `len(x.stack)` with `x.Len()` in tests
+3. ✅ Remove type assertions accessing private fields
 
 **Result**: Tests use public API only, encapsulation restored.
 
 ### Phase 3: Typo Cleanup (2-3 hours)
 
-7. ✅ Rename `SingelyLinkList` → `SinglyLinkedList` everywhere
-8. ✅ Rename `ProrityQueue` → `PriorityQueue` everywhere
-9. ✅ Rename `SingallyLinkedList.md` → `SinglyLinkedList.md`
-10. ✅ Fix comment typos
+1. ✅ Rename `SingelyLinkList` → `SinglyLinkedList` everywhere
+2. ✅ Rename `ProrityQueue` → `PriorityQueue` everywhere
+3. ✅ Rename `SingallyLinkedList.md` → `SinglyLinkedList.md`
+4. ✅ Fix comment typos
 
 **Result**: Professional-looking codebase.
 
 ### Phase 4: Testing (3-4 hours)
 
-11. ✅ Add edge case tests (empty, overflow, nil)
-12. ✅ Complete LIFO/FIFO verification tests
-13. ✅ Add benchmarks for all operations
-14. ✅ Increase coverage to 80%+
+1. ✅ Add edge case tests (empty, overflow, nil)
+2. ✅ Complete LIFO/FIFO verification tests
+3. ✅ Add benchmarks for all operations
+4. ✅ Increase coverage to 80%+
 
 **Result**: Comprehensive test suite, performance baselines.
 
 ### Phase 5: Refinement (2-3 hours)
 
-15. ✅ Add Stack interface for consistency
-16. ✅ Rename `LengthOfQueue` → `Len`
-17. ✅ Change value receivers to pointer receivers
-18. ✅ Add godoc comments for all exports
+1. ✅ Add Stack interface for consistency
+2. ✅ Rename `LengthOfQueue` → `Len`
+3. ✅ Change value receivers to pointer receivers
+4. ✅ Add godoc comments for all exports
 
 **Result**: Idiomatic, well-documented Go code.
 
