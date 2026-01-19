@@ -37,3 +37,9 @@ func NewPlayer() *Player {
 		Position: &Position{},
 	}
 }
+func main() {
+	aakku := NewPlayer()
+	aakku.MoveUp()
+	aakku.MoveLeft()
+	fmt.Println(aakku.Position)
+}
