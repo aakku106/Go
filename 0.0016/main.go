@@ -9,7 +9,7 @@ type Position struct {
 	y float64
 }
 type Player struct {
-	Position
+	*Position
 }
 type Enemy struct {
 }
