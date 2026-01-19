@@ -33,3 +33,7 @@ func (p *Position) Teleport(x, y float64) {
 }
 
 func NewPlayer() *Player {
+	return &Player{
+		Position: &Position{},
+	}
+}
