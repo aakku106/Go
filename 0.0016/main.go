@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"image/color"
@@ -48,13 +47,8 @@ func (g *Game) Update() error {
 func (g *Game) Draw(screen *ebiten.Image) {
 	screen.Fill(color.RGBA{0, 0, 0, 255}) // clear screen to black
 
-	var path vector.Path
-	path.MoveTo(float32(aakku.Position.x), float32(aakku.Position.y))
-	path.ArcTo(float32(aakku.Position.x), float32(aakku.Position.y), 20, 0, 2*3.14159) // full circle
-	path.Close()
-
-	op := &ebiten.DrawTrianglesOptions{}
-	vector.Fill(screen, path, color.RGBA{255, 0, 0, 255}, op)
+	// Draw player as a filled circle
+	vector.DrawFilledCircle(screen, float32(aakku.Position.x), float32(aakku.Position.y), 20, color.RGBA{255, 0, 0, 255}, false)
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
