@@ -12,6 +12,7 @@ type Player struct {
 	*Position
 }
 type Enemy struct {
+	*Position
 }
 
 func main() {}
