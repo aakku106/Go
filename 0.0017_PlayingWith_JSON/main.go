@@ -7,8 +7,8 @@ import (
 )
 
 /*
-Go standard libary provides a built in package to work with JSON (	encoding/decoding ) and struct (serilize/deserilize)
-Go has encoding/json package, has toold like marshal(convert Go data to JSON)
+Go standard library provides a built in package to work with JSON (	encoding/decoding ) and struct (serialize/deserialize)
+Go has encoding/json package, has told like marshal(convert Go data to JSON)
 and unmarshal (Converting JSON to Go data)
 Go's struct matches with JSON more naturally
 */
@@ -20,7 +20,7 @@ type normalStruct struct {
 }
 
 /*
-This is normal struct in Go which naturally looks liek a json format:
+This is normal struct in Go which naturally looks like a json format:
 {
 "name":"...",
 "age":"...",
@@ -35,13 +35,13 @@ func call1() {
 	}
 	response, err := json.Marshal(data)
 	if err != nil {
-		log.Fatal("An error occured while marsaling JSON")
+		log.Fatal("An error occurred while marshaling JSON")
 	}
 	fmt.Println(response) // thats show raw bytes,so
 	fmt.Println(string(response))
 	// And its still showing an empty Object (js)
 	fmt.Println(data)
-	// But this raw struct shows output as aspected, why ?
+	// But this raw struct shows output as expected, why ?
 }
 
 type StructWithTick struct {
@@ -56,14 +56,14 @@ func call2() {
 	}
 	response, err := json.Marshal(data)
 	if err != nil {
-		log.Fatal("Error while marsaling")
+		log.Fatal("Error while marshaling")
 	}
 	fmt.Println(string(response))
 	// still after using struct tag we got and empty object {}
 }
 
 /*
-So what is the real cluprit here, its :
+So what is the real culprit here, its :
 field name in struct, it always need to be public
 */
 type struct3 struct {
@@ -80,7 +80,7 @@ func call3() {
 	}
 	response, err := json.Marshal(data)
 	if err != nil {
-		log.Fatal("Error while marsaling")
+		log.Fatal("Error while marshaling")
 	}
 	fmt.Println(string(response))
 	/*
@@ -88,7 +88,7 @@ func call3() {
 				{"Name":"Adarasha Gaihre","Address":"Nepal"}
 
 				but ignores age (because it was private or starts with small case)
-		here the output we got dosent look that much standard, lest put struct tag on them
+		here the output we got doesn't look that much standard, lest put struct tag on them
 	*/
 }
 
@@ -106,12 +106,12 @@ func call4() {
 	}
 	response, err := json.Marshal(data)
 	if err != nil {
-		log.Fatal("Error while marsaling")
+		log.Fatal("Error while marshaling")
 	}
 	fmt.Println(string(response))
 	/*
 		{"name":"Adarasha Gaihre","address":"Nepal","age":20}
-		this one looks good, but we could do more humain reabable usinf indents
+		this one looks good, but we could do more human readable using indents
 	*/
 }
 func call5() {
@@ -122,7 +122,7 @@ func call5() {
 	}
 	response, err := json.MarshalIndent(data, "", "")
 	if err != nil {
-		log.Fatal("Error while marsaling")
+		log.Fatal("Error while marshaling")
 	}
 	fmt.Println(string(response))
 	/*
@@ -134,13 +134,13 @@ func call5() {
 								}
 				this was much readable than : {"name":"Adarasha Gaihre","address":"Nepal","age":20}
 		but logically they both are same
-		marsal indent just adds styling
+		marshal indent just adds styling
 
 	*/
 	// actually we could also do
 	response, err = json.MarshalIndent(data, "", "  ")
 	if err != nil {
-		log.Fatal("Error while marsaling")
+		log.Fatal("Error while marshaling")
 	}
 	fmt.Println(string(response))
 	/*
@@ -154,7 +154,7 @@ func call5() {
 	// Or we could also do
 	response, err = json.MarshalIndent(data, "", "--->")
 	if err != nil {
-		log.Fatal("Error while marsaling")
+		log.Fatal("Error while marshaling")
 	}
 	fmt.Println(string(response))
 
@@ -190,9 +190,9 @@ type StructWithTick struct {
 	email string `email`
 }
 saying: struct filed has tag json but not exported, it's just saying what i explained earlier, outer packages needs
-public variable/filds to access data
+public variable/fields to access data
 
 
 */
 
-// NEXT: we will look into unmarsal in ./unMarsal.go
+// NEXT: we will look into unmarshal in ./unMarsala.go

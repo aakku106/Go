@@ -41,11 +41,11 @@ func um() {
 	defer response.Body.Close()
 	fmt.Println(response.Body)
 	/*
-			this does give someoutput but :
+			this does give some output but :
 		&{[] {0x14000204000} <nil> <nil>}
 		thats looks like address of some slice
 	*/
-	// So we have to use proper Unmarsal to get data
+	// So we have to use proper Unmarshal to get data
 }
 func um2() {
 	response, err := http.Get("https://jsonplaceholder.typicode.com/users")
@@ -76,7 +76,7 @@ func um2() {
 									Here after marshal we will get value:
 									[{1 Leanne Graham 0 0x1400000e198} {2 Ervin Howell 0 0x1400000e1b0} {3 Clementine Bauch 0 0x1400000e1c8} {4 Patricia Lebsack 0 0x1400000e1e0} {5 Chelsey Dietrich 0 0x1400000e1f8} {6 Mrs. Dennis Schulist 0 0x1400000e210} {7 Kurtis Weissnat 0 0x1400000e228} {8 Nicholas Runolfsdottir V 0 0x1400000e240} {9 Glenna Reichert 0 0x1400000e258} {10 Clementina DuBuque 0 0x1400000e270}]
 
-							Which may look wired at 1st place, it is because we didnt handeled the structure of the respponse given by api,
+							Which may look wired at 1st place, it is because we didn't handled the structure of the response given by api,
 							thats why we get only 2 readable value of
 					id and name, because it matches our defined :
 				Id       uint   `json:"id"`
