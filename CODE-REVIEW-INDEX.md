@@ -1,13 +1,13 @@
 # Go Learning - Code Review Index
 
-**Latest Review**: January 18, 2026 (Week 6)  
-**Learning Duration**: 6 weeks  
-**Overall Rating**: 4.9/10 (Week 6)  
-**Files Reviewed**: 76 files across 6 weeks (59 main repo + 17 week 6)
+**Latest Review**: January 25, 2026 (Week 7)  
+**Learning Duration**: 7 weeks  
+**Overall Rating**: 5.6/10 (Week 7)  
+**Files Reviewed**: 85 files across 7 weeks (59 main repo + 17 week 6 + 9 week 7)
 
-**Week Progression**: Week 1 (7.0/10) → Week 2 (8.0/10) → Week 3 (7.7/10) → Week 4 (9.0/10) → Week 5 (6.8/10) → **Week 6 (4.9/10)**
+**Week Progression**: Week 1 (7.0/10) → Week 2 (8.0/10) → Week 3 (7.7/10) → Week 4 (9.0/10) → Week 5 (6.8/10) → Week 6 (4.9/10) → **Week 7 (5.6/10)**
 
-**Week 6 Breakdown**: Main Repo (3.8/10) + Datastructures Repo (5.6/10) = Combined (4.9/10)
+**Week 7 Breakdown**: Main Repo (5.2/10) + Datastructures Repo (6.1/10) = Combined (5.6/10)
 
 ---
 
@@ -46,7 +46,7 @@ Detailed analysis of every Go file:
 - Best file: try3_POST/main.go (8.5/10)
 - **Regression from Week 4** - error handling not maintained
 
-**Week 6**: `/review/week6/` - Latest (TWO REPOSITORIES)
+**Week 6**: `/review/week6/` (TWO REPOSITORIES)
 
 **Main Repository** (3.8/10 - Major Regression):
 
@@ -68,120 +68,204 @@ Detailed analysis of every Go file:
 
 **Week 6 Combined**: 4.9/10 (17 files total)
 
-**Total**: 95+ markdown files with detailed feedback
+**Week 7**: `/review/week7/` - Latest (TWO REPOSITORIES)
+
+**Main Repository** (5.2/10 - Improvement):
+
+- 0.0016: Ebiten 2D game with WASD movement (3.5/10 avg)
+- 0.0017_PlayingWith_JSON: JSON marshaling/unmarshaling (7.0/10 avg)
+- Best file: main_test.go (8.5/10) ⭐ Best testing in any week
+- Critical issues: Global variables, filename typos, no entry points
+- New topics explored but no execution (functions never called)
+- Testing quality dramatically improved from Week 6
+
+**Datastructures Repository** (6.1/10 - Selective Improvement):
+
+- InsertAt implementation completed (was stubbed in Week 6)
+- Documentation expanded to 303 lines (+44%)
+- Best file: doc/SingallyLinkedList.md (8/10) - trade-off analysis
+- Critical issues: Ignored 70% of Week 6 feedback
+- Created new test file with zero assertions (3/10)
+- Fixed 3 of 10 Week 6 issues (30% fix rate)
+
+**Week 7 Combined**: 5.6/10 (9 files total) - +0.7 improvement from Week 6
+
+**Total**: 109+ markdown files with detailed feedback
 
 ---
 
 ## Start Here
 
-1. **Read**: `/review/week6/README.md` - Week 6 overview
-2. **Read**: `/review/week6/00-SUMMARY.md` - Full week 6 assessment
+1. **Read**: `/review/week7/README.md` - Week 7 overview
+2. **Read**: `/review/week7/00-SUMMARY.md` - Full week 7 assessment
 3. **Review**: Outstanding issues (listed below)
-4. **Fix**: Week 5 regressions in try4 + datastructures test typos
+4. **Fix**: Week 7 critical issues (filename typos, zero assertions, entry points)
 
 ---
 
-## Outstanding Issues (Week 6)
+## Outstanding Issues (Week 7)
 
 ### Main Repository - CRITICAL 🚨
 
-#### 1. Broken Error Handling (3 files) - MAJOR ⚠️
+#### 1. Filename Typos (8 instances) - CRITICAL ⚠️
 
-**Files**: try5/main1.go, try5/main2.go, try5/main3.go
+**Main Repo** (3 files):
 
-**Issue**: All call `http.Error()` without `return` - code continues executing
+- `movments.go` → should be `movements.go` (missing 'e')
+- `unMarsal.go` → should be `unmarshal.go` (missing 'h')
+- Folder comment says "Raylib" but uses Ebiten (wrong library)
+
+**Datastructures** (5 instances):
+
+- `SingelyLinkList.go` → should be `SinglyLinkedList.go` (missing 'l')
+- `SingallyLinkedList.md` → should be `SinglyLinkedList.md` (wrong spelling)
+- `SingallyLinkedListtest2_test.go` → double typo ("Singally" + no underscore)
+- Code typo: "Insearting" → should be "Inserting"
+- Error message: "to index which greater then" → should be "index greater than"
+
+**Action**: Find/replace all typos, rename files
+
+#### 2. No Entry Points (0.0017 folder) - CRITICAL ⚠️
+
+**Files**: 0.0017/main.go, 0.0017/unMarsal.go
+
+**Issue**: All functions never called - educational code sits unused
 
 ```go
-// WRONG (in 3 files):
-if request.Method != http.MethodGet {
-    http.Error(writer, "Method Not Allowed", http.StatusMethodNotAllowed)
-}
-// Code continues - BUG
+// Current: 5 functions defined but never executed
+func call1() { /* excellent code */ }
+func call2() { /* excellent code */ }
+// No main() to call them
 
-// CORRECT:
-if request.Method != http.MethodGet {
-    http.Error(writer, "Method Not Allowed", http.StatusMethodNotAllowed)
-    return  // REQUIRED
+// Fix: Add entry point
+func main() {
+    call1()
+    call2()
+    call3()
+    call4()
+    call5()
 }
 ```
 
-#### 2. Non-Functional TLS Code - CRITICAL ⚠️
+#### 3. Global Variable - CRITICAL ⚠️
 
-**File**: try5/main4.go
+**File**: 0.0016/main.go (3/10)
 
-**Issue**: Calls `ListenAndServeTLS()` with 0 params (requires 2) - doesn't compile
+**Issue**: Mutable global state `var aakku = Position{X: 0, Y: 0}`
 
-#### 3. Testing Framework Abuse - CRITICAL ⚠️
+**Action**: Move to Game struct field
 
-**File**: try5/main_test.go (1/10)
+#### 4. No Boundary Checking - MAJOR ⚠️
 
-**Issue**: Misuses testing framework for 600s auto-kill timer instead of actual testing
+**File**: 0.0016/movments.go (4/10)
 
-#### 4. try4 Template Error Handling - MAJOR ⚠️
-
-**Week 5**: try4/main.go missing error handling for templates  
-**Week 6**: **still not fixed**
+**Issue**: Player can move infinitely off-screen
 
 ```go
-if err := tmpl.Execute(writer, data); err != nil {
-    log.Println("Template error:", err)
-    http.Error(writer, "Internal error", 500)
+// Add bounds checking:
+func (p *Position) MoveUp(maxY int) bool {
+    if p.Y-2 >= 0 {
+        p.Y -= 2
+        return true
+    }
+    return false
 }
 ```
 
 ### Datastructures Repository - HIGH PRIORITY ⚠️
 
-#### 1. Self-Aware Bad Code - WORST PATTERN 💀
+#### 1. Zero Assertions Test File - WORST FILE 💀
 
-**File**: stack/stack.go (4/10)
+**File**: list/SingallyLinkedListtest2_test.go (3/10)
 
-**Issue**: 12-line rambling comment admitting code is wrong but keeping it anyway
+**Issue**: Not a real test - just prints output for manual inspection
 
-**Action**: Delete uint16 stack cap + entire comment, add standard `Len() int`
+**Problems**:
 
-#### 2. Typo Propagation - MAJOR ⚠️
+- Double filename typo ("Singally" + "test2" without underscore)
+- Zero assertions (no t.Error, t.Fatal, or verification)
+- Variable named 'cat' (non-descriptive)
 
-**Critical typos**:
-
-- `SingelyLinkList` (missing 'l') - appears 8+ times
-- `ProrityQueue` (missing 'i') - appears 7+ times
-- Filename: `SingallyLinkedList.md`
-
-**Action**: Find/replace everywhere (2-3 hours)
-
-#### 3. Test Encapsulation Violations - ALL TEST FILES ⚠️
-
-**Issue**: All 4 test files access private fields instead of public API
+**Action**: Add real assertions or merge into main test file
 
 ```go
-// WRONG (in all tests):
-if len(queue.queue) != 3 {  // Private field access
+// Current (WRONG):
+func TestInsertAt(t *testing.T) {
+    cat := NewSinglyLinkedList(5)
+    cat.PrintList()  // Just prints ❌
+}
 
-// CORRECT:
-if queue.Len() != 3 {  // Public API
+// Fix (CORRECT):
+func TestInsertAt(t *testing.T) {
+    list := NewSinglyLinkedList(5)
+    list = list.InsertAt(12, 2)
+    verifyList(t, list, []int{5, 10, 12, 15})  // Real assertion ✅
+}
 ```
 
-#### 4. Broken Test Function - CRITICAL 🐛
+#### 2. Week 6 Issues Ignored (7 issues) - MAJOR ⚠️
 
-**File**: list/SinglyLinkedList_test.go (4/10)
+**File**: list/SingelyLinkList.go (6.5/10)
 
-**Issue**: `testNewSinglyLinkedList` (lowercase 't') - won't run
+**Issues NOT fixed from Week 6**:
 
-**Fix**: Rename to `TestNewSinglyLinkedList`
+- Filename typo: "SingelyLinkList" (still missing 'l')
+- PrintList value receiver (should be pointer)
+- Labeled break unnecessary
+- Error grammar: "to index which greater then"
+- Debug typo: "Insearting"
+- Inconsistent returns (error vs nil)
+
+**Fix Rate**: Only 30% of Week 6 issues addressed
+
+**Action**: Fix all 7 remaining issues
+
+#### 3. Test Naming Convention Broken - MAJOR ⚠️
+
+**File**: list/SinglyLinkedListtest.go (7/10)
+
+**Issue**: Removed underscore from test filename
+
+```
+// Week 6 (CORRECT):
+SinglyLinkedList_test.go  ✅
+
+// Week 7 (WRONG):
+SinglyLinkedListtest.go  ❌
+```
+
+**Action**: Restore underscore or merge test files
+
+#### 4. Documentation Comment Wrong - MINOR ⚠️
+
+**File**: doc/SingallyLinkedList.md (8/10)
+
+**Issue**: InsertAt comment says "replaces" but code inserts (shifts elements)
+
+**Action**: Change "replaces the link" → "inserts new element, shifts rest"
 
 ### Both Repositories - ONGOING ⚠️
 
+#### Struct Mismatch with API - MAJOR ⚠️
+
+**File**: 0.0017/unMarsal.go (5.5/10)
+
+**Issue**: Struct expects age/country/province but API returns username/phone/company
+
+**Action**: Match struct to actual jsonplaceholder API response
+
 #### Spelling Errors
 
-**Main repo**: "Initilize" × 5 (in ALL files despite Week 5 feedback)  
-**Datastructures**: 30+ typos (mostly propagation)
+**Main repo**: movments, unMarsal (2 filename typos)  
+**Datastructures**: SingelyLinkList, Singally variants, "Insearting" (8 instances)
 
 **Action**: Enable Code Spell Checker extension
 
-### Completed (Week 5 Issues)
+### Completed (Week 7 Fixes)
 
-✅ InsertAtLast Bug - Fixed in Week 5  
-✅ LinkedList Interface - Working correctly
+✅ InsertAt Implementation - Completed (was stubbed in Week 6)  
+✅ Test Discovery Bug - Fixed (testNew → TestNew capitalization)  
+✅ Undefined Variable - Fixed (T → t)
 
 ---
 
@@ -262,28 +346,54 @@ if queue.Len() != 3 {  // Public API
 
 **Combined Rating**: 4.9/10 (datastructures better but main repo drags down average)
 
-### Skills Assessment (Current - Week 6)
+**Week 7**: Game Development + JSON + Datastructures Continued
 
-- **Algorithm Implementation**: 6.5/10 (functional but flawed)
-- **Conceptual Understanding**: 7.5/10 (good learning, poor application)
-- **Problem Solving**: 7/10 (can solve but doesn't maintain quality)
-- **Code Organization**: 6/10 (datastructures good, main repo poor)
-- **Testing**: 4/10 (main: framework abuse 1/10, data: encapsulation issues)
-- **Concurrency**: 9/10 (from Week 4, not demonstrated in Week 6)
-- **Error Handling**: 3/10 (major regression - 3 broken files)
-- **Go Idioms**: 6/10 (datastructures shows understanding)
-- **Production Awareness**: 4/10 (documenting bugs instead of fixing)
-- **HTTP Development**: 5/10 (exploration good, implementation broken)
-- **Data Structures**: 6/10 (functional with interface mastery but issues)
-- **Following Feedback**: 2/10 (repeats same errors despite reviews)
+**Main Repository** (5.2/10 - Improvement):
 
-### Overall: 4.9/10
+- Ebiten 2D game (3.5/10 avg) - first game development attempt
+- JSON marshaling/unmarshaling (7.0/10 avg) - educational exploration
+- **BEST TESTING EVER**: main_test.go (8.5/10) - 9 comprehensive test functions
+- Table-driven tests, edge cases, round-trip validation
+- **NEW ISSUES**: Global variables, no entry points (functions never called)
+- **PERSISTENT**: Filename typos (movments, unMarsal)
+- Topics: Ebiten library, game loop, WASD input, JSON struct tags, API integration
 
-**Main repo** (3.8/10): Major regression from Week 5. Broken error handling in 3 files, non-functional TLS, testing framework abuse. Repeats "Initilize" typo 5 times despite Week 5 feedback.
+**Datastructures Repository** (6.1/10 - Selective Improvement):
 
-**Datastructures** (5.6/10): New repository shows interface mastery (7.5/10 documentation) but has typo propagation, self-aware bad code (12-line comment admitting code is wrong but keeping it), and test encapsulation violations.
+- InsertAt implementation completed (bounds checking, O(n) algorithm)
+- Documentation expanded 210→303 lines (+44%) with trade-off analysis
+- **EXCELLENT**: doc/SingallyLinkedList.md (8/10) - concrete vs interface comparison
+- Fixed 3 critical bugs (InsertAt, test discovery, undefined variable)
+- **IGNORED**: 70% of Week 6 feedback (7 of 10 issues not addressed)
+- **NEW WORST FILE**: test2_test.go (3/10) - zero assertions, just prints
+- Pattern: Fixes functional issues, ignores quality issues
 
-**Critical pattern**: Can learn concepts (datastructures doc proves it) but doesn't apply previous feedback (main repo proves it). Speed over quality continues.
+**Combined Rating**: 5.6/10 (+0.7 improvement from Week 6, but uneven)
+
+### Skills Assessment (Current - Week 7)
+
+- **Algorithm Implementation**: 7/10 (InsertAt correct with bounds checking)
+- **Conceptual Understanding**: 8/10 (trade-off analysis, interface understanding)
+- **Problem Solving**: 7/10 (can solve but selective improvement)
+- **Code Organization**: 6/10 (improving but inconsistent)
+- **Testing**: 6.5/10 (main: 8.5/10 excellent, data: 3/10 zero assertions)
+- **Concurrency**: 9/10 (from Week 4, not demonstrated in Week 7)
+- **Error Handling**: 5/10 (better than Week 6, still missing in places)
+- **Go Idioms**: 7/10 (JSON struct tags, table-driven tests)
+- **Production Awareness**: 4/10 (creates issues while fixing others)
+- **Game Development**: 4/10 (first attempt, functional but flawed)
+- **JSON Operations**: 7/10 (marshaling/unmarshaling understood)
+- **Data Structures**: 7/10 (InsertAt working, documentation excellent)
+- **Technical Writing**: 8/10 (303-line trade-off analysis)
+- **Following Feedback**: 3/10 (30% fix rate, ignores 70% of issues)
+
+### Overall: 5.6/10
+
+**Main repo** (5.2/10): Improvement from Week 6 (3.8/10). Best testing ever (8.5/10) but no entry points (functions never called). New topics: game dev (Ebiten), JSON operations. Still has filename typos, global variables, missing boundaries.
+
+**Datastructures** (6.1/10): Selective improvement from Week 6 (5.6/10). Fixed InsertAt (+2), documentation excellent (8/10), but ignored 70% of Week 6 feedback. Created worst file (test2: 3/10, zero assertions).
+
+**Critical pattern**: Quality ceiling raised (+2 best file: 8.5/10) but floor unchanged (worst still 3/10). Fixes critical functional issues, ignores style/quality issues. Creates as many new problems (7) as fixes old ones (3).
 
 ---
 
@@ -541,35 +651,44 @@ Common errors: "prority", "lenght", "itterated", "heppened"
 
 ## Next Learning Phase
 
-### Completed (Weeks 1-4)
+### Completed (Weeks 1-7)
 
-1. Unit Testing - DONE (comprehensive assertions in Week 4)
-2. Error Handling - DONE in Week 4, **REGRESSED in Week 5** ⚠️
-3. Structs & Methods - DONE (no globals)
+1. Unit Testing - DONE (comprehensive assertions in Week 4, excellent in Week 7)
+2. Error Handling - DONE in Week 4, regressed Week 5-6, improving Week 7
+3. Structs & Methods - DONE (no globals in most files)
 4. Concurrency Basics - DONE (channels, select, WaitGroup)
-5. Test Assertions - DONE in Week 4, **REGRESSED in Week 5** ⚠️
+5. Test Assertions - DONE in Week 4, excellent in Week 7 (main_test.go 8.5/10)
 6. WaitGroup - DONE (perfect implementation)
+7. JSON Operations - DONE in Week 7 (marshal/unmarshal, struct tags)
+8. Game Development - STARTED in Week 7 (Ebiten basics)
+9. InsertAt Implementation - DONE in Week 7 (bounds checking, O(n))
+10. Technical Documentation - DONE in Week 7 (trade-off analysis)
 
-### Started but Incomplete (Week 5)
+### Started but Incomplete (Week 7)
 
-1. HTTP Servers - Basic understanding, missing error handling
-2. Linked Lists - First implementation, has bugs
-3. JSON APIs - One production-quality file (try3_POST)
-4. RWMutex - Correct usage demonstrated
+1. Game Development - Basic Ebiten integration, missing boundaries/error handling
+2. API Integration - Understands concept but struct mismatch with real API
+3. Entry Points - Educational code exists but never executed
 
-### CRITICAL Priority (Week 6) 🚨
+### CRITICAL Priority (Week 8) 🚨
 
-1. **Restore error handling** - Add to all 6 HTTP files missing it
-2. **Fix linked list bugs** - InsertAtLast return value, test assertions
-3. **Add test assertions** - Fix 2 test function names, add all assertions
-4. **Enable spell-check** - Install Code Spell Checker extension
+1. **Fix all filename typos** - 8 instances across both repos (30 seconds each)
+2. **Add entry points** - 0.0017 functions never called (add main())
+3. **Fix test2 file** - Add real assertions or delete (zero verification currently)
+4. **Address Week 6 feedback** - 7 of 10 issues still ignored (30% fix rate)
+5. **Fix struct mismatch** - unMarsal.go doesn't match actual API
 
-### High Priority (Week 6)
+### High Priority (Week 8)
 
-1. Write HTTP tests using httptest package
-2. Fix template race condition (parse once, not per request)
-3. Complete linked list (InsertAt, InsertAfter, InsertBefore, Delete)
-4. Fix LinkList interface signatures
+1. Add boundary checking to game movement
+2. Remove global variable from game (move to struct field)
+3. Restore test file naming convention (add underscore)
+4. Fix PrintList value receiver to pointer
+5. Enable spell-check extension
+
+### Recommended Focus
+
+**Week 8 should be CONSOLIDATION week**: Fix all accumulated issues before exploring new topics. Demonstrate systematic quality improvement, not just selective functional fixes. 2. Fix template race condition (parse once, not per request) 3. Complete linked list (InsertAt, InsertAfter, InsertBefore, Delete) 4. Fix LinkList interface signatures
 
 ### Medium Priority (Month 2)
 
@@ -757,12 +876,12 @@ if request.Method != http.MethodGet {
 }
 ```
 
-2. 💀 **Delete self-aware bad code** (datastructures)
+1. 💀 **Delete self-aware bad code** (datastructures)
    - Delete lines 28-39 in stack/stack.go (12-line rambling comment)
    - Delete `LengthOfStack()` method
    - Add standard `Len() int` method
 
-3. 📖 **Read `/review/week6/00-SUMMARY.md`** (20 min)
+2. 📖 **Read `/review/week6/00-SUMMARY.md`** (20 min)
    - Understand why Week 6 is 4.9/10
    - See comparison: main (3.8) vs datastructures (5.6)
 
@@ -782,18 +901,20 @@ if request.Method != http.MethodGet {
 
 - Rename `testNewSinglyLinkedList` → `TestNewSinglyLinkedList`
 
-4. 🔧 Fix test encapsulation (1-2 hours)
-   - Replace `len(queue.queue)` with `queue.Len()` in ALL tests
-   - Use public API only
+1.  Fix test encapsulation (1-2 hours)
+
+- Replace `len(queue.queue)` with `queue.Len()` in ALL tests
+- Use public API only
 
 **Both**: 5. 📝 Enable spell-check (10 min)
 
 - Install Code Spell Checker extension
 - Fix "Initilize" in all main repo files
 
-6. 📖 Read ALL Week 6 reviews (2 hours)
-   - Understand regression patterns
-   - See what datastructures did right
+1.  Read ALL Week 6 reviews (2 hours)
+
+- Understand regression patterns
+- See what datastructures did right
 
 ### NEXT WEEK
 
