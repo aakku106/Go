@@ -16,3 +16,11 @@ func TestFiles(t *testing.T) {
 	}
 
 }
+func TestSomeWork(t *testing.T) {
+
+	someWork()
+	someBetterWork()
+	SomeFileReading("./go.mod")
+	SomeFileReading("./go.sum")
+
+}
