@@ -32,7 +32,7 @@ func c3() {
 	defer fmt.Println("defer print")
 	defer fmt.Println("defer print 2")
 	fmt.Println("normal")
-	c2Helper()
+	c3Helper()
 }
 func c3Helper() {
 	fmt.Println("normal2")
@@ -46,9 +46,29 @@ func c4() {
 	defer fmt.Println("defer print")
 	defer fmt.Println("defer print 2")
 	fmt.Println("normal")
-	c2Helper()
+	c4Helper()
 }
 func c4Helper() {
 	defer fmt.Println("defer print 3")
 	fmt.Println("normal2")
+}
+
+/*
+Yes this do act like stack
+*/
+func d1() {
+	defer fmt.Println("Exiting D1")
+	defer d1Point1()
+	defer d1Point2()
+	defer d1Point3()
+	defer fmt.Println("Starting D1")
+}
+func d1Point1() {
+	fmt.Println("Printing at last")
+}
+func d1Point2() {
+	fmt.Println("Printing at 2ndlast/2nd")
+}
+func d1Point3() {
+	fmt.Println("Printing at 1st")
 }
