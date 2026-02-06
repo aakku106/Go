@@ -72,3 +72,9 @@ func d1Point2() {
 func d1Point3() {
 	fmt.Println("Printing at 1st")
 }
+
+/*
+As aspected, this show a consistent stack behavior everythere,
+thsi is perfect to close servers or actually db connections even before we start connection it will insure db will close at last
+This is liek destructor in C++ ~
+*/
