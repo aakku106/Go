@@ -53,3 +53,5 @@ more error liek ErrInvalid    = errors.New("invalid argument")
 here close function will be called/executed despite of success or falure of readAll func.
 
 */
+// NEXT: defer to recover from panic
+// Navigate to ../examples/panic.go
