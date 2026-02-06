@@ -1,6 +1,10 @@
 package examples
 
-import "os"
+import (
+	"fmt"
+	"io"
+	"os"
+)
 
 func ReadFile(filename string) error {
 	file, err := os.Open(filename)
