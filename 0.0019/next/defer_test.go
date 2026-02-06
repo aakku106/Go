@@ -3,5 +3,6 @@ package playingWithDefer
 import "testing"
 
 func TestDefer(t *testing.T) {
-	c4()
+	// c4()
+	d1()
 }
