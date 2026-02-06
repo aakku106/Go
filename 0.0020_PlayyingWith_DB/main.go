@@ -22,16 +22,23 @@ func main() {
 
 // One shall use migrations for actual use, this is just example
 func createTable(db *sql.DB) {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Println(err)
+		} // Althow this wont recover then we try to create same table more than 1 time cause we used log.fetal which uses os.exit
 
-	query := `create table Users
-	id serial primary key,
-	name varchar(20) not null,
-	address varchar(50) not null
+	}()
+
+	query := `CREATE TABLE users(
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(20) NOT NULL,
+	address VARCHAR(50) NOT NULL)
 	`
 
 	log.Println("Creating Table")
 	if _, err := db.Exec(query); err != nil {
 		log.Fatal(err)
 	}
+	log.Println(" Table Created")
 
 }
