@@ -9,7 +9,10 @@ func ReadFile(filename string) error {
 	}
 	defer file.Close()
 	/*
-	what we did is opeaned a file, check for error (may be file dont exist)
+		what we did is opeaned a file, check for error (may be file dont exist)
+		if thers error, we simpally return it (I only assumed the only eooe we will get is file dont exist in this example)
+		and wrirte defer func to close that file,
+		that function will called just before return
 	*/
 	return nil
 }
