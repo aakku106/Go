@@ -38,3 +38,18 @@ func ReadFile2(filename string) error {
 
 	return nil
 }
+
+/*
+This func just read all content of file and simplly prints it on consile/terminal
+The thing to notice here is the way i placed defer func between opeaning a file and reading a file
+
+1. Why not before opeaning file,
+because opean func may throw errors like file dont exist, closing it make no scence and add up
+more error liek ErrInvalid    = errors.New("invalid argument")
+
+2. why before read, why not after:
+	Well i see no concreat reasons here,but its good pratice to defer close file just after checking error for file opean
+
+here close function will be called/executed despite of success or falure of readAll func.
+
+*/
