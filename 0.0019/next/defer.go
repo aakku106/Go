@@ -78,3 +78,5 @@ As aspected, this show a consistent stack behavior everythere,
 thsi is perfect to close servers or actually db connections even before we start connection it will insure db will close at last
 This is liek destructor in C++ ~
 */
+// Next we will look at some examples
+// Navigate to ../examples/files.go
