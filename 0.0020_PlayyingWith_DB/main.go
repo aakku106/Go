@@ -42,3 +42,5 @@ func createTable(db *sql.DB) {
 	log.Println(" Table Created")
 
 }
+
+// TO-DO create addData func to add data
