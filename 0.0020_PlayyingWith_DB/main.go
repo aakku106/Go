@@ -68,5 +68,19 @@ func InsertIntoUserTable(db *sql.DB, user Users) int {
 }
 func DisplayAllUserInfo(db *sql.DB) {
 	queue := `select * from Users`
-	log.Println(db.Query(queue))
+	rows, err := db.Query(queue)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	// 	data := []Users{}
+	id, name, address := 0, "", ""
+	for rows.Next() {
+		if err := rows.Scan(&id, &name, &address); err != nil {
+			log.Fatal(err)
+		}
+		// 		data = append(data, name)
+		log.Println(id, name, address)
+	}
 }
