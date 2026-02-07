@@ -1,13 +1,14 @@
 # Go Learning - Code Review Index
 
-**Latest Review**: January 25, 2026 (Week 7)  
-**Learning Duration**: 7 weeks  
-**Overall Rating**: 5.6/10 (Week 7)  
-**Files Reviewed**: 85 files across 7 weeks (59 main repo + 17 week 6 + 9 week 7)
+**Latest Review**: February 8, 2026 (Week 8 - FINAL)  
+**Learning Duration**: 8 weeks (with 1-week Docker/interview prep break)  
+**Overall Rating**: 5.8/10 (Week 8)  
+**Files Reviewed**: 96 files across 8 weeks (59 main repo + 17 week 6 + 9 week 7 + 11 week 8)  
+**Challenge Outcome**: Backend Node.js Internship Secured ✅
 
-**Week Progression**: Week 1 (7.0/10) → Week 2 (8.0/10) → Week 3 (7.7/10) → Week 4 (9.0/10) → Week 5 (6.8/10) → Week 6 (4.9/10) → **Week 7 (5.6/10)**
+**Week Progression**: Week 1 (7.0/10) → Week 2 (8.0/10) → Week 3 (7.7/10) → Week 4 (9.0/10) → Week 5 (6.8/10) → Week 6 (4.9/10) → Week 7 (5.6/10) → **Week 8 (5.8/10)**
 
-**Week 7 Breakdown**: Main Repo (5.2/10) + Datastructures Repo (6.1/10) = Combined (5.6/10)
+**Week 8 Breakdown**: Main Repo (5.4/10, 9 files) + Datastructures Repo (7.5/10, 2 files) = Combined (5.8/10)
 
 ---
 
@@ -68,13 +69,13 @@ Detailed analysis of every Go file:
 
 **Week 6 Combined**: 4.9/10 (17 files total)
 
-**Week 7**: `/review/week7/` - Latest (TWO REPOSITORIES)
+**Week 7**: `/review/week7/` (TWO REPOSITORIES)
 
 **Main Repository** (5.2/10 - Improvement):
 
 - 0.0016: Ebiten 2D game with WASD movement (3.5/10 avg)
 - 0.0017_PlayingWith_JSON: JSON marshaling/unmarshaling (7.0/10 avg)
-- Best file: main_test.go (8.5/10) ⭐ Best testing in any week
+- Best file: main_test.go (8.5/10) ⭐ Best testing through Week 7
 - Critical issues: Global variables, filename typos, no entry points
 - New topics explored but no execution (functions never called)
 - Testing quality dramatically improved from Week 6
@@ -90,42 +91,92 @@ Detailed analysis of every Go file:
 
 **Week 7 Combined**: 5.6/10 (9 files total) - +0.7 improvement from Week 6
 
-**Total**: 109+ markdown files with detailed feedback
+**Week 8**: `/review/week8/` - FINAL WEEK ⭐ (TWO REPOSITORIES)
+
+**Context**: Week included 1-week break for Docker learning, CS concepts, Node.js backend interview prep (internship secured)
+
+**Main Repository** (5.4/10, 9 files - excluding Zig exploration):
+
+- 0.0018: Docker client (doesn't compile, 2/10)
+- 0.0019: defer/panic/recover deep dive (3 excellent educational files)
+- 0.0020_PlayyingWith_DB: PostgreSQL integration (hardcoded credentials)
+- Best file: next/defer.go (7.5/10) - hypothesis-driven learning methodology
+- Critical issues: Non-compiling code, zero-assertion test (defer_test.go: 3/10)
+- Excellent educational documentation despite typos
+
+**Datastructures Repository** (7.5/10, 2 files - **BEST WEEK EVER**):
+
+- stack.go (8/10) ⭐⭐ **HIGHEST RATED IN ENTIRE 8-WEEK CHALLENGE**
+- Thread-safe with sync.Mutex, production-ready, zero typos
+- stack_test.go (7/10) - 13 assertions (vs Week 7's 0)
+- Complete rewrite: NewStack constructor, Peek method, memory cleanup
+- Critical bug: TestAmount line 68 loop condition
+- Growth: Defensive commentary (Week 7) → Clean professional code (Week 8)
+
+**Week 8 Combined**: 5.8/10 (11 files total) - +0.2 improvement from Week 7
+
+**Week 8 Achievements**:
+
+- Highest-quality code: stack.go thread-safe implementation (8/10)
+- Best testing discipline: 13 assertions covering all operations
+- Career outcome: Backend Node.js internship secured
+- Balanced learning with career-critical activities
+
+**Total**: 127+ markdown files with detailed feedback
 
 ---
 
 ## Start Here
 
-1. **Read**: `/review/week7/README.md` - Week 7 overview
-2. **Read**: `/review/week7/00-SUMMARY.md` - Full week 7 assessment
-3. **Review**: Outstanding issues (listed below)
-4. **Fix**: Week 7 critical issues (filename typos, zero assertions, entry points)
+1. **Read**: `/review/week8/README.md` - Week 8 final overview
+2. **Read**: `/review/week8/00-SUMMARY.md` - Full week 8 assessment
+3. **Read**: `/review/week8/datastructures-README.md` - Best work of challenge
+4. **Review**: Outstanding issues (listed below)
+5. **Fix**: Critical issues before production use
 
 ---
 
-## Outstanding Issues (Week 7)
+## Outstanding Issues (Week 8 - Final)
 
 ### Main Repository - CRITICAL 🚨
 
-#### 1. Filename Typos (8 instances) - CRITICAL ⚠️
+#### 1. Non-Compiling Code - CRITICAL ⚠️
 
-**Main Repo** (3 files):
+**File**: 0.0018/main.go (2/10)
 
-- `movments.go` → should be `movements.go` (missing 'e')
-- `unMarsal.go` → should be `unmarshal.go` (missing 'h')
-- Folder comment says "Raylib" but uses Ebiten (wrong library)
+**Issue**: Docker client doesn't compile - wrong imports and non-existent API types
 
-**Datastructures** (5 instances):
+```go
+// Current (WRONG):
+import "github.com/moby/moby/client"  // Deprecated
+client.ContainerListOptions{}  // Doesn't exist
+containers.Items  // Doesn't exist
 
-- `SingelyLinkList.go` → should be `SinglyLinkedList.go` (missing 'l')
-- `SingallyLinkedList.md` → should be `SinglyLinkedList.md` (wrong spelling)
-- `SingallyLinkedListtest2_test.go` → double typo ("Singally" + no underscore)
-- Code typo: "Insearting" → should be "Inserting"
-- Error message: "to index which greater then" → should be "index greater than"
+// Fix:
+import "github.com/docker/docker/client"
+context.Background()
+container.ListOptions{}
+```
+
+**Action**: Fix imports, run `go build` before committing
+
+#### 2. Filename Typos (6 instances) - CRITICAL ⚠️
+
+**Main Repo** (2 files):
+
+- `0.0016/movments.go` → should be `movements.go` (missing 'e')
+- `0.0017/unMarsal.go` → should be `unmarshal.go` (missing 'h')
+
+**Datastructures** (4 instances):
+
+- `list/SingelyLinkList.go` → should be `SinglyLinkedList.go` (missing 'l')
+- `doc/SingallyLinkedList.md` → should be `SinglyLinkedList.md` (wrong spelling)
+- `list/SingallyLinkedListtest2_test.go` → double typo ("Singally" + no underscore)
+- `list/SinglyLinkedListtest.go` → missing underscore (should be `_test.go`)
 
 **Action**: Find/replace all typos, rename files
 
-#### 2. No Entry Points (0.0017 folder) - CRITICAL ⚠️
+#### 3. No Entry Points (0.0017 folder) - CRITICAL ⚠️
 
 **Files**: 0.0017/main.go, 0.0017/unMarsal.go
 
@@ -147,7 +198,26 @@ func main() {
 }
 ```
 
-#### 3. Global Variable - CRITICAL ⚠️
+#### 4. Hardcoded Credentials - CRITICAL ⚠️
+
+**File**: 0.0020_PlayyingWith_DB/main.go (5.5/10)
+
+**Issue**: PostgreSQL password hardcoded in connection string
+
+```go
+// Current (WRONG):
+connStr := "user=aakku106 password=aakku106 dbname=gofirst sslmode=disable"
+
+// Fix:
+connStr := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable",
+    os.Getenv("DB_USER"),
+    os.Getenv("DB_PASSWORD"),
+    os.Getenv("DB_NAME"))
+```
+
+**Action**: Use environment variables
+
+#### 5. Global Variable - CRITICAL ⚠️
 
 **File**: 0.0016/main.go (3/10)
 
@@ -155,7 +225,42 @@ func main() {
 
 **Action**: Move to Game struct field
 
-#### 4. No Boundary Checking - MAJOR ⚠️
+#### 6. Zero Assertions Test - REPEATED MISTAKE ⚠️
+
+**File**: 0.0019/next/defer_test.go (3/10)
+
+**Issue**: Test file with no assertions - exact repeat of Week 7 test2 mistake
+
+```go
+// Current (WRONG):
+func TestD1(t *testing.T) {
+    d1()  // Just runs code, no verification ❌
+}
+
+// Fix (CORRECT):
+func TestD1(t *testing.T) {
+    // Capture output and verify defer order
+    old := os.Stdout
+    r, w, _ := os.Pipe()
+    os.Stdout = w
+
+    d1()
+
+    w.Close()
+    os.Stdout = old
+    var buf bytes.Buffer
+    io.Copy(&buf, r)
+
+    output := buf.String()
+    if !strings.Contains(output, "expected order") {
+        t.Fatal("Defer order incorrect")
+    }
+}
+```
+
+**Action**: Add assertions or delete file
+
+#### 7. No Boundary Checking - MAJOR ⚠️
 
 **File**: 0.0016/movments.go (4/10)
 
@@ -174,7 +279,35 @@ func (p *Position) MoveUp(maxY int) bool {
 
 ### Datastructures Repository - HIGH PRIORITY ⚠️
 
-#### 1. Zero Assertions Test File - WORST FILE 💀
+#### 1. TestAmount Loop Bug - CRITICAL 🐛
+
+**File**: stack/stack_test.go (7/10)
+
+**Issue**: Line 68 loop condition backwards - Peek verification never runs
+
+```go
+// Current (WRONG):
+for i := 1; i > iterate; i++ {  // 1 > 100000000 is false!
+    if val, ok := stack.Peek(); !ok {
+        t.Fatal("there shall exist values")
+    }
+}
+
+// Fix (CORRECT):
+for i := 0; i < iterate; i++ {
+    if val, ok := stack.Peek(); !ok {
+        t.Fatal("there shall exist 10,00,00,000 values")
+    } else {
+        if val != iterate-1-i {
+            t.Fatal("We shall get:", iterate-1-i, "but instead got", val)
+        }
+    }
+}
+```
+
+**Action**: Change `i > iterate` to `i < iterate`
+
+#### 2. Zero Assertions Test File (Week 7) - STILL UNFIXED 💀
 
 **File**: list/SingallyLinkedListtest2_test.go (3/10)
 
@@ -203,7 +336,7 @@ func TestInsertAt(t *testing.T) {
 }
 ```
 
-#### 2. Week 6 Issues Ignored (7 issues) - MAJOR ⚠️
+#### 3. Week 6 Issues Still Ignored (7 issues) - MAJOR ⚠️
 
 **File**: list/SingelyLinkList.go (6.5/10)
 
@@ -220,7 +353,7 @@ func TestInsertAt(t *testing.T) {
 
 **Action**: Fix all 7 remaining issues
 
-#### 3. Test Naming Convention Broken - MAJOR ⚠️
+#### 4. Test Naming Convention Broken - MAJOR ⚠️
 
 **File**: list/SinglyLinkedListtest.go (7/10)
 
@@ -236,7 +369,7 @@ SinglyLinkedListtest.go  ❌
 
 **Action**: Restore underscore or merge test files
 
-#### 4. Documentation Comment Wrong - MINOR ⚠️
+#### 5. Documentation Comment Wrong - MINOR ⚠️
 
 **File**: doc/SingallyLinkedList.md (8/10)
 
@@ -246,7 +379,7 @@ SinglyLinkedListtest.go  ❌
 
 ### Both Repositories - ONGOING ⚠️
 
-#### Struct Mismatch with API - MAJOR ⚠️
+#### Struct Mismatch with API (Week 7) - MAJOR ⚠️
 
 **File**: 0.0017/unMarsal.go (5.5/10)
 
@@ -256,16 +389,23 @@ SinglyLinkedListtest.go  ❌
 
 #### Spelling Errors
 
-**Main repo**: movments, unMarsal (2 filename typos)  
-**Datastructures**: SingelyLinkList, Singally variants, "Insearting" (8 instances)
+**Main repo (Week 7-8)**: movments, unMarsal (2 filename typos)  
+**Main repo (Week 8 new)**: 31 typos in educational comments (defer.go: 9, panic.go: 11, files.go: 8)  
+**Datastructures (Week 7)**: SingelyLinkList, Singally variants, "Insearting" (6 filename instances)  
+**Datastructures (Week 8 new)**: 3 typos in stack_test.go (somem, itterate, insted)
 
-**Action**: Enable Code Spell Checker extension
+**Action**: Enable Code Spell Checker extension, proofread comments before committing
 
-### Completed (Week 7 Fixes)
+### Completed (Week 7-8 Fixes)
 
 ✅ InsertAt Implementation - Completed (was stubbed in Week 6)  
 ✅ Test Discovery Bug - Fixed (testNew → TestNew capitalization)  
-✅ Undefined Variable - Fixed (T → t)
+✅ Undefined Variable - Fixed (T → t)  
+✅ Thread-Safe Stack - Implemented with sync.Mutex (Week 8)  
+✅ Stack Constructor - Added NewStack with size validation (Week 8)  
+✅ Peek Method - Added non-destructive top element access (Week 8)  
+✅ Comprehensive Testing - 13 assertions in stack_test.go (Week 8)  
+✅ uint16 Limit Removed - Len() now returns int (Week 8)
 
 ---
 
@@ -347,6 +487,81 @@ SinglyLinkedListtest.go  ❌
 **Combined Rating**: 4.9/10 (datastructures better but main repo drags down average)
 
 **Week 7**: Game Development + JSON + Datastructures Continued
+
+**Main Repository** (5.2/10):
+
+- Ebiten game with WASD movement (global variables, no boundaries)
+- JSON marshaling/unmarshaling (excellent test: 8.5/10)
+- No entry points (functions never called)
+- Filename typos persist
+
+**Datastructures Repository** (6.1/10):
+
+- InsertAt completed from Week 6 stub
+- 303-line documentation with trade-off analysis (8/10)
+- Zero-assertion test file created (test2: 3/10)
+- Only 30% of Week 6 issues fixed
+
+**Combined**: 5.6/10 - Modest improvement but ignored most feedback
+
+**Week 8**: defer/panic/recover Patterns + PostgreSQL + Production-Ready Stack (FINAL WEEK)
+
+**Context**: Included 1-week break for Docker learning, CS concepts, and Node.js backend interview preparation. **Internship secured**.
+
+**Main Repository** (5.4/10):
+
+- **Docker Client** (0.0018/main.go: 2/10) - doesn't compile, wrong imports
+- **defer Exploration** (0.0019): Best educational content in entire challenge
+  - defer.go (7.5/10): Hypothesis-driven learning, progressive examples, 9 typos
+  - files.go (7/10): Excellent defer placement reasoning, 8 typos
+  - panic.go (7/10): Recovery patterns, teaches anti-pattern (panic for file-not-found)
+  - defer_test.go (3/10): Zero assertions, repeats Week 7 test2 mistake
+  - files_test.go (6.5/10): 2 assertions, shallow verification
+- **PostgreSQL** (0.0020_PlayyingWith_DB/main.go: 5.5/10)
+  - Parameterized queries (prevents SQL injection)
+  - Hardcoded credentials (security risk)
+  - library functions use log.Fatal (should return errors)
+
+**Datastructures Repository** (7.5/10) - **BEST WORK OF ENTIRE CHALLENGE**:
+
+- **stack.go (8/10)** ⭐⭐ HIGHEST RATING IN 8-WEEK CHALLENGE
+  - Thread-safe with sync.Mutex
+  - Production-ready: NewStack constructor, Peek method, Len() returns int
+  - Memory discipline: nil clearing on Pop prevents leaks
+  - Zero typos, clean professional code
+  - Major growth from Week 7's defensive "bigBrain" commentary
+- **stack_test.go (7/10)** - Best testing discipline
+  - 13 assertions (vs Week 7's 0)
+  - Tests all operations: Push, Pop, Peek, Len
+  - Edge cases: empty stack behavior verified
+  - Performance: 100M element stress test
+  - Critical bug: Line 68 loop condition (`i > iterate` should be `i < iterate`)
+  - 3 typos: somem, itterate, insted
+
+**Combined**: 5.8/10 - Main repo educational, datastructures professional
+
+**Key Achievement**: Transitioned from documenting mistakes (Week 7 uint16 commentary) to writing clean code that doesn't need defending (Week 8 thread-safe stack).
+
+**Career Outcome**: 8-week challenge completed. Backend Node.js internship secured. Balance between learning completion and career preparation demonstrated good prioritization.
+
+**Outstanding Issues Post-Challenge**:
+
+- 6 filename typos (2 main repo, 4 datastructures)
+- Non-compiling Docker code
+- Hardcoded credentials
+- Zero-assertion test files
+- TestAmount loop bug
+- 30+ typos in Week 8 educational comments
+
+**Challenge Statistics**:
+
+- Duration: 8 weeks (Jan 18 - Feb 8, 2026)
+- Files reviewed: 96 total
+- Reviews written: 127+ markdown files
+- Rating range: 4.9/10 (Week 6) to 9.0/10 (Week 4)
+- Best file overall: forSelect.go (Week 4: 10/10)
+- Best Week 8 file: stack.go (8/10) - highest quality, production-ready
+- Testing evolution: Week 1 (no assertions) → Week 4 (assertions added) → Week 7 (regression: 0 assertions) → Week 8 (13 assertions)
 
 **Main Repository** (5.2/10 - Improvement):
 
