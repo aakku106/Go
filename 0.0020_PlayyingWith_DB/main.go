@@ -29,7 +29,7 @@ func createTable(db *sql.DB) {
 
 	}()
 
-	query := `CREATE TABLE users(
+	query := `CREATE TABLE IF NOT EXIST users(
 	id SERIAL PRIMARY KEY,
 	name VARCHAR(20) NOT NULL,
 	address VARCHAR(50) NOT NULL)
