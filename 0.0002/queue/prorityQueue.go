@@ -1,4 +1,4 @@
-package main
+:q
 
 import (
 	"fmt"
