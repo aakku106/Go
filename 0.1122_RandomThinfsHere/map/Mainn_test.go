@@ -5,13 +5,16 @@ import (
 	"testing"
 )
 
+var (
+	a = "cat"
+	b = "tac"
+	c = "cati"
+	d = "taci"
+	e = "camera"
+	f = "ccmera"
+)
+
 func TestIsAnagram(t *testing.T) {
-	a := "cat"
-	b := "tac"
-	c := "cati"
-	d := "taci"
-	e := "camera"
-	f := "ccmera"
 
 	if ab := isAnagram(a, b); ab == false {
 		t.Error("cat amd tac is Anagram")
@@ -31,16 +34,15 @@ func TestIsAnagram(t *testing.T) {
 		fmt.Println(c, d, "Was Good")
 	}
 
-	if de := isAnagram(d, c); de == true {
+	if de := isAnagram(d, e); de == true {
 		t.Error(" taci and camera isn't Anagram")
 	} else {
 		fmt.Println(d, e, "Wasn't Good")
 	}
 
-	if ef := isAnagram(d, c); ef == true {
+	if ef := isAnagram(e, f); ef == true {
 		t.Error(" ccmera and camera isn't Anagram")
 	} else {
 		fmt.Println(e, f, "Wasn't Good")
 	}
-
 }
