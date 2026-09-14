@@ -11,7 +11,7 @@ func isAnagram(s string, t string) bool {
 	// WE not usign ruine, insted using bytes type at key
 
 	// Filling up the map
-	for i, _ := range s {
+	for i := range s {
 		S[s[i]] = S[s[i]] + 1
 		T[t[i]] = T[t[i]] + 1
 	}
@@ -19,7 +19,7 @@ func isAnagram(s string, t string) bool {
 	fmt.Println(S, "--S")
 	fmt.Println(T, "--T")
 
-	for k, _ := range S {
+	for k := range S {
 		if S[k] == T[k] {
 			return true
 		}
