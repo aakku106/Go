@@ -1,5 +1,7 @@
 package mapTimePass
 
+import "fmt"
+
 func isAnagram(s string, t string) bool {
 	if len(s) != len(t) {
 		return false
@@ -13,8 +15,14 @@ func isAnagram(s string, t string) bool {
 		S[s[i]] = S[s[i]] + 1
 		T[t[i]] = T[t[i]] + 1
 	}
-	for k, v := range S {
-		if 
+
+	fmt.Println(S, "--S")
+	fmt.Println(T, "--T")
+
+	for k, _ := range S {
+		if S[k] == T[k] {
+			return true
+		}
 	}
 
 	return false

@@ -1,22 +1,32 @@
 package mapTimePass
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
-func TestisAnagram(t *testing.T) {
+func TestIsAnagram(t *testing.T) {
 	a := "cat"
 	b := "tac"
 	c := "cati"
 	d := "taci"
 
 	if ab := isAnagram(a, b); ab == false {
-		t.Error("It cat adn tac is Anagram")
+		t.Error("cat amd tac is Anagram")
+	} else {
+		fmt.Println(a, b, "Was Good")
 	}
 
 	if bc := isAnagram(b, c); bc == true {
-		t.Error("It cati adn tac is not Anagram")
+		t.Error("cati and tac is not Anagram")
+	} else {
+		fmt.Println(a, b, "Was Good")
 	}
+
 	if cd := isAnagram(c, d); cd == false {
-		t.Error("It cati and taci is Anagram")
+		t.Error(" cati and taci is Anagram")
+	} else {
+		fmt.Println(a, b, "Was Good")
 	}
 
 }
