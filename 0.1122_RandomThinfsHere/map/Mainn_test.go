@@ -10,6 +10,8 @@ func TestIsAnagram(t *testing.T) {
 	b := "tac"
 	c := "cati"
 	d := "taci"
+	e := "camera"
+	f := "ccmera"
 
 	if ab := isAnagram(a, b); ab == false {
 		t.Error("cat amd tac is Anagram")
@@ -20,13 +22,25 @@ func TestIsAnagram(t *testing.T) {
 	if bc := isAnagram(b, c); bc == true {
 		t.Error("cati and tac is not Anagram")
 	} else {
-		fmt.Println(a, b, "Was Good")
+		fmt.Println(b, c, "Was Not Good")
 	}
 
-	if cd := isAnagram(c, d); cd == false {
+	if cd := isAnagram(d, c); cd == false {
 		t.Error(" cati and taci is Anagram")
 	} else {
-		fmt.Println(a, b, "Was Good")
+		fmt.Println(c, d, "Was Good")
+	}
+
+	if de := isAnagram(d, c); de == true {
+		t.Error(" taci and camera isn't Anagram")
+	} else {
+		fmt.Println(d, e, "Wasn't Good")
+	}
+
+	if ef := isAnagram(d, c); ef == true {
+		t.Error(" ccmera and camera isn't Anagram")
+	} else {
+		fmt.Println(e, f, "Wasn't Good")
 	}
 
 }
