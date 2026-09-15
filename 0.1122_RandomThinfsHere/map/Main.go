@@ -12,12 +12,9 @@ func isAnagram(s string, t string) bool {
 
 	// Filling up the map
 	for i := range s {
-		S[s[i]] = S[s[i]] + 1
-		T[t[i]] = T[t[i]] + 1
+		S[s[i]]++
+		T[t[i]]++
 	}
-
-	// fmt.Println(S, "--S")
-	// fmt.Println(T, "--T")
 
 	count := 0
 	for k := range S {
