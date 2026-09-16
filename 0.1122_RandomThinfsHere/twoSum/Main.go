@@ -17,9 +17,9 @@ func twoSum(nums []int, target int) []int {
 
 func twosumBrutal(nums []int, target int) []int {
 	for i := range nums {
-		for j := range nums {
+		for j := i + 1; j < len(nums); j++ {
 			if target-nums[j] == nums[i] {
-				return []int{nums[i], nums[j]}
+				return []int{i, j}
 			}
 		}
 	}
