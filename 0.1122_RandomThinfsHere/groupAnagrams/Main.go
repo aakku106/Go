@@ -2,6 +2,18 @@ package groupanagrams
 
 func groupAnagrams(strs []string) [][]string {
 	first := strs[0]
+	one := make([]string, 0, len(strs)/2)
+mainLoop:
+	for index, value := range strs {
+		if value == first {
+			break mainLoop
+		}
+		ok := isAnagrams(first, value)
+		if ok {
+			one = append(one, value)
+		}
+	}
+	return nil
 }
 
 // Function to take Anagrams, takes two strings and return true if anagram false else wise
