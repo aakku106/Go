@@ -51,6 +51,11 @@ anotherLoop:
 				notAnargamList = append(notAnargamList, value)
 			}
 		}
+		final = append(final, one)
+		notAnargamList = newNotAnargamsList
+		newNotAnargamsList = []string{}
+		one = []string{}
+		// fmt.Println(one, " Entered in Final--")
 		notAnargamList = []string{}
 	}
 
