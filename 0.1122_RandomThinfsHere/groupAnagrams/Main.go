@@ -7,38 +7,37 @@ func groupAnagrams(strs []string) [][]string {
 	if len(strs) == 0 || len(strs) > 10000 {
 		return nil
 	}
+
 	first := strs[0]
 	one := make([]string, 0, len(strs)/2)
 	notAnargamList := make([]string, 0, len(strs)/2)
-	var final [][]string
 
-mainLoop:
 	for _, value := range strs {
 		if len(value) > 100 {
 			return nil
 		}
 		if value == first {
 			one = append(one, first)
-			continue mainLoop
+			continue
 		}
-		ok := isAnagrams(first, value)
-		if ok {
+		if ok := isAnagrams(first, value); ok {
 			one = append(one, value)
 			// fmt.Println(value, "Enterde in One")
 		} else {
 			notAnargamList = append(notAnargamList, value)
 			// fmt.Println(value, " Entered in NotAnargam List")
 		}
-
 	}
+
+	var final [][]string
 	final = append(final, one)
 	// fmt.Println(one, " Entered in Final")
-	one = []string{}
+	one = make([]string, 0, len(notAnargamList)/2)
 	// fmt.Println("After MainLoop not= ", notAnargamList)
 	// fmt.Println("Main Loop done, Final= ", final)
-	newNotAnargamsList := []string{}
+	newNotAnargamsList := make([]string, 0, len(notAnargamList)/2)
 
-	for len(notAnargamList) != 0 {
+	for {
 		if len(notAnargamList) == 1 {
 			final = append(final, notAnargamList)
 			// fmt.Println("Found single one", notAnargamList)
@@ -62,8 +61,8 @@ mainLoop:
 		}
 		final = append(final, one)
 		notAnargamList = newNotAnargamsList
-		newNotAnargamsList = []string{}
-		one = []string{}
+		newNotAnargamsList = make([]string, 0, len(notAnargamList)/2)
+		one = make([]string, 0, len(notAnargamList)/2)
 		// fmt.Println(one, " Entered in Final--")
 	}
 	// fmt.Println(final, "That's Final")
