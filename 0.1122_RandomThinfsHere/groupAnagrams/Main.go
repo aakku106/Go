@@ -1,10 +1,10 @@
 package groupanagrams
 
-import "fmt"
+// import "fmt"
 
 func groupAnagrams(strs []string) [][]string {
-	fmt.Println("Given list: ", strs)
-	if len(strs) == 0 {
+	// fmt.Println("Given list: ", strs)
+	if len(strs) == 0 || len(strs) > 10000 {
 		return nil
 	}
 	first := strs[0]
@@ -14,6 +14,9 @@ func groupAnagrams(strs []string) [][]string {
 
 mainLoop:
 	for _, value := range strs {
+		if len(value) > 100 {
+			return nil
+		}
 		if value == first {
 			one = append(one, first)
 			continue mainLoop
@@ -21,34 +24,40 @@ mainLoop:
 		ok := isAnagrams(first, value)
 		if ok {
 			one = append(one, value)
-			fmt.Println(value, "Enterde in One")
+			// fmt.Println(value, "Enterde in One")
 		} else {
 			notAnargamList = append(notAnargamList, value)
-			fmt.Println(value, " Entered in NotAnargam List")
+			// fmt.Println(value, " Entered in NotAnargam List")
 		}
 
 	}
 	final = append(final, one)
-	fmt.Println(one, " Entered in Final")
+	// fmt.Println(one, " Entered in Final")
 	one = []string{}
-	fmt.Println("Main Loop done, Final= ", final)
+	// fmt.Println("After MainLoop not= ", notAnargamList)
+	// fmt.Println("Main Loop done, Final= ", final)
+	newNotAnargamsList := []string{}
 
-anotherLoop:
 	for len(notAnargamList) != 0 {
 		if len(notAnargamList) == 1 {
 			final = append(final, notAnargamList)
-			fmt.Println("Found single one", notAnargamList)
+			// fmt.Println("Found single one", notAnargamList)
+			break
 		}
 		first = notAnargamList[0]
+		// fmt.Println("Entering notAnargams List")
 		for _, value := range notAnargamList {
 			if value == first {
-				break anotherLoop
+				one = append(one, first)
+				continue
 			}
 
 			if ok := isAnagrams(first, value); ok {
 				one = append(one, value)
+				// fmt.Println(value, "Enterde in One")
 			} else {
-				notAnargamList = append(notAnargamList, value)
+				newNotAnargamsList = append(newNotAnargamsList, value)
+				// fmt.Println(value, " Entered in NotAnargam List")
 			}
 		}
 		final = append(final, one)
@@ -56,10 +65,8 @@ anotherLoop:
 		newNotAnargamsList = []string{}
 		one = []string{}
 		// fmt.Println(one, " Entered in Final--")
-		notAnargamList = []string{}
 	}
-
-	final = append(final, one)
+	// fmt.Println(final, "That's Final")
 	return final
 }
 
