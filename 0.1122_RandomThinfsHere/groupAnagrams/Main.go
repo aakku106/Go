@@ -1,6 +1,9 @@
 package groupanagrams
 
+import "fmt"
+
 func groupAnagrams(strs []string) [][]string {
+	fmt.Println("Given list: ", strs)
 	if len(strs) == 0 {
 		return nil
 	}
@@ -12,35 +15,43 @@ func groupAnagrams(strs []string) [][]string {
 mainLoop:
 	for _, value := range strs {
 		if value == first {
-			break mainLoop
+			one = append(one, first)
+			continue mainLoop
 		}
 		ok := isAnagrams(first, value)
 		if ok {
 			one = append(one, value)
+			fmt.Println(value, "Enterde in One")
 		} else {
 			notAnargamList = append(notAnargamList, value)
+			fmt.Println(value, " Entered in NotAnargam List")
 		}
 
 	}
 	final = append(final, one)
+	fmt.Println(one, " Entered in Final")
 	one = []string{}
+	fmt.Println("Main Loop done, Final= ", final)
 
 anotherLoop:
 	for len(notAnargamList) != 0 {
+		if len(notAnargamList) == 1 {
+			final = append(final, notAnargamList)
+			fmt.Println("Found single one", notAnargamList)
+		}
 		first = notAnargamList[0]
 		for _, value := range notAnargamList {
 			if value == first {
 				break anotherLoop
 			}
-			if len(notAnargamList) == 1 {
-				final = append(final, notAnargamList)
-			}
+
 			if ok := isAnagrams(first, value); ok {
 				one = append(one, value)
 			} else {
 				notAnargamList = append(notAnargamList, value)
 			}
 		}
+		notAnargamList = []string{}
 	}
 
 	final = append(final, one)
