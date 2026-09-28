@@ -1,6 +1,9 @@
 package groupanagrams
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestGroupAnagram(t *testing.T) {
 	// strs := []string{"cat", "tac", "rat", "tar", "ate"}
@@ -22,6 +25,10 @@ func TestGroupAnagram(t *testing.T) {
 	}
 
 	for _, v := range gg {
-
+		t.Run(v.name, func(t *testing.T) {
+			if got := groupAnagrams(v.strs); !reflect.DeepEqual(got, v.expected) {
+				t.Error("Expected: ", v.expected, "got: ", got)
+			}
+		})
 	}
 }

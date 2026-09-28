@@ -37,7 +37,7 @@ func groupAnagrams(strs []string) [][]string {
 	// fmt.Println("Main Loop done, Final= ", final)
 	newNotAnargamsList := make([]string, 0, len(notAnargamList)/2)
 
-	for {
+	for len(notAnargamList) != 0 {
 		if len(notAnargamList) == 1 {
 			final = append(final, notAnargamList)
 			// fmt.Println("Found single one", notAnargamList)
