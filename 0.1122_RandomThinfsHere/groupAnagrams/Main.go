@@ -77,7 +77,7 @@ func groupAnagramsImproved(strs []string) [][]string {
 	final := make([][]string, 0, len(strs)/2)
 	notAnargamGroup := strs
 
-	for {
+	for len(notAnargamGroup) != 0 {
 		if len(notAnargamGroup) == 1 {
 			final = append(final, notAnargamGroup)
 			break
@@ -98,7 +98,6 @@ func groupAnagramsImproved(strs []string) [][]string {
 		}
 		final = append(final, anagramGroup)
 		notAnargamGroup = newNotAnargamsList
-
 	}
 
 	return final
