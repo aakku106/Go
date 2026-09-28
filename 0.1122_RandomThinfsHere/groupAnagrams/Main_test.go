@@ -31,4 +31,11 @@ func TestGroupAnagram(t *testing.T) {
 			}
 		})
 	}
+	for _, v := range gg {
+		t.Run(v.name, func(t *testing.T) {
+			if got := groupAnagramsImproved(v.strs); !reflect.DeepEqual(got, v.expected) {
+				t.Error("Expected: ", v.expected, "got: ", got)
+			}
+		})
+	}
 }
