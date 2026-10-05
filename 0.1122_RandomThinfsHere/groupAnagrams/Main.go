@@ -123,3 +123,13 @@ func isAnagrams(s, t string) bool {
 	}
 	return true
 }
+
+func groupAnagramsOptimized(strs []string) [][]string {
+	if len(strs) == 0 || len(strs) > 10000 {
+		return [][]string{}
+	}
+
+	g := make(map[[26]byte]string)
+
+	return nil
+}
