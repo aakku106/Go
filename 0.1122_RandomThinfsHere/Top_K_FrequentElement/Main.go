@@ -1,15 +1,12 @@
 package topkfrequentelement
 
-type countTable struct {
-	value     int
-	frequency int
-}
-
 func topKFrequent(nums []int, k int) []int {
-	g := make(map[int]countTable)
+	g := make(map[int][][2]int)
 
 	for _, v := range nums {
-		g[v]={v,}
+		if _, ok := g[v]; ok {
+			g[v][0][1] += 1
+		}
 	}
 
 	return nil
