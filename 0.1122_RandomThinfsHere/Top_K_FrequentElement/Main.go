@@ -12,14 +12,14 @@ func topKFrequent(nums []int, k int) []int {
 		group[v]++
 	}
 
-	var bucket [][]int
+	bucket := make([][]int, 0, len(group))
 	for key, value := range group {
 		bucket = append(bucket, []int{key, value})
 	}
 	slices.SortFunc(bucket, func(first, second []int) int {
 		return cmp.Compare(second[1], first[1])
 	})
-	var final []int
+	final := make([]int, 0, k)
 	for i := range k {
 		final = append(final, bucket[i][0])
 	}
