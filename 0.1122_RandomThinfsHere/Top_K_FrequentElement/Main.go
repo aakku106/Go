@@ -2,7 +2,6 @@ package topkfrequentelement
 
 import (
 	"cmp"
-	"fmt"
 	"slices"
 )
 
@@ -24,6 +23,5 @@ func topKFrequent(nums []int, k int) []int {
 	for i := range k {
 		final = append(final, bucket[i][0])
 	}
-	fmt.Println(final)
-	return nil
+	return final
 }
