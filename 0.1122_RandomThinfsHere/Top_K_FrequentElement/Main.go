@@ -1,12 +1,16 @@
 package topkfrequentelement
 
+import "fmt"
+
 func topKFrequent(nums []int, k int) []int {
-	g := make(map[int][][2]int)
+	g := make(map[int]int)
 
 	for _, v := range nums {
-		if _, ok := g[v]; ok {
-			g[v][0][1] += 1
-		}
+		g[v]++
+	}
+
+	for i, v := range g {
+		fmt.Println(i, v)
 	}
 
 	return nil
