@@ -1,17 +1,29 @@
 package topkfrequentelement
 
-import "fmt"
+import (
+	"cmp"
+	"fmt"
+	"slices"
+)
 
 func topKFrequent(nums []int, k int) []int {
-	g := make(map[int]int)
+	group := make(map[int]int)
 
 	for _, v := range nums {
-		g[v]++
+		group[v]++
 	}
 
-	for i, v := range g {
-		fmt.Println(i, v)
+	var bucket [][]int
+	for key, value := range group {
+		bucket = append(bucket, []int{key, value})
 	}
-
+	slices.SortFunc(bucket, func(first, second []int) int {
+		return cmp.Compare(second[1], first[1])
+	})
+	var final []int
+	for i := range k {
+		final = append(final, bucket[i][0])
+	}
+	fmt.Println(final)
 	return nil
 }
