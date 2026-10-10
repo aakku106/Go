@@ -21,6 +21,7 @@ func main() {
 }
 
 func fetchData(ctx context.Context, s string) (string, error) {
+	ctx, cancel := context.WithTimeout()
 	val, err := doingSomeWork()
 	if err != nil {
 		return "", err
