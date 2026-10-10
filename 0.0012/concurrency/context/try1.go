@@ -20,13 +20,32 @@ func main() {
 	fmt.Println(time.Since(start))
 }
 
+type Return struct {
+	vaue string
+	err  error
+}
+
 func fetchData(ctx context.Context, s string) (string, error) {
-	ctx, cancel := context.WithTimeout()
-	val, err := doingSomeWork()
-	if err != nil {
-		return "", err
+	timeout := time.Microsecond * 200
+	ctx, cancel := context.WithTimeout(ctx, timeout)
+	defer cancel()
+	responseChan := make(chan Return)
+	go func() {
+		val, err := doingSomeWork()
+		responseChan <- Return{
+			vaue: val,
+			err:  err,
+		}
+
+	}()
+	for {
+		select {
+		case <-ctx.Done():
+			return "", fmt.Errorf("wtf happend it took to long time")
+		case resp := <-responseChan:
+			return resp.vaue, resp.err
+		}
 	}
-	return val, nil
 }
 
 func doingSomeWork() (string, error) {
