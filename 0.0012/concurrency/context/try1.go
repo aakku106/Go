@@ -50,5 +50,6 @@ func fetchData(ctx context.Context, s string) (string, error) {
 
 func doingSomeWork() (string, error) {
 	time.Sleep(time.Microsecond * 600)
+
 	return "SOme HEavy WoRk DoNe", nil
 }
