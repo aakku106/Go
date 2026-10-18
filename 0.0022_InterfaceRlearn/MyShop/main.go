@@ -42,7 +42,7 @@ type CatStruct struct {
 var (
 	discountOnShirt   int8 = 2
 	discountOnPant    int8 = 1
-	discountOnMonitor int8 = 0
+	discountOnMonitor int8 = 5
 	taxOnCat          int8 = 6
 	VAT               int8 = 13
 )
