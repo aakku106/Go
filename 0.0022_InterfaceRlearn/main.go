@@ -1,20 +1,37 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
-func main() {
-	a := 3
-	b := 3
-	fmt.Println(add(a, b))
-	fmt.Println(add(a, b, 3))
+type NepaliBhasiKoLagiAankaEkThichnuHos struct{}
 
+func (n *NepaliBhasiKoLagiAankaEkThichnuHos) StartingMessage() string {
+	return "Namaste ! K samosaa parro holla hou!!"
 }
 
-func add(n ...int) int {
-	s := 0
-	for _, v := range n {
-		s += v
-	}
-	return s
+type ForEnglishLanguagePressTwo struct{}
 
+func (e *ForEnglishLanguagePressTwo) StartingMessage() string {
+	return "Hellow !, How cum I help you ??"
+}
+
+type BhasaSelectors interface {
+	StartingMessage() string
+}
+
+func Speek(L BhasaSelectors) {
+	fmt.Println(L.StartingMessage())
+}
+
+func main() {
+	switch os.Args[1] {
+	case "1":
+		n := &NepaliBhasiKoLagiAankaEkThichnuHos{}
+		Speek(n)
+	case "2":
+		e := &ForEnglishLanguagePressTwo{}
+		Speek(e)
+	}
 }
