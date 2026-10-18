@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type PriceCalculator interface {
 	CalculatePrice() int64
@@ -107,7 +109,7 @@ func (cat *CatStruct) CalculatePrice() int64 {
 	return (cat.price - tax + vat)
 }
 
-func SetAll() {
+func SetAll() (a [4]PriceCalculator) {
 	s := &ShirtStruct{}
 	s.SetProduct()
 
@@ -119,8 +121,16 @@ func SetAll() {
 
 	c := &CatStruct{}
 	c.SetProduct()
+
+	a[0] = s
+	a[1] = p
+	a[2] = m
+	a[3] = c
+
+	return
 }
-func GetAll() ProductSetter
+
+// func GetAll() ProductSetter
 
 func FinalPriceCalculator(n ...PriceCalculator) int64 {
 	var s int64 = 0
@@ -133,6 +143,8 @@ func FinalPriceCalculator(n ...PriceCalculator) int64 {
 func main() {
 	fmt.Println("Starting program")
 	fmt.Println("Setting all")
-	SetAll()
-
+	structsB := SetAll()
+	GT := FinalPriceCalculator(structsB[0], structsB[1], structsB[2], structsB[3])
+	fmt.Printf("GT: %v\n", GT)
+	fmt.Printf("structsB: %v\n", structsB)
 }
