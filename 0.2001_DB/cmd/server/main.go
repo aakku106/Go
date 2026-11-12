@@ -1,34 +1,142 @@
 package main
 
 import (
+	_ "embed"
+	"encoding/json"
+	"flag"
 	"fmt"
 	h "honeyberridb"
 	"log"
 	"net/http"
 )
 
-var db *h.HoneyberriDB
+//go:embed index.html
+var managerHTML []byte
+
+type App struct {
+	db *h.HoneyberriDB
+}
+
+type WriteRequest struct {
+	Tapari string `json:"tapari"`
+	Duna   string `json:"duna"`
+	Key    string `json:"key"`
+	Value  string `json:"value"`
+}
 
 func main() {
+	managerSite := flag.Bool("managerSite", false, "Enable built-in web management dashboard")
+	flag.Parse()
+
 	fmt.Println("Opening DB")
-	db, err := h.Open()
+	dbInstance, err := h.Open()
 	if err != nil {
 		log.Fatalln(err)
 	}
+	defer dbInstance.Close()
+
+	app := &App{db: dbInstance}
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("POST /write", write)
-	mux.HandleFunc("GET /readAll", readAll)
+	mux.HandleFunc("POST /write", app.writeHandler)
+
+	// The 4 read endpoints
+	mux.HandleFunc("GET /readAll", app.readAllHandler)
+	mux.HandleFunc("GET /tapari/{tapari}", app.readTapariHandler)
+	mux.HandleFunc("GET /duna/{tapari}/{duna}", app.readDunaHandler)
+	mux.HandleFunc("GET /key/{tapari}/{duna}/{key}", app.readKeyHandler)
+
+	// Optional Web Management Dashboard
+	if *managerSite {
+		mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
+			if r.URL.Path != "/" {
+				http.NotFound(w, r)
+				return
+			}
+			w.Header().Set("Content-Type", "text/html; charset=utf-8")
+			w.WriteHeader(http.StatusOK)
+			w.Write(managerHTML)
+		})
+		fmt.Println("Web Manager Dashboard enabled at http://localhost:6106/")
+	}
+
 	server := http.Server{
-		Addr:    ":106106",
+		Addr:    ":6106",
 		Handler: mux,
 	}
 
-	fmt.Println("Lunching Server on port localhost:106106")
+	fmt.Println("Launching Server on http://localhost:6106")
 	if err := server.ListenAndServe(); err != nil {
 		log.Fatalln(err)
 	}
 }
 
-func write(w http.ResponseWriter, r *http.Request)   {}
-func readAll(w http.ResponseWriter, r *http.Request) {}
+func (app *App) writeHandler(w http.ResponseWriter, r *http.Request) {
+	var req WriteRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	rec, err := app.db.Set(req.Tapari, req.Duna, req.Key, req.Value)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]any{"status": "success", "seq": rec.Seq})
+}
+
+// 1. ReadAll: Spits out everything in DB as JSON
+func (app *App) readAllHandler(w http.ResponseWriter, r *http.Request) {
+	dump := app.db.GetFullDump()
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(dump)
+}
+
+// 2. ReadTapari: Read everything inside a specific Tapari
+func (app *App) readTapariHandler(w http.ResponseWriter, r *http.Request) {
+	tapari := r.PathValue("tapari")
+	data, found := app.db.GetTapari(tapari)
+	if !found {
+		http.Error(w, "Tapari not found", http.StatusNotFound)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(data)
+}
+
+// 3. ReadDuna: Read every key-value pair from a specific Duna
+func (app *App) readDunaHandler(w http.ResponseWriter, r *http.Request) {
+	tapari := r.PathValue("tapari")
+	duna := r.PathValue("duna")
+	data, found := app.db.GetDuna(tapari, duna)
+	if !found {
+		http.Error(w, "Duna or Tapari not found", http.StatusNotFound)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(data)
+}
+
+// 4. ReadKey: Just the value of that specific key
+func (app *App) readKeyHandler(w http.ResponseWriter, r *http.Request) {
+	tapari := r.PathValue("tapari")
+	duna := r.PathValue("duna")
+	key := r.PathValue("key")
+
+	val, found := app.db.Get(tapari, duna, key)
+	if !found {
+		http.Error(w, "Key not found", http.StatusNotFound)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]string{
+		"tapari": tapari,
+		"duna":   duna,
+		"key":    key,
+		"value":  val,
+	})
+}
